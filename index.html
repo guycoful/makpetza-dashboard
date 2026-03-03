@@ -204,6 +204,71 @@ tr:hover{background:var(--bg3)}
 .ex-field-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 @media(max-width:768px){.ex-field-grid{grid-template-columns:1fr}}
 .ex-save-row{display:flex;gap:8px;margin-top:16px;padding-top:12px;border-top:1px solid var(--border)}
+
+/* ========== SUB-TABS ========== */
+.sub-tabs{display:flex;gap:4px;padding:8px 0;margin-bottom:16px;border-bottom:2px solid var(--border)}
+.sub-tab-btn{padding:10px 20px;border:none;border-radius:8px 8px 0 0;background:none;color:var(--text2);cursor:pointer;font-size:14px;font-weight:500;transition:.2s;border-bottom:2px solid transparent;margin-bottom:-2px}
+.sub-tab-btn:hover{background:var(--bg3);color:var(--text)}
+.sub-tab-btn.active{color:var(--accent);border-bottom-color:var(--accent);background:rgba(37,99,235,.05)}
+.sub-tab-content{display:none}.sub-tab-content.active{display:block}
+
+/* ========== RED FLAGS ========== */
+.red-flags-card{background:rgba(220,38,38,.04);border:1px solid rgba(220,38,38,.2);border-radius:12px;padding:20px;margin-bottom:16px}
+.red-flags-card h3{color:var(--red)}
+.red-flag{display:flex;align-items:flex-start;gap:10px;padding:10px 12px;background:rgba(220,38,38,.06);border-radius:8px;margin-bottom:8px;font-size:13px;line-height:1.5}
+.red-flag .rf-icon{font-size:18px;flex-shrink:0;margin-top:1px}
+.red-flag .rf-title{font-weight:600;color:var(--red)}
+.red-flag .rf-desc{color:var(--text2);margin-top:2px}
+.no-flags{text-align:center;padding:20px;color:var(--green);font-weight:500}
+
+/* ========== MARKET SENTIMENT ========== */
+.market-badge{display:inline-block;padding:4px 14px;border-radius:20px;font-size:12px;font-weight:600;letter-spacing:.3px}
+.market-badge.bullish{background:rgba(22,163,74,.12);color:var(--green)}
+.market-badge.neutral{background:rgba(217,119,6,.12);color:var(--orange)}
+.market-badge.bearish{background:rgba(220,38,38,.12);color:var(--red)}
+.sentiment-card{background:linear-gradient(135deg,var(--bg2),var(--bg3));border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:16px}
+.sentiment-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border)}
+.sentiment-row:last-child{border:none}
+.sentiment-label{font-size:13px;color:var(--text2)}
+.vix-interp{font-size:12px;padding:3px 10px;border-radius:12px;font-weight:500}
+
+/* ========== SCENARIO PLANNING ========== */
+.scenario-card{background:var(--bg2);border:1px solid var(--accent);border-radius:12px;padding:20px;margin-bottom:16px}
+.scenario-card h3{color:var(--accent)}
+.scenario-result{background:var(--bg3);border-radius:10px;padding:16px;margin-top:12px}
+.scenario-result .sr-row{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border);font-size:14px}
+.scenario-result .sr-row:last-child{border:none;font-weight:700}
+
+/* ========== ANALYST COMPARE ========== */
+.analyst-card{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:16px}
+.analyst-row{display:flex;align-items:center;gap:12px;padding:10px;background:var(--bg3);border-radius:8px;margin-bottom:8px}
+.analyst-row .ar-source{font-weight:500;min-width:140px;font-size:14px}
+.analyst-row select{padding:6px 12px;border:1px solid var(--border);border-radius:6px;background:var(--bg);color:var(--text);font-size:13px}
+.analyst-warning{padding:12px;background:rgba(220,38,38,.06);border:1px solid rgba(220,38,38,.2);border-radius:8px;margin-top:10px;font-size:13px;color:var(--red);display:none}
+
+/* ========== TERM POPUP ========== */
+.term-link{color:var(--accent);cursor:pointer;border-bottom:1px dashed var(--accent);position:relative}
+.term-popup{position:fixed;background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:14px 18px;max-width:350px;box-shadow:0 8px 30px rgba(0,0,0,.12);z-index:200;font-size:13px;line-height:1.6;display:none}
+.term-popup.show{display:block}
+.term-popup .tp-term{font-weight:700;color:var(--accent);margin-bottom:4px;font-size:14px}
+.term-popup .tp-def{color:var(--text2)}
+.term-popup .tp-close{position:absolute;top:6px;left:6px;background:none;border:none;font-size:16px;cursor:pointer;color:var(--text3)}
+
+/* ========== GLOSSARY CATEGORIES ========== */
+.glossary-cats{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.glossary-cat-btn{padding:6px 14px;border:1px solid var(--border);border-radius:20px;background:none;color:var(--text2);cursor:pointer;font-size:12px;transition:.2s}
+.glossary-cat-btn:hover,.glossary-cat-btn.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.glossary-cat-header{font-size:13px;font-weight:600;color:var(--accent);padding:10px 12px;background:var(--bg3);border-radius:8px;margin:12px 0 6px}
+
+/* ========== LEARNING TAB ========== */
+.learning-sub-tabs{display:flex;gap:8px;margin-bottom:16px}
+.learning-sub-btn{padding:8px 18px;border:1px solid var(--border);border-radius:8px;background:none;color:var(--text2);cursor:pointer;font-size:13px;transition:.2s}
+.learning-sub-btn:hover{background:var(--bg3)}
+.learning-sub-btn.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.video-placeholder{background:var(--bg3);border:2px dashed var(--border);border-radius:12px;padding:40px;text-align:center;margin-bottom:12px}
+.video-placeholder .vp-icon{font-size:48px;margin-bottom:8px}
+.video-placeholder .vp-title{font-weight:600;font-size:15px;margin-bottom:4px}
+.video-placeholder .vp-desc{font-size:12px;color:var(--text2)}
 </style>
 </head>
 <body>
@@ -218,11 +283,12 @@ tr:hover{background:var(--bg3)}
       <button class="active" onclick="switchTab('dashboard')"><span class="icon">&#127968;</span><span>דשבורד</span></button>
       <button onclick="switchTab('analysis')"><span class="icon">&#128202;</span><span>ניתוח מניה</span></button>
       <button onclick="switchTab('checklist')"><span class="icon">&#9989;</span><span>צ'קליסט כניסה</span></button>
+      <button onclick="switchTab('calculator')"><span class="icon">&#128170;</span><span>מחשבון פוזיציה</span></button>
       <button onclick="switchTab('journal')"><span class="icon">&#128221;</span><span>יומן מסחר</span></button>
+      <button onclick="switchTab('learning')"><span class="icon">&#127891;</span><span>למידה</span></button>
       <button onclick="switchTab('weekly')"><span class="icon">&#128203;</span><span>פעולות שבועי</span></button>
       <button onclick="switchTab('glossary')"><span class="icon">&#128218;</span><span>מילון מושגים</span></button>
       <button onclick="switchTab('chat')"><span class="icon">&#128172;</span><span>צ'אט יועץ</span></button>
-      <button onclick="switchTab('exercises')"><span class="icon">&#9999;</span><span>תרגילים</span></button>
     </nav>
     <div style="padding:12px;border-top:1px solid var(--border)">
       <button class="btn btn-outline btn-sm" style="width:100%" onclick="openSettings()">&#9881; הגדרות</button>
@@ -244,6 +310,26 @@ tr:hover{background:var(--bg3)}
           <div class="index-card"><div class="name">VIX</div><div class="price" id="idx-vix">--</div><div class="change" id="idx-vix-chg">--</div></div>
         </div>
       </div>
+      <!-- Market Sentiment -->
+      <div class="sentiment-card" id="sentiment-card">
+        <h3 style="margin-bottom:12px">&#127760; סקירת מצב שוק <span class="market-badge neutral" id="market-badge">טוען...</span></h3>
+        <div class="card-grid" style="grid-template-columns:repeat(3,1fr)">
+          <div class="index-card"><div class="name">יומי</div><div id="tf-daily" style="font-size:18px;font-weight:700">--</div></div>
+          <div class="index-card"><div class="name">שבועי</div><select id="tf-weekly" style="font-size:14px;font-weight:700;border:1px solid var(--border);border-radius:6px;padding:2px 6px;background:var(--bg2);color:var(--text);cursor:pointer" onchange="saveTfState()"><option value="">--</option><option value="up">▲ עולה</option><option value="side">↔ צדדי</option><option value="down">▼ יורד</option></select></div>
+          <div class="index-card"><div class="name">חודשי</div><select id="tf-monthly" style="font-size:14px;font-weight:700;border:1px solid var(--border);border-radius:6px;padding:2px 6px;background:var(--bg2);color:var(--text);cursor:pointer" onchange="saveTfState()"><option value="">--</option><option value="up">▲ עולה</option><option value="side">↔ צדדי</option><option value="down">▼ יורד</option></select></div>
+        </div>
+        <div style="margin-top:12px">
+          <div class="sentiment-row">
+            <span class="sentiment-label">VIX - מדד הפחד</span>
+            <span id="vix-interp" class="vix-interp" style="background:var(--bg3)">--</span>
+          </div>
+          <div class="sentiment-row">
+            <span class="sentiment-label">המלצת פעולה</span>
+            <span id="market-action" style="font-weight:600;font-size:14px">--</span>
+          </div>
+        </div>
+      </div>
+
       <div class="card">
         <h3>&#11088; Watchlist <button class="btn btn-sm btn-outline" style="margin-right:auto" onclick="addToWatchlist()">+ הוסף מניה</button></h3>
         <div id="watchlist-container">
@@ -284,6 +370,16 @@ tr:hover{background:var(--bg3)}
         </div>
       </div>
 
+      <!-- SUB-TABS -->
+      <div class="sub-tabs">
+        <button class="sub-tab-btn active" onclick="switchSubTab('business')">&#127919; הבנת העסק</button>
+        <button class="sub-tab-btn" onclick="switchSubTab('financial')">&#128200; יחסים פיננסיים</button>
+        <button class="sub-tab-btn" onclick="switchSubTab('technical')">&#128202; ניתוח טכני</button>
+      </div>
+
+      <!-- SUB-TAB: BUSINESS -->
+      <div id="subtab-business" class="sub-tab-content active">
+
       <!-- CANDLESTICK CHART -->
       <div class="card" id="chart-card" style="display:none">
         <h3>&#128200; גרף נרות יפניים</h3>
@@ -313,7 +409,7 @@ tr:hover{background:var(--bg3)}
       <!-- 2A: BUS Score -->
       <div class="card">
         <h3>&#127919; Business Understanding Score (33%)</h3>
-        <p style="font-size:12px;color:var(--text2);margin-bottom:16px">העניקו ציון 0-10 לכל רכיב. ככל שאתם מבינים את הביזנס טוב יותר - הציון גבוה יותר.</p>
+        <p style="font-size:12px;color:var(--text2);margin-bottom:16px">העניקו ציון 1-5 (כולל חצאי נקודות) לכל רכיב. ככל שאתם מבינים את הביזנס טוב יותר - הציון גבוה יותר.</p>
         <div id="bus-items"></div>
         <div style="text-align:center;padding:16px;background:var(--bg3);border-radius:10px;margin-top:12px">
           <div style="font-size:13px;color:var(--text2)">ציון BUS כולל</div>
@@ -321,21 +417,25 @@ tr:hover{background:var(--bg3)}
         </div>
       </div>
 
+      </div><!-- /subtab-business -->
+
+      <!-- SUB-TAB: FINANCIAL -->
+      <div id="subtab-financial" class="sub-tab-content">
       <!-- 2B: Financial Ratios -->
       <div class="card">
         <h3>&#128200; יחסים פיננסיים (33%)</h3>
         <table class="fin-table">
           <thead><tr><th>יחס</th><th>ערך</th><th>סטטוס</th></tr></thead>
           <tbody id="ratios-body">
-            <tr><td>P/E</td><td id="r-pe">--</td><td><span class="ratio-status" id="rs-pe"></span></td></tr>
-            <tr><td>P/B</td><td id="r-pb">--</td><td><span class="ratio-status" id="rs-pb"></span></td></tr>
-            <tr><td>ROE</td><td id="r-roe">--</td><td><span class="ratio-status" id="rs-roe"></span></td></tr>
-            <tr><td>Debt/Equity</td><td id="r-de">--</td><td><span class="ratio-status" id="rs-de"></span></td></tr>
-            <tr><td>Current Ratio</td><td id="r-cr">--</td><td><span class="ratio-status" id="rs-cr"></span></td></tr>
-            <tr><td>EPS</td><td id="r-eps">--</td><td><span class="ratio-status" id="rs-eps"></span></td></tr>
-            <tr><td>Revenue Growth</td><td id="r-rg">--</td><td><span class="ratio-status" id="rs-rg"></span></td></tr>
-            <tr><td>Net Margin</td><td id="r-nm">--</td><td><span class="ratio-status" id="rs-nm"></span></td></tr>
-            <tr><td>Free Cash Flow</td><td id="r-fcf">--</td><td><span class="ratio-status" id="rs-fcf"></span></td></tr>
+            <tr><td><span class="term-link" onclick="showTermPopup('P/E',event)">P/E</span></td><td id="r-pe">--</td><td><span class="ratio-status" id="rs-pe"></span></td></tr>
+            <tr><td><span class="term-link" onclick="showTermPopup('P/B',event)">P/B</span></td><td id="r-pb">--</td><td><span class="ratio-status" id="rs-pb"></span></td></tr>
+            <tr><td><span class="term-link" onclick="showTermPopup('ROE',event)">ROE</span></td><td id="r-roe">--</td><td><span class="ratio-status" id="rs-roe"></span></td></tr>
+            <tr><td><span class="term-link" onclick="showTermPopup('Debt/Equity',event)">Debt/Equity</span></td><td id="r-de">--</td><td><span class="ratio-status" id="rs-de"></span></td></tr>
+            <tr><td><span class="term-link" onclick="showTermPopup('Current Ratio',event)">Current Ratio</span></td><td id="r-cr">--</td><td><span class="ratio-status" id="rs-cr"></span></td></tr>
+            <tr><td><span class="term-link" onclick="showTermPopup('EPS',event)">EPS</span></td><td id="r-eps">--</td><td><span class="ratio-status" id="rs-eps"></span></td></tr>
+            <tr><td><span class="term-link" onclick="showTermPopup('Revenue Growth',event)">Revenue Growth</span></td><td id="r-rg">--</td><td><span class="ratio-status" id="rs-rg"></span></td></tr>
+            <tr><td><span class="term-link" onclick="showTermPopup('Net Margin',event)">Net Margin</span></td><td id="r-nm">--</td><td><span class="ratio-status" id="rs-nm"></span></td></tr>
+            <tr><td><span class="term-link" onclick="showTermPopup('Free Cash Flow',event)">Free Cash Flow</span></td><td id="r-fcf">--</td><td><span class="ratio-status" id="rs-fcf"></span></td></tr>
           </tbody>
         </table>
         <div style="text-align:center;padding:16px;background:var(--bg3);border-radius:10px;margin-top:12px">
@@ -344,19 +444,43 @@ tr:hover{background:var(--bg3)}
         </div>
       </div>
 
+      </div><!-- /subtab-financial -->
+
+      <!-- SUB-TAB: TECHNICAL -->
+      <div id="subtab-technical" class="sub-tab-content">
       <!-- 2C: Technical Score -->
       <div class="card">
         <h3>&#128200; ניתוח טכני (34%)</h3>
         <div class="input-group">
-          <label>ציון טכני (0-10) - הזינו ידנית על בסיס הניתוח שלכם</label>
-          <input type="range" id="tech-score" min="0" max="10" step="0.5" value="5" oninput="updateTechScore()">
-          <div style="text-align:center;font-family:var(--mono);font-size:32px;font-weight:700;color:var(--purple);margin-top:8px" id="tech-score-display">5.0</div>
+          <label>ציון טכני (1-5, כולל חצאי נקודות)</label>
+          <input type="range" id="tech-score" min="1" max="5" step="0.5" value="3" oninput="updateTechScore()">
+          <div style="text-align:center;font-family:var(--mono);font-size:32px;font-weight:700;color:var(--purple);margin-top:8px" id="tech-score-display">3.0</div>
         </div>
         <div class="input-group">
           <label>הערות ניתוח טכני</label>
           <textarea id="tech-notes" placeholder="תבניות נרות, תמיכה/התנגדות, אינדיקטורים..." rows="3"></textarea>
         </div>
       </div>
+
+      <!-- Scenario Planning -->
+      <div class="scenario-card">
+        <h3>&#127919; תכנון תרחיש (Scenario Planning)</h3>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px">
+          <div class="input-group"><label>מחיר כניסה ($)</label><input type="number" id="sc-entry" step="0.01" style="font-family:var(--mono)" oninput="calcScenario()"></div>
+          <div class="input-group"><label>Stop Loss ($)</label><input type="number" id="sc-sl" step="0.01" style="font-family:var(--mono)" oninput="calcScenario()"></div>
+          <div class="input-group"><label>Target ($)</label><input type="number" id="sc-target" step="0.01" style="font-family:var(--mono)" oninput="calcScenario()"></div>
+        </div>
+        <div class="scenario-result" id="scenario-result" style="display:none">
+          <div class="sr-row"><span style="color:var(--text2)">כמות מניות לרכישה</span><span style="font-family:var(--mono);font-weight:700" id="sc-shares">--</span></div>
+          <div class="sr-row"><span style="color:var(--text2)">שווי פוזיציה</span><span style="font-family:var(--mono)" id="sc-posval">--</span></div>
+          <div class="sr-row"><span style="color:var(--text2)">סיכון מקסימלי</span><span style="font-family:var(--mono);color:var(--red)" id="sc-risk">--</span></div>
+          <div class="sr-row"><span style="color:var(--text2)">רווח פוטנציאלי</span><span style="font-family:var(--mono);color:var(--green)" id="sc-profit">--</span></div>
+          <div class="sr-row"><span style="color:var(--text2)">Risk/Reward</span><span style="font-family:var(--mono);font-weight:700" id="sc-rr">--</span></div>
+        </div>
+        <button class="btn btn-outline btn-sm" style="margin-top:10px" onclick="sendToCalculator()">&#128170; העבר למחשבון פוזיציה</button>
+      </div>
+
+      </div><!-- /subtab-technical -->
 
       <!-- 2D: TOTAL SCORE -->
       <div class="card">
@@ -369,6 +493,32 @@ tr:hover{background:var(--bg3)}
           <div class="part"><div class="val" id="bd-bus">0</div><div class="name">BUS (33%)</div></div>
           <div class="part"><div class="val" id="bd-fund">0</div><div class="name">פונדמנטלי (33%)</div></div>
           <div class="part"><div class="val" id="bd-tech">0</div><div class="name">טכני (34%)</div></div>
+        </div>
+      </div>
+
+      <!-- Red Flags -->
+      <div class="red-flags-card" id="red-flags-card" style="display:none">
+        <h3>&#9888; דגלים אדומים (Red Flags)</h3>
+        <div id="red-flags-list"></div>
+      </div>
+
+      <!-- Analyst Comparison -->
+      <div class="analyst-card">
+        <h3>&#128101; השוואה לאנליסטים</h3>
+        <div class="analyst-row">
+          <span class="ar-source">TradingView</span>
+          <select id="analyst-tv" onchange="checkAnalystConflict()"><option value="">-- בחר --</option><option value="buy">Strong Buy</option><option value="hold">Hold</option><option value="sell">Sell</option></select>
+        </div>
+        <div class="analyst-row">
+          <span class="ar-source">Interactive Brokers</span>
+          <select id="analyst-ib" onchange="checkAnalystConflict()"><option value="">-- בחר --</option><option value="buy">Buy</option><option value="hold">Hold</option><option value="sell">Sell</option></select>
+        </div>
+        <div class="analyst-row">
+          <span class="ar-source">הציון שלי</span>
+          <span id="analyst-my" style="font-family:var(--mono);font-weight:700;font-size:16px">--</span>
+        </div>
+        <div class="analyst-warning" id="analyst-warning">
+          &#9888; <strong>סתירה!</strong> הציון שלך גבוה, אבל אנליסטים חיצוניים מצביעים על Sell. שקול לבדוק שוב.
         </div>
       </div>
     </div>
@@ -393,11 +543,21 @@ tr:hover{background:var(--bg3)}
         </div>
       </div>
 
+    </div>
+
+    <!-- ===== TAB 3B: POSITION CALCULATOR (SEPARATE) ===== -->
+    <div id="tab-calculator" class="tab">
+      <h2 style="margin-bottom:20px">&#128170; מחשבון פוזיציה (כלל 1%)</h2>
       <div class="card">
-        <h3>&#128170; מחשבון פוזיציה (כלל 1%)</h3>
+        <h3>&#128176; פרטי תיק</h3>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
           <div class="input-group"><label>הון כולל בתיק ($)</label><input type="number" id="calc-capital" value="10000" oninput="calcPosition()"></div>
           <div class="input-group"><label>אחוז סיכון לעסקה (%)</label><input type="number" id="calc-risk-pct" value="1" step="0.5" oninput="calcPosition()"></div>
+        </div>
+      </div>
+      <div class="card">
+        <h3>&#127919; פרטי עסקה</h3>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px">
           <div class="input-group"><label>מחיר כניסה ($)</label><input type="number" id="calc-entry" step="0.01" oninput="calcPosition()"></div>
           <div class="input-group"><label>Stop Loss ($)</label><input type="number" id="calc-sl" step="0.01" oninput="calcPosition()"></div>
           <div class="input-group"><label>Target ($)</label><input type="number" id="calc-target" step="0.01" oninput="calcPosition()"></div>
@@ -409,6 +569,9 @@ tr:hover{background:var(--bg3)}
           <div class="calc-row"><span class="calc-label">שווי פוזיציה ($)</span><span class="calc-val" id="cr-posval">--</span></div>
           <div class="calc-row"><span class="calc-label">רווח פוטנציאלי ($)</span><span class="calc-val" id="cr-profit" style="color:var(--green)">--</span></div>
           <div class="calc-row"><span class="calc-label">Risk/Reward Ratio</span><span class="calc-val" id="cr-rr">--</span></div>
+        </div>
+        <div style="margin-top:12px;padding:12px;background:var(--bg3);border-radius:8px;font-size:13px;color:var(--text2)">
+          &#128161; <strong>הוראות פקודה:</strong> <span id="trade-instructions">הזן מחיר כניסה, Stop Loss ו-Target לקבלת הוראות.</span>
         </div>
       </div>
     </div>
@@ -457,8 +620,16 @@ tr:hover{background:var(--bg3)}
     <!-- ===== TAB 5: WEEKLY WORKFLOW ===== -->
     <div id="tab-weekly" class="tab">
       <h2 style="margin-bottom:20px">&#128203; סדר פעולות שבועי</h2>
+      <div class="card" style="background:var(--bg3);border:1px dashed var(--border);margin-bottom:16px;padding:12px 16px;font-size:13px;color:var(--text2)">
+        &#128221; <strong>הערה:</strong> רשימת הפעולות תתעדכן מעת לעת ע"י עומרי. הרשימה הנוכחית מבוססת על מפגש 12-13.
+      </div>
       <div class="card">
-        <h3>&#128197; שבוע נוכחי <button class="btn btn-sm btn-outline" style="margin-right:auto" onclick="resetWeekly()">&#128260; איפוס שבועי</button></h3>
+        <h3>&#128197; שבוע של <span id="weekly-date-range"></span>
+          <span style="margin-right:auto;display:flex;gap:6px">
+            <button class="btn btn-sm btn-outline" onclick="markAllWeekly()">&#9989; סמן הכל</button>
+            <button class="btn btn-sm btn-outline" onclick="resetWeekly()">&#128260; איפוס</button>
+          </span>
+        </h3>
         <div class="weekly-progress"><div class="fill" id="weekly-fill" style="width:0%"></div></div>
         <span id="weekly-pct" style="font-family:var(--mono);font-size:14px;color:var(--text2)">0% הושלם</span>
         <div style="margin-top:16px" id="weekly-items">
@@ -480,8 +651,15 @@ tr:hover{background:var(--bg3)}
     <div id="tab-glossary" class="tab">
       <h2 style="margin-bottom:20px">&#128218; מילון מושגים</h2>
       <div class="card">
-        <div class="input-group" style="margin:0">
+        <div class="input-group" style="margin:0 0 12px">
           <input type="text" id="glossary-search" placeholder="&#128269; חפש מושג..." oninput="filterGlossary()">
+        </div>
+        <div class="glossary-cats">
+          <button class="glossary-cat-btn active" onclick="filterGlossaryCat('all')">הכל</button>
+          <button class="glossary-cat-btn" onclick="filterGlossaryCat('financial')">דוחות כספיים</button>
+          <button class="glossary-cat-btn" onclick="filterGlossaryCat('technical')">ניתוח טכני</button>
+          <button class="glossary-cat-btn" onclick="filterGlossaryCat('trading')">מושגי מסחר</button>
+          <button class="glossary-cat-btn" onclick="filterGlossaryCat('economy')">כלכלה</button>
         </div>
       </div>
       <div class="card" id="glossary-list"></div>
@@ -516,9 +694,29 @@ tr:hover{background:var(--bg3)}
       </div>
     </div>
 
-    <!-- ===== TAB 8: EXERCISES ===== -->
-    <div id="tab-exercises" class="tab">
-      <h2 style="margin-bottom:20px">&#9999; תרגילים - מדריך לימודי</h2>
+    <!-- ===== TAB 8: LEARNING (replaces EXERCISES) ===== -->
+    <div id="tab-learning" class="tab">
+      <h2 style="margin-bottom:20px">&#127891; למידה</h2>
+      <div class="learning-sub-tabs">
+        <button class="learning-sub-btn active" onclick="switchLearningTab('exercises')">&#9999; תרגילים</button>
+        <button class="learning-sub-btn" onclick="switchLearningTab('videos')">&#127909; סרטונים</button>
+      </div>
+
+      <!-- Videos section -->
+      <div id="learning-videos" style="display:none">
+        <div class="card">
+          <h3>&#127909; סרטוני לימוד - מודולרי</h3>
+          <p style="font-size:13px;color:var(--text2);margin-bottom:16px">סרטונים מפולחים לקטעים של 5-10 דקות כל אחד. כל סגמנט כולל הסבר, מצגת ותרגיל מעשי.</p>
+          <div class="video-placeholder"><div class="vp-icon">&#127909;</div><div class="vp-title">מבוא לשוק ההון</div><div class="vp-desc">קטע 1: מהו שוק ההון? (8 דקות) - יעלה בקרוב</div></div>
+          <div class="video-placeholder"><div class="vp-icon">&#127909;</div><div class="vp-title">ניתוח פונדמנטלי</div><div class="vp-desc">קטע 2: קריאת דוחות כספיים (10 דקות) - יעלה בקרוב</div></div>
+          <div class="video-placeholder"><div class="vp-icon">&#127909;</div><div class="vp-title">ניתוח טכני</div><div class="vp-desc">קטע 3: נרות יפניים ותבניות (7 דקות) - יעלה בקרוב</div></div>
+          <div class="video-placeholder"><div class="vp-icon">&#127909;</div><div class="vp-title">ניהול סיכונים</div><div class="vp-desc">קטע 4: כלל 1% ו-Position Sizing (6 דקות) - יעלה בקרוב</div></div>
+          <div class="video-placeholder"><div class="vp-icon">&#127909;</div><div class="vp-title">פסיכולוגיית מסחר</div><div class="vp-desc">קטע 5: שנאת הפסד והטיות קוגניטיביות (9 דקות) - יעלה בקרוב</div></div>
+        </div>
+      </div>
+
+      <!-- Exercises section -->
+      <div id="learning-exercises">
 
       <!-- Exercise 1 -->
       <div class="exercise-card" id="ex-1">
@@ -704,6 +902,115 @@ tr:hover{background:var(--bg3)}
         </div>
       </div>
 
+      <!-- Exercise 6 -->
+      <div class="exercise-card" id="ex-6">
+        <div class="exercise-header" onclick="toggleExercise(6)">
+          <div class="ex-num pending" id="ex-num-6">6</div>
+          <div class="ex-title">חפיר תחרותי (Competitive Moat)</div>
+          <span class="ex-arrow">&#9660;</span>
+        </div>
+        <div class="exercise-body">
+          <p style="color:var(--text2);font-size:13px;margin-bottom:12px">בחרו חברה וזהו את סוג החפיר התחרותי שלה: מותג, פטנטים, אפקט רשת, עלויות מעבר, או יתרון בעלויות.</p>
+          <div class="ex-field-grid">
+            <div class="input-group"><label>Ticker</label><input type="text" id="ex6-ticker" style="text-transform:uppercase;font-family:var(--mono)"></div>
+            <div class="input-group"><label>סוג חפיר</label><select id="ex6-moat"><option value="">-- בחר --</option><option value="brand">מותג חזק</option><option value="patents">פטנטים/IP</option><option value="network">אפקט רשת</option><option value="switching">עלויות מעבר</option><option value="cost">יתרון בעלויות</option><option value="multiple">מספר חפירים</option></select></div>
+          </div>
+          <div class="input-group"><label>ניתוח החפיר</label><textarea id="ex6-notes" rows="3" placeholder="הסבירו למה החפיר חזק/חלש, והאם הוא בר-קיימא?"></textarea></div>
+          <div class="prompt-box">Prompt ל-AI: "נתח את החפיר התחרותי של [TICKER]. זהה את סוג החפיר (מותג, פטנטים, אפקט רשת, עלויות מעבר, יתרון בעלויות). האם החפיר בר-קיימא? מה המתחרים המרכזיים?"<button class="copy-btn" onclick="copyPrompt(this)">&#128203; העתק</button></div>
+          <div class="ex-save-row">
+            <button class="btn btn-primary btn-sm" onclick="saveExercise(6)">&#128190; שמור</button>
+            <button class="btn btn-outline btn-sm" onclick="loadExercise(6)">&#128194; טען</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Exercise 7 -->
+      <div class="exercise-card" id="ex-7">
+        <div class="exercise-header" onclick="toggleExercise(7)">
+          <div class="ex-num pending" id="ex-num-7">7</div>
+          <div class="ex-title">ניתוח תזרים מזומנים (Cash Flow)</div>
+          <span class="ex-arrow">&#9660;</span>
+        </div>
+        <div class="exercise-body">
+          <p style="color:var(--text2);font-size:13px;margin-bottom:12px">בדקו את דוח תזרים המזומנים של חברה: תפעולי, השקעות, מימון. האם ה-FCF חיובי?</p>
+          <div class="ex-field-grid">
+            <div class="input-group"><label>Ticker</label><input type="text" id="ex7-ticker" style="text-transform:uppercase;font-family:var(--mono)"></div>
+            <div class="input-group"><label>Operating Cash Flow</label><input type="text" id="ex7-ocf" style="font-family:var(--mono)" placeholder="$XX.XB"></div>
+            <div class="input-group"><label>CapEx</label><input type="text" id="ex7-capex" style="font-family:var(--mono)" placeholder="$XX.XB"></div>
+            <div class="input-group"><label>Free Cash Flow</label><input type="text" id="ex7-fcf" style="font-family:var(--mono)" placeholder="$XX.XB"></div>
+          </div>
+          <div class="input-group"><label>ניתוח</label><textarea id="ex7-notes" rows="3" placeholder="האם החברה מייצרת מזומנים? מה עושים עם ה-FCF?"></textarea></div>
+          <div class="ex-save-row">
+            <button class="btn btn-primary btn-sm" onclick="saveExercise(7)">&#128190; שמור</button>
+            <button class="btn btn-outline btn-sm" onclick="loadExercise(7)">&#128194; טען</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Exercise 8 -->
+      <div class="exercise-card" id="ex-8">
+        <div class="exercise-header" onclick="toggleExercise(8)">
+          <div class="ex-num pending" id="ex-num-8">8</div>
+          <div class="ex-title">השוואת מתחרים בסקטור</div>
+          <span class="ex-arrow">&#9660;</span>
+        </div>
+        <div class="exercise-body">
+          <p style="color:var(--text2);font-size:13px;margin-bottom:12px">בחרו 3 חברות מאותו סקטור והשוו ביניהן: P/E, ROE, צמיחת הכנסות, ושולי רווח.</p>
+          <div class="ex-field-grid">
+            <div class="input-group"><label>חברה 1</label><input type="text" id="ex8-t1" style="text-transform:uppercase;font-family:var(--mono)"></div>
+            <div class="input-group"><label>חברה 2</label><input type="text" id="ex8-t2" style="text-transform:uppercase;font-family:var(--mono)"></div>
+            <div class="input-group"><label>חברה 3</label><input type="text" id="ex8-t3" style="text-transform:uppercase;font-family:var(--mono)"></div>
+            <div class="input-group"><label>סקטור</label><input type="text" id="ex8-sector"></div>
+          </div>
+          <div class="input-group"><label>מסקנות ההשוואה</label><textarea id="ex8-notes" rows="3" placeholder="איזו חברה הכי אטרקטיבית ולמה?"></textarea></div>
+          <div class="ex-save-row">
+            <button class="btn btn-primary btn-sm" onclick="saveExercise(8)">&#128190; שמור</button>
+            <button class="btn btn-outline btn-sm" onclick="loadExercise(8)">&#128194; טען</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Exercise 9 -->
+      <div class="exercise-card" id="ex-9">
+        <div class="exercise-header" onclick="toggleExercise(9)">
+          <div class="ex-num pending" id="ex-num-9">9</div>
+          <div class="ex-title">בניית BUS Score מלא</div>
+          <span class="ex-arrow">&#9660;</span>
+        </div>
+        <div class="exercise-body">
+          <p style="color:var(--text2);font-size:13px;margin-bottom:12px">בחרו מניה ומלאו BUS Score מלא עם כל 7 הרכיבים. השתמשו בטאב ניתוח מניה.</p>
+          <div class="input-group"><label>Ticker</label><input type="text" id="ex9-ticker" style="text-transform:uppercase;font-family:var(--mono)"></div>
+          <div class="input-group"><label>סיכום הניתוח</label><textarea id="ex9-notes" rows="4" placeholder="מה הציון הסופי? האם המניה שווה השקעה?"></textarea></div>
+          <div class="ex-save-row">
+            <button class="btn btn-primary btn-sm" onclick="saveExercise(9)">&#128190; שמור</button>
+            <button class="btn btn-outline btn-sm" onclick="loadExercise(9)">&#128194; טען</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Exercise 10 -->
+      <div class="exercise-card" id="ex-10">
+        <div class="exercise-header" onclick="toggleExercise(10)">
+          <div class="ex-num pending" id="ex-num-10">10</div>
+          <div class="ex-title">סימולציית עסקה מלאה</div>
+          <span class="ex-arrow">&#9660;</span>
+        </div>
+        <div class="exercise-body">
+          <p style="color:var(--text2);font-size:13px;margin-bottom:12px">בצעו סימולציה מלאה: ניתוח מניה → צ'קליסט → מחשבון פוזיציה → תיעוד ביומן.</p>
+          <div class="input-group"><label>Ticker</label><input type="text" id="ex10-ticker" style="text-transform:uppercase;font-family:var(--mono)"></div>
+          <div class="input-group"><label>ציון BUS</label><input type="text" id="ex10-bus" style="font-family:var(--mono)" placeholder="X.X / 5"></div>
+          <div class="input-group"><label>ציון פונדמנטלי</label><input type="text" id="ex10-fund" style="font-family:var(--mono)" placeholder="X.X / 5"></div>
+          <div class="input-group"><label>ציון טכני</label><input type="text" id="ex10-tech" style="font-family:var(--mono)" placeholder="X.X / 5"></div>
+          <div class="input-group"><label>החלטה סופית</label><select id="ex10-decision"><option value="">-- בחר --</option><option value="buy">קנייה</option><option value="watch">המתנה/מעקב</option><option value="pass">דילוג</option></select></div>
+          <div class="input-group"><label>נימוק</label><textarea id="ex10-notes" rows="3" placeholder="למה החלטתם כך? מה היו הגורמים המכריעים?"></textarea></div>
+          <div class="ex-save-row">
+            <button class="btn btn-primary btn-sm" onclick="saveExercise(10)">&#128190; שמור</button>
+            <button class="btn btn-outline btn-sm" onclick="loadExercise(10)">&#128194; טען</button>
+          </div>
+        </div>
+      </div>
+
+      </div><!-- /learning-exercises -->
     </div>
 
   </main>
@@ -726,6 +1033,14 @@ tr:hover{background:var(--bg3)}
       </select>
     </div>
     <div class="input-group">
+      <label>גודל תיק ($)</label>
+      <input type="number" id="setting-portfolio" placeholder="10000">
+    </div>
+    <div class="input-group">
+      <label>אחוז סיכון ברירת מחדל (%)</label>
+      <input type="number" id="setting-risk" placeholder="1" step="0.5">
+    </div>
+    <div class="input-group">
       <label>מטבע ברירת מחדל</label>
       <select id="default-currency">
         <option value="USD">$ דולר</option>
@@ -738,6 +1053,13 @@ tr:hover{background:var(--bg3)}
       <button class="btn btn-danger btn-sm" style="margin-right:auto" onclick="clearAllData()">&#128465; מחק הכל</button>
     </div>
   </div>
+</div>
+
+<!-- TERM POPUP -->
+<div class="term-popup" id="term-popup">
+  <button class="tp-close" onclick="closeTermPopup()">&times;</button>
+  <div class="tp-term" id="tp-term"></div>
+  <div class="tp-def" id="tp-def"></div>
 </div>
 
 <script>
@@ -770,9 +1092,26 @@ function switchTab(name) {
   document.querySelectorAll('.sidebar nav button').forEach(b => b.classList.remove('active'));
   document.getElementById('tab-' + name).classList.add('active');
   const btns = document.querySelectorAll('.sidebar nav button');
-  const tabs = ['dashboard','analysis','checklist','journal','weekly','glossary','chat','exercises'];
+  const tabs = ['dashboard','analysis','checklist','calculator','journal','learning','weekly','glossary','chat'];
   const idx = tabs.indexOf(name);
   if (idx >= 0 && btns[idx]) btns[idx].classList.add('active');
+}
+
+// ========== SUB-TABS (Analysis) ==========
+function switchSubTab(name) {
+  document.querySelectorAll('#tab-analysis .sub-tab-content').forEach(c => c.classList.remove('active'));
+  document.querySelectorAll('#tab-analysis .sub-tab-btn').forEach(b => b.classList.remove('active'));
+  const content = document.getElementById('subtab-' + name);
+  if (content) content.classList.add('active');
+  event.target.classList.add('active');
+}
+
+// ========== LEARNING TAB ==========
+function switchLearningTab(name) {
+  document.querySelectorAll('.learning-sub-btn').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+  document.getElementById('learning-exercises').style.display = name === 'exercises' ? 'block' : 'none';
+  document.getElementById('learning-videos').style.display = name === 'videos' ? 'block' : 'none';
 }
 
 // ========== YAHOO FINANCE API ==========
@@ -826,7 +1165,21 @@ async function loadIndices() {
       const chgEl = document.getElementById('idx-' + idx.el + '-chg');
       chgEl.textContent = `${changePct >= 0 ? '+' : ''}${changePct.toFixed(2)}%`;
       chgEl.className = 'change ' + (changePct >= 0 ? 'up' : 'down');
+      // Update sentiment for VIX and S&P
+      if (idx.el === 'vix') { window._vixPrice = price; }
+      if (idx.el === 'sp500') { window._sp500Chg = changePct; }
     } catch(e) { console.warn('Index fetch error:', idx.sym, e); }
+  }
+  // Update market sentiment
+  if (window._vixPrice && window._sp500Chg != null) {
+    updateMarketSentiment(window._vixPrice, window._sp500Chg);
+    // Multi-timeframe display
+    document.getElementById('tf-daily').textContent = window._sp500Chg >= 0 ? '▲ עולה' : '▼ יורד';
+    document.getElementById('tf-daily').style.color = window._sp500Chg >= 0 ? 'var(--green)' : 'var(--red)';
+    // Restore weekly/monthly from state if available
+    if (state.tfWeekly) document.getElementById('tf-weekly').value = state.tfWeekly;
+    if (state.tfMonthly) document.getElementById('tf-monthly').value = state.tfMonthly;
+    applyTfColors();
   }
 }
 
@@ -899,9 +1252,9 @@ function initBusItems() {
           <div class="bus-title">${b.title}</div>
           <div style="font-size:11px;color:var(--text3)">${b.desc}</div>
         </div>
-        <div class="bus-score-val" id="bus-val-${b.id}" style="color:var(--orange)">5</div>
+        <div class="bus-score-val" id="bus-val-${b.id}" style="color:var(--orange)">3.0</div>
       </div>
-      <input type="range" id="bus-${b.id}" min="0" max="10" step="0.5" value="5" oninput="updateBusScore('${b.id}')">
+      <input type="range" id="bus-${b.id}" min="1" max="5" step="0.5" value="3" oninput="updateBusScore('${b.id}')">
       <textarea id="bus-notes-${b.id}" placeholder="תיעוד ממצאים..." oninput="updateBusScore('${b.id}')"></textarea>
     </div>
   `).join('');
@@ -911,7 +1264,7 @@ function updateBusScore(id) {
   const val = parseFloat(document.getElementById('bus-' + id).value);
   const el = document.getElementById('bus-val-' + id);
   el.textContent = val.toFixed(1);
-  el.style.color = val >= 7 ? 'var(--green)' : val >= 4 ? 'var(--orange)' : 'var(--red)';
+  el.style.color = val >= 4 ? 'var(--green)' : val >= 2.5 ? 'var(--orange)' : 'var(--red)';
   calcTotalScore();
 }
 
@@ -934,13 +1287,17 @@ function calcTotalScore() {
 
   const totalEl = document.getElementById('total-score-num');
   totalEl.textContent = total.toFixed(1);
-  totalEl.style.color = total >= 7 ? 'var(--green)' : total >= 4 ? 'var(--orange)' : 'var(--red)';
+  totalEl.style.color = total >= 4 ? 'var(--green)' : total >= 2.5 ? 'var(--orange)' : 'var(--red)';
 
   const verdict = document.getElementById('total-verdict');
-  if (total >= 8) { verdict.textContent = 'מניה מצוינת - שווה בדיקה מעמיקה'; verdict.style.color = 'var(--green)'; }
-  else if (total >= 6) { verdict.textContent = 'מניה סבירה - יש פוטנציאל'; verdict.style.color = 'var(--orange)'; }
-  else if (total >= 4) { verdict.textContent = 'מניה בינונית - זהירות'; verdict.style.color = 'var(--orange)'; }
-  else { verdict.textContent = 'מניה חלשה - לא מומלצת'; verdict.style.color = 'var(--red)'; }
+  if (total >= 4.5) { verdict.textContent = 'Buy - מניה מצוינת'; verdict.style.color = 'var(--green)'; }
+  else if (total >= 3.5) { verdict.textContent = 'Hold - מניה סבירה, יש פוטנציאל'; verdict.style.color = 'var(--orange)'; }
+  else if (total >= 2.5) { verdict.textContent = 'Hold - מניה בינונית, זהירות'; verdict.style.color = 'var(--orange)'; }
+  else { verdict.textContent = 'Sell - מניה חלשה, לא מומלצת'; verdict.style.color = 'var(--red)'; }
+
+  // Update analyst comparison
+  document.getElementById('analyst-my').textContent = total.toFixed(1) + ' / 5';
+  checkAnalystConflict();
 }
 
 function updateTechScore() {
@@ -1010,13 +1367,13 @@ async function loadStock() {
     setRatio('nm', nm != null ? (nm * 100).toFixed(1) + '%' : null, v => v > 15 ? 'good' : v > 5 ? 'ok' : 'bad');
     setRatio('fcf', fcf != null ? (fcf / 1e9).toFixed(2) + 'B' : null, v => v > 0 ? 'good' : 'bad');
 
-    // Calculate fundamental score
+    // Calculate fundamental score (1-5 scale)
     let fScore = 0, fCount = 0;
     const addF = (val, goodFn) => {
       if (val == null || isNaN(val)) return;
       fCount++;
       const s = goodFn(val);
-      fScore += s === 'good' ? 10 : s === 'ok' ? 6 : 2;
+      fScore += s === 'good' ? 5 : s === 'ok' ? 3 : 1;
     };
     addF(pe, v => v > 0 && v < 20 ? 'good' : v < 35 ? 'ok' : 'bad');
     addF(pb, v => v > 0 && v < 3 ? 'good' : v < 5 ? 'ok' : 'bad');
@@ -1030,7 +1387,10 @@ async function loadStock() {
     const fundTotal = fCount > 0 ? (fScore / fCount) : 0;
     const fundEl = document.getElementById('fund-score');
     fundEl.textContent = fundTotal.toFixed(1);
-    fundEl.style.color = fundTotal >= 7 ? 'var(--green)' : fundTotal >= 4 ? 'var(--orange)' : 'var(--red)';
+    fundEl.style.color = fundTotal >= 4 ? 'var(--green)' : fundTotal >= 2.5 ? 'var(--orange)' : 'var(--red)';
+
+    // Generate Red Flags
+    generateRedFlags({ pe, pb, roe, de, cr, eps, rg, nm, fcf });
 
     calcTotalScore();
 
@@ -1105,6 +1465,8 @@ function calcPosition() {
   const rrEl = document.getElementById('cr-rr');
   rrEl.textContent = '1:' + rr.toFixed(1);
   rrEl.style.color = rr >= 4 ? 'var(--green)' : rr >= 2 ? 'var(--orange)' : 'var(--red)';
+
+  updateTradeInstructions();
 }
 
 // ========== JOURNAL ==========
@@ -1219,6 +1581,22 @@ function resetWeekly() {
   updateWeeklyProgress();
 }
 
+function markAllWeekly() {
+  state.weeklyChecks = [true,true,true,true,true,true,true,true,true,true];
+  document.querySelectorAll('#weekly-items input[type=checkbox]').forEach(c => { c.checked = true; c.closest('.checklist-item').classList.add('checked'); });
+  updateWeeklyProgress();
+}
+
+function updateWeeklyDate() {
+  const now = new Date();
+  const day = now.getDay();
+  const sun = new Date(now); sun.setDate(now.getDate() - day);
+  const sat = new Date(sun); sat.setDate(sun.getDate() + 6);
+  const fmt = d => d.getDate() + '/' + (d.getMonth() + 1);
+  const el = document.getElementById('weekly-date-range');
+  if (el) el.textContent = fmt(sun) + ' - ' + fmt(sat);
+}
+
 function restoreWeekly() {
   document.querySelectorAll('#weekly-items input[type=checkbox]').forEach((c, i) => {
     c.checked = state.weeklyChecks[i] || false;
@@ -1229,33 +1607,42 @@ function restoreWeekly() {
 
 // ========== GLOSSARY ==========
 const GLOSSARY = [
-  { term: 'P/E - מכפיל רווח', def: 'Price to Earnings - היחס בין מחיר המניה לרווח למניה. מכפיל נמוך עשוי להצביע על מניה זולה יחסית. מכפיל ממוצע בשוק: 15-25.', tags: 'pe מכפיל רווח price earnings' },
-  { term: 'P/B - מכפיל הון', def: 'Price to Book - היחס בין מחיר המניה לערך החשבונאי (הון עצמי) למניה. P/B נמוך מ-1 עשוי להצביע על חברה מתומחרת מתחת לשווי הנכסים שלה.', tags: 'pb מכפיל הון book value' },
-  { term: 'ROE - תשואה על ההון', def: 'Return on Equity - כמה רווח נקי החברה מייצרת ביחס להון העצמי שלה. ROE גבוה (מעל 15%) מעיד על ניהול יעיל של ההון.', tags: 'roe תשואה הון return equity' },
-  { term: 'EPS - רווח למניה', def: 'Earnings Per Share - הרווח הנקי של החברה מחולק במספר המניות. עלייה עקבית ב-EPS היא סימן חיובי.', tags: 'eps רווח מניה earnings share' },
-  { term: 'חפיר תחרותי (Moat)', def: 'יתרון תחרותי בר-קיימא שמגן על החברה מפני מתחרים. סוגים: מותג חזק, פטנטים, אפקט רשת, עלויות מעבר גבוהות, יתרון בעלויות.', tags: 'moat חפיר תחרותי יתרון competitive advantage' },
-  { term: 'Risk/Reward Ratio', def: 'יחס סיכון/סיכוי - היחס בין ההפסד הפוטנציאלי (מרחק ל-Stop Loss) לבין הרווח הפוטנציאלי (מרחק ל-Target). לפי התוכנית, יש לדרוש לפחות 1:4.', tags: 'risk reward ratio סיכון סיכוי יחס' },
-  { term: 'Stop Loss', def: 'פקודת הפסקת הפסד - מחיר שבו סוגרים את העסקה כדי להגביל הפסדים. חיוני לניהול סיכונים נכון.', tags: 'stop loss סטופ לוס הפסד הגבלה' },
-  { term: 'כלל 1% (Position Sizing)', def: 'כלל ניהול סיכונים: לא לסכן יותר מ-1% מההון הכולל בעסקה בודדת. אם התיק 100,000$, הסיכון המקסימלי לעסקה הוא 1,000$.', tags: 'כלל אחוז position sizing גודל פוזיציה סיכון' },
-  { term: 'נרות יפניים', def: 'שיטת ייצוג גרפי של מחירי מניות. כל נר מציג: פתיחה, סגירה, שיא ושפל. נר ירוק = סגירה מעל פתיחה, נר אדום = סגירה מתחת לפתיחה.', tags: 'נרות יפניים candlestick candle גרף' },
-  { term: 'תמיכה (Support)', def: 'רמת מחיר שבה הביקוש חזק מספיק כדי לעצור ירידת מחיר. כשהמחיר מגיע לתמיכה, הוא נוטה לעצור או להתהפך כלפי מעלה.', tags: 'תמיכה support רמה ביקוש' },
-  { term: 'התנגדות (Resistance)', def: 'רמת מחיר שבה ההיצע חזק מספיק כדי לעצור עליית מחיר. כשהמחיר מגיע להתנגדות, הוא נוטה לעצור או להתהפך כלפי מטה.', tags: 'התנגדות resistance רמה היצע' },
-  { term: 'RSI', def: 'Relative Strength Index - אינדיקטור מומנטום שנע בין 0-100. מעל 70 = Overbought (קניית יתר), מתחת ל-30 = Oversold (מכירת יתר).', tags: 'rsi relative strength index אינדיקטור מומנטום' },
-  { term: 'MACD', def: 'Moving Average Convergence Divergence - אינדיקטור מגמה ומומנטום. חציית קו ה-MACD מעל קו האות = אות קנייה, מתחתיו = אות מכירה.', tags: 'macd moving average convergence divergence אינדיקטור' },
-  { term: 'Bollinger Bands', def: 'רצועות בולינגר - אינדיקטור תנודתיות. כשהמחיר נוגע ברצועה העליונה = אזור קניית יתר, ברצועה התחתונה = מכירת יתר. כשהרצועות מתכווצות = צפי לתנועה חדה.', tags: 'bollinger bands בולינגר רצועות תנודתיות' },
-  { term: 'ממוצע נע (Moving Average)', def: 'ממוצע מחירי הסגירה על פני תקופה מוגדרת. MA50 = 50 ימים, MA200 = 200 ימים. חציית MA50 מעל MA200 = Golden Cross (חיובי).', tags: 'moving average ממוצע נע ma50 ma200 golden cross' },
-  { term: 'מאזן (Balance Sheet)', def: 'דוח כספי המציג את מצבה הפיננסי של חברה ביום מסוים: נכסים = התחייבויות + הון עצמי. נכסים שוטפים וקבועים, התחייבויות קצרות וארוכות.', tags: 'מאזן balance sheet נכסים התחייבויות הון עצמי' },
-  { term: 'דוח רווח והפסד', def: 'דוח על הכנסות, הוצאות ורווח נקי של חברה. מתחילים מההכנסות, מפחיתים עלויות ומגיעים לרווח הנקי. "השורה התחתונה".', tags: 'דוח רווח הפסד income statement revenue profit' },
-  { term: 'תזרים מזומנים', def: 'Cash Flow Statement - דוח המראה את תנועת המזומנים בפועל: מפעילות שוטפת, מפעילות השקעה, ומפעילות מימון.', tags: 'תזרים מזומנים cash flow statement' },
-  { term: 'Current Ratio', def: 'יחס שוטף - נכסים שוטפים חלקי התחייבויות שוטפות. מעל 1.5 = טוב, מתחת ל-1 = בעייתי (החברה עלולה להתקשות לשלם חובות).', tags: 'current ratio יחס שוטף נזילות' },
-  { term: 'Debt/Equity', def: 'יחס חוב להון - מודד כמה החברה ממומנת בחוב לעומת הון עצמי. יחס נמוך (מתחת ל-50) = פחות ממונפת = פחות סיכון.', tags: 'debt equity חוב הון מינוף leverage' },
-  { term: 'Free Cash Flow', def: 'תזרים מזומנים חופשי - המזומנים שנשארים לחברה אחרי הוצאות תפעול והשקעות. FCF חיובי = החברה מייצרת מזומנים, שלילי = שורפת מזומנים.', tags: 'free cash flow fcf תזרים חופשי מזומנים' },
-  { term: 'BUS - Business Understanding Score', def: 'ציון הבנה עסקית - מסגרת מהתוכנית עם 7 רכיבים (ביזנס, חפיר, תעשייה, מתחרות, השוואה ענפית, מיצוב, סיכונים). כל רכיב 0-10. מהווה 33% מהציון הכולל של ניתוח מניה.', tags: 'bus business understanding score ציון הבנה עסקית' },
-  { term: 'אג"ח (Bond)', def: 'אגרת חוב - מכשיר פיננסי לגיוס כסף. המנפיק מתחייב לשלם ריבית קבועה ולהחזיר את הקרן בתום התקופה. ממשלתי = בטוח יותר, קונצרני = תשואה גבוהה יותר.', tags: 'אגח bond אגרת חוב ריבית' },
-  { term: 'סחורות (Commodities)', def: 'מוצרים בסיסיים הניתנים לסחר: אנרגיה (נפט, גז), מתכות (זהב, כסף), חקלאות (חיטה, תירס). השקעה בסחורות מגנה מאינפלציה.', tags: 'סחורות commodities נפט זהב' },
-  { term: 'Finviz', def: 'אתר סריקת מניות (Stock Screener). מאפשר סינון לפי מכפילים, סקטורים, מדינות ועוד. כולל מפת חום (Heat Map) לראיית השוק בסקירה מהירה.', tags: 'finviz סורק screener מפת חום' },
-  { term: 'שנאת הפסד (Loss Aversion)', def: 'נטייה פסיכולוגית שבה כאב ההפסד חזק פי 2 מהנאת הרווח. מובילה משקיעים למכור מנצחות מוקדם ולהחזיק מפסידות זמן רב מדי.', tags: 'שנאת הפסד loss aversion פסיכולוגיה' },
-  { term: 'Earnings Whisper', def: 'אתר לעדכוני דוחות כספיים קרובים (Earnings). מציג תאריכי פרסום דוחות, תחזיות אנליסטים, ו"לחישות" על ביצועים צפויים.', tags: 'earnings whisper דוחות רבעוניים' }
+  { term: 'P/E - מכפיל רווח', def: 'Price to Earnings - היחס בין מחיר המניה לרווח למניה. מכפיל נמוך עשוי להצביע על מניה זולה יחסית. מכפיל ממוצע בשוק: 15-25.', tags: 'pe מכפיל רווח price earnings', cat: 'financial' },
+  { term: 'P/B - מכפיל הון', def: 'Price to Book - היחס בין מחיר המניה לערך החשבונאי (הון עצמי) למניה. P/B נמוך מ-1 עשוי להצביע על חברה מתומחרת מתחת לשווי הנכסים שלה.', tags: 'pb מכפיל הון book value', cat: 'financial' },
+  { term: 'ROE - תשואה על ההון', def: 'Return on Equity - כמה רווח נקי החברה מייצרת ביחס להון העצמי שלה. ROE גבוה (מעל 15%) מעיד על ניהול יעיל של ההון.', tags: 'roe תשואה הון return equity', cat: 'financial' },
+  { term: 'EPS - רווח למניה', def: 'Earnings Per Share - הרווח הנקי של החברה מחולק במספר המניות. עלייה עקבית ב-EPS היא סימן חיובי.', tags: 'eps רווח מניה earnings share', cat: 'financial' },
+  { term: 'חפיר תחרותי (Moat)', def: 'יתרון תחרותי בר-קיימא שמגן על החברה מפני מתחרים. סוגים: מותג חזק, פטנטים, אפקט רשת, עלויות מעבר גבוהות, יתרון בעלויות.', tags: 'moat חפיר תחרותי יתרון competitive advantage', cat: 'trading' },
+  { term: 'Risk/Reward Ratio', def: 'יחס סיכון/סיכוי - היחס בין ההפסד הפוטנציאלי (מרחק ל-Stop Loss) לבין הרווח הפוטנציאלי (מרחק ל-Target). לפי התוכנית, יש לדרוש לפחות 1:4.', tags: 'risk reward ratio סיכון סיכוי יחס', cat: 'trading' },
+  { term: 'Stop Loss', def: 'פקודת הפסקת הפסד - מחיר שבו סוגרים את העסקה כדי להגביל הפסדים. חיוני לניהול סיכונים נכון.', tags: 'stop loss סטופ לוס הפסד הגבלה', cat: 'trading' },
+  { term: 'כלל 1% (Position Sizing)', def: 'כלל ניהול סיכונים: לא לסכן יותר מ-1% מההון הכולל בעסקה בודדת. אם התיק 100,000$, הסיכון המקסימלי לעסקה הוא 1,000$.', tags: 'כלל אחוז position sizing גודל פוזיציה סיכון', cat: 'trading' },
+  { term: 'נרות יפניים', def: 'שיטת ייצוג גרפי של מחירי מניות. כל נר מציג: פתיחה, סגירה, שיא ושפל. נר ירוק = סגירה מעל פתיחה, נר אדום = סגירה מתחת לפתיחה.', tags: 'נרות יפניים candlestick candle גרף', cat: 'technical' },
+  { term: 'תמיכה (Support)', def: 'רמת מחיר שבה הביקוש חזק מספיק כדי לעצור ירידת מחיר. כשהמחיר מגיע לתמיכה, הוא נוטה לעצור או להתהפך כלפי מעלה.', tags: 'תמיכה support רמה ביקוש', cat: 'technical' },
+  { term: 'התנגדות (Resistance)', def: 'רמת מחיר שבה ההיצע חזק מספיק כדי לעצור עליית מחיר. כשהמחיר מגיע להתנגדות, הוא נוטה לעצור או להתהפך כלפי מטה.', tags: 'התנגדות resistance רמה היצע', cat: 'technical' },
+  { term: 'RSI', def: 'Relative Strength Index - אינדיקטור מומנטום שנע בין 0-100. מעל 70 = Overbought (קניית יתר), מתחת ל-30 = Oversold (מכירת יתר).', tags: 'rsi relative strength index אינדיקטור מומנטום', cat: 'technical' },
+  { term: 'MACD', def: 'Moving Average Convergence Divergence - אינדיקטור מגמה ומומנטום. חציית קו ה-MACD מעל קו האות = אות קנייה, מתחתיו = אות מכירה.', tags: 'macd moving average convergence divergence אינדיקטור', cat: 'technical' },
+  { term: 'Bollinger Bands', def: 'רצועות בולינגר - אינדיקטור תנודתיות. כשהמחיר נוגע ברצועה העליונה = אזור קניית יתר, ברצועה התחתונה = מכירת יתר. כשהרצועות מתכווצות = צפי לתנועה חדה.', tags: 'bollinger bands בולינגר רצועות תנודתיות', cat: 'technical' },
+  { term: 'ממוצע נע (Moving Average)', def: 'ממוצע מחירי הסגירה על פני תקופה מוגדרת. MA50 = 50 ימים, MA200 = 200 ימים. חציית MA50 מעל MA200 = Golden Cross (חיובי).', tags: 'moving average ממוצע נע ma50 ma200 golden cross', cat: 'technical' },
+  { term: 'מאזן (Balance Sheet)', def: 'דוח כספי המציג את מצבה הפיננסי של חברה ביום מסוים: נכסים = התחייבויות + הון עצמי. נכסים שוטפים וקבועים, התחייבויות קצרות וארוכות.', tags: 'מאזן balance sheet נכסים התחייבויות הון עצמי', cat: 'financial' },
+  { term: 'דוח רווח והפסד', def: 'דוח על הכנסות, הוצאות ורווח נקי של חברה. מתחילים מההכנסות, מפחיתים עלויות ומגיעים לרווח הנקי. "השורה התחתונה".', tags: 'דוח רווח הפסד income statement revenue profit', cat: 'financial' },
+  { term: 'תזרים מזומנים', def: 'Cash Flow Statement - דוח המראה את תנועת המזומנים בפועל: מפעילות שוטפת, מפעילות השקעה, ומפעילות מימון.', tags: 'תזרים מזומנים cash flow statement', cat: 'financial' },
+  { term: 'Current Ratio', def: 'יחס שוטף - נכסים שוטפים חלקי התחייבויות שוטפות. מעל 1.5 = טוב, מתחת ל-1 = בעייתי (החברה עלולה להתקשות לשלם חובות).', tags: 'current ratio יחס שוטף נזילות', cat: 'financial' },
+  { term: 'Debt/Equity', def: 'יחס חוב להון - מודד כמה החברה ממומנת בחוב לעומת הון עצמי. יחס נמוך (מתחת ל-50) = פחות ממונפת = פחות סיכון.', tags: 'debt equity חוב הון מינוף leverage', cat: 'financial' },
+  { term: 'Free Cash Flow', def: 'תזרים מזומנים חופשי - המזומנים שנשארים לחברה אחרי הוצאות תפעול והשקעות. FCF חיובי = החברה מייצרת מזומנים, שלילי = שורפת מזומנים.', tags: 'free cash flow fcf תזרים חופשי מזומנים', cat: 'financial' },
+  { term: 'Revenue Growth', def: 'צמיחת הכנסות - אחוז השינוי בהכנסות החברה ביחס לתקופה קודמת. צמיחה חיובית עקבית = סימן חיובי. צמיחה שלילית = החברה מצטמקת.', tags: 'revenue growth צמיחה הכנסות', cat: 'financial' },
+  { term: 'Net Margin', def: 'שולי רווח נקי - אחוז הרווח הנקי מתוך סך ההכנסות. מראה כמה מכל שקל הכנסה נשאר כרווח. מעל 20% = מצוין, 10-20% = טוב, מתחת ל-5% = חלש.', tags: 'net margin שולי רווח נקי רווחיות', cat: 'financial' },
+  { term: 'BUS - Business Understanding Score', def: 'ציון הבנה עסקית - מסגרת מהתוכנית עם 7 רכיבים (ביזנס, חפיר, תעשייה, מתחרות, השוואה ענפית, מיצוב, סיכונים). כל רכיב 1-5. מהווה 33% מהציון הכולל של ניתוח מניה.', tags: 'bus business understanding score ציון הבנה עסקית', cat: 'trading' },
+  { term: 'אג"ח (Bond)', def: 'אגרת חוב - מכשיר פיננסי לגיוס כסף. המנפיק מתחייב לשלם ריבית קבועה ולהחזיר את הקרן בתום התקופה. ממשלתי = בטוח יותר, קונצרני = תשואה גבוהה יותר.', tags: 'אגח bond אגרת חוב ריבית', cat: 'economy' },
+  { term: 'סחורות (Commodities)', def: 'מוצרים בסיסיים הניתנים לסחר: אנרגיה (נפט, גז), מתכות (זהב, כסף), חקלאות (חיטה, תירס). השקעה בסחורות מגנה מאינפלציה.', tags: 'סחורות commodities נפט זהב', cat: 'economy' },
+  { term: 'Finviz', def: 'אתר סריקת מניות (Stock Screener). מאפשר סינון לפי מכפילים, סקטורים, מדינות ועוד. כולל מפת חום (Heat Map) לראיית השוק בסקירה מהירה.', tags: 'finviz סורק screener מפת חום', cat: 'trading' },
+  { term: 'שנאת הפסד (Loss Aversion)', def: 'נטייה פסיכולוגית שבה כאב ההפסד חזק פי 2 מהנאת הרווח. מובילה משקיעים למכור מנצחות מוקדם ולהחזיק מפסידות זמן רב מדי.', tags: 'שנאת הפסד loss aversion פסיכולוגיה', cat: 'trading' },
+  { term: 'Earnings Whisper', def: 'אתר לעדכוני דוחות כספיים קרובים (Earnings). מציג תאריכי פרסום דוחות, תחזיות אנליסטים, ו"לחישות" על ביצועים צפויים.', tags: 'earnings whisper דוחות רבעוניים', cat: 'trading' },
+  { term: 'GICS', def: 'Global Industry Classification Standard - מערכת סיווג בינלאומית של תעשיות. מחלקת חברות ל-11 סקטורים, 25 קבוצות, 74 תעשיות, ו-164 תתי-תעשיות. חיונית להשוואה בין חברות דומות.', tags: 'gics סיווג סקטור תעשייה classification', cat: 'economy' },
+  { term: 'Quintiles (חמישונים)', def: 'חלוקת קבוצה ל-5 חלקים שווים (20% כל אחד). משמש להשוואת יחסים פיננסיים בתוך סקטור - למשל, P/E בחמישון העליון (יקר) לעומת התחתון (זול).', tags: 'quintiles חמישונים השוואה סטטיסטיקה', cat: 'financial' },
+  { term: 'VIX - מדד הפחד', def: 'Volatility Index - מדד התנודתיות הצפויה ב-S&P 500. מתחת ל-15 = שוק שקט, 15-25 = נורמלי, מעל 25 = פחד ותנודתיות גבוהה.', tags: 'vix volatility פחד תנודתיות מדד', cat: 'economy' },
+  { term: 'Market Cap (שווי שוק)', def: 'שווי שוק = מחיר מניה × מספר מניות. Mega Cap: מעל $200B, Large Cap: $10-200B, Mid Cap: $2-10B, Small Cap: $300M-2B, Micro Cap: מתחת ל-$300M.', tags: 'market cap שווי שוק גודל חברה mega large mid small', cat: 'financial' },
+  { term: 'Golden Cross / Death Cross', def: 'Golden Cross: ממוצע נע 50 חוצה מעלה את ממוצע 200 - אות חיובי. Death Cross: ממוצע 50 חוצה מטה את 200 - אות שלילי. אותות לטווח ארוך.', tags: 'golden cross death cross ממוצע נע אות', cat: 'technical' },
+  { term: 'Dividend Yield (תשואת דיבידנד)', def: 'דיבידנד שנתי חלקי מחיר המניה. תשואה של 2-4% נחשבת טובה. חברות עם דיבידנד קבוע ועולה נחשבות יציבות יותר.', tags: 'dividend yield דיבידנד תשואה', cat: 'financial' },
+  { term: 'Short Selling (מכירה בחסר)', def: 'שאילת מניות ומכירתן במחיר הנוכחי, בתקווה לקנות בחזרה בזול ולהרוויח מהפרש. סיכון בלתי מוגבל כי המחיר יכול לעלות ללא גבול.', tags: 'short selling מכירה בחסר שורט', cat: 'trading' }
 ];
 
 function initGlossary() {
@@ -1270,9 +1657,14 @@ function renderGlossary(items) {
 
 function filterGlossary() {
   const q = document.getElementById('glossary-search').value.toLowerCase();
-  if (!q) { renderGlossary(GLOSSARY); return; }
-  const filtered = GLOSSARY.filter(g => g.term.toLowerCase().includes(q) || g.def.toLowerCase().includes(q) || g.tags.includes(q));
-  renderGlossary(filtered);
+  let items = GLOSSARY;
+  if (currentGlossaryCat !== 'all') {
+    items = items.filter(g => g.cat === currentGlossaryCat);
+  }
+  if (q) {
+    items = items.filter(g => g.term.toLowerCase().includes(q) || g.def.toLowerCase().includes(q) || g.tags.includes(q));
+  }
+  renderGlossary(items);
 }
 
 // ========== CHAT ==========
@@ -1294,11 +1686,24 @@ function askSuggested(btn) {
   sendChat();
 }
 
+function parseMiniMarkdown(text) {
+  return text
+    .replace(/^### (.+)$/gm, '<strong style="font-size:15px;display:block;margin:8px 0 4px">$1</strong>')
+    .replace(/^## (.+)$/gm, '<strong style="font-size:16px;display:block;margin:10px 0 4px">$1</strong>')
+    .replace(/^# (.+)$/gm, '<strong style="font-size:17px;display:block;margin:12px 0 6px">$1</strong>')
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\*(.+?)\*/g, '<em>$1</em>')
+    .replace(/^- (.+)$/gm, '<span style="display:block;padding-right:12px">• $1</span>')
+    .replace(/^\d+\. (.+)$/gm, (m) => `<span style="display:block;padding-right:12px">${m}</span>`)
+    .replace(/\n/g, '<br>');
+}
+
 function addChatMessage(text, isUser, source) {
   const c = document.getElementById('chat-messages');
   const div = document.createElement('div');
   div.className = 'chat-msg ' + (isUser ? 'user' : 'bot');
-  div.innerHTML = text.replace(/\n/g, '<br>') + (source ? `<br><span class="source-tag">${source}</span>` : '');
+  const formatted = isUser ? text.replace(/\n/g, '<br>') : parseMiniMarkdown(text);
+  div.innerHTML = formatted + (source ? `<br><span class="source-tag">${source}</span>` : '');
   c.appendChild(div);
   c.scrollTop = c.scrollHeight;
 }
@@ -1372,7 +1777,7 @@ async function sendChat() {
       });
       const data = await res.json();
       const answer = data.choices?.[0]?.message?.content || 'שגיאה בקבלת תשובה מ-Grok';
-      lastMsg.innerHTML = answer.replace(/\n/g, '<br>') + `<br><span class="source-tag">Grok AI | מקורות: ${[...new Set(results.map(r => r.source))].join(', ') || 'כללי'}</span>`;
+      lastMsg.innerHTML = parseMiniMarkdown(answer) + `<br><span class="source-tag">Grok AI | מקורות: ${[...new Set(results.map(r => r.source))].join(', ') || 'כללי'}</span>`;
     } catch(e) {
       lastMsg.innerHTML = 'שגיאה בחיבור ל-Grok API. בדוק את המפתח בהגדרות.<br><span class="source-tag">שגיאה: ' + e.message + '</span>';
     }
@@ -1402,17 +1807,186 @@ const KNOWLEDGE_BASE = [
   { content: 'Finviz Heat Map - מפת חום לסריקת שוק: מאפשרת לראות בסקירה מהירה אילו סקטורים/מניות עולים או יורדים. ניתן לסנן לפי מכפילים (P/B, P/E), סקטורים, גודל חברה. שימושי במיוחד להערכת מצב השוק הכללי ולאיתור הזדמנויות.', source: 'מפגש 12 + מפגש 13', tags: 'finviz heat map מפת חום סריקה סקטור סורק screener' }
 ];
 
+// ========== RED FLAGS ==========
+function generateRedFlags(ratios) {
+  const flags = [];
+  if (ratios.pe > 50) flags.push({ title: 'P/E גבוה מאוד (' + ratios.pe.toFixed(1) + ')', desc: 'מכפיל רווח גבוה - החברה עשויה להיות מתומחרת ביתר. השווה לסקטור.' });
+  if (ratios.pe < 0 || (ratios.eps != null && ratios.eps < 0)) flags.push({ title: 'רווח שלילי', desc: 'החברה מפסידה כסף. בדוק אם זו תקופה זמנית או מגמה.' });
+  if (ratios.de > 100) flags.push({ title: 'מינוף גבוה (D/E: ' + ratios.de.toFixed(0) + ')', desc: 'יחס חוב/הון גבוה - סיכון במשבר או בעליית ריבית.' });
+  if (ratios.cr != null && ratios.cr < 1) flags.push({ title: 'Current Ratio נמוך (' + ratios.cr.toFixed(2) + ')', desc: 'בעיית נזילות - החברה עלולה להתקשות לשלם חובות לטווח קצר.' });
+  if (ratios.rg != null && ratios.rg < 0) flags.push({ title: 'צמיחת הכנסות שלילית', desc: 'ההכנסות יורדות - בדוק אם מדובר בשינוי מגמה או אירוע חד-פעמי.' });
+  if (ratios.fcf != null && ratios.fcf < 0) flags.push({ title: 'FCF שלילי', desc: 'החברה שורפת מזומנים. בדוק האם זה בגלל השקעות בצמיחה או בעיה מהותית.' });
+  if (ratios.nm != null && ratios.nm < 0.03) flags.push({ title: 'שולי רווח נמוכים (' + (ratios.nm*100).toFixed(1) + '%)', desc: 'רווחיות נמוכה - החברה רגישה לשינויים בעלויות.' });
+  if (ratios.pb > 15) flags.push({ title: 'P/B גבוה מאוד (' + ratios.pb.toFixed(1) + ')', desc: 'הרבה "אוויר" - בירידות, המניה עלולה ליפול חזק.' });
+
+  const card = document.getElementById('red-flags-card');
+  const list = document.getElementById('red-flags-list');
+  if (flags.length > 0) {
+    card.style.display = 'block';
+    list.innerHTML = flags.map(f => `<div class="red-flag"><span class="rf-icon">&#9888;</span><div><div class="rf-title">${f.title}</div><div class="rf-desc">${f.desc}</div></div></div>`).join('');
+  } else {
+    card.style.display = 'block';
+    list.innerHTML = '<div class="no-flags">&#9989; לא זוהו דגלים אדומים - הנתונים הפיננסיים נראים תקינים</div>';
+  }
+}
+
+// ========== SCENARIO PLANNING ==========
+function calcScenario() {
+  const entry = parseFloat(document.getElementById('sc-entry').value);
+  const sl = parseFloat(document.getElementById('sc-sl').value);
+  const target = parseFloat(document.getElementById('sc-target').value);
+  if (!entry || !sl || !target) return;
+
+  const capital = parseFloat(document.getElementById('calc-capital')?.value) || state.settings.portfolioSize || 10000;
+  const riskPct = parseFloat(document.getElementById('calc-risk-pct')?.value) || state.settings.riskPct || 1;
+  const maxRisk = capital * (riskPct / 100);
+  const slDist = Math.abs(entry - sl);
+  const shares = slDist > 0 ? Math.floor(maxRisk / slDist) : 0;
+
+  document.getElementById('scenario-result').style.display = 'block';
+  document.getElementById('sc-shares').textContent = shares;
+  document.getElementById('sc-posval').textContent = '$' + (shares * entry).toFixed(2);
+  document.getElementById('sc-risk').textContent = '$' + (shares * slDist).toFixed(2);
+  document.getElementById('sc-profit').textContent = '$' + (shares * Math.abs(target - entry)).toFixed(2);
+  const rr = slDist > 0 ? (Math.abs(target - entry) / slDist) : 0;
+  const rrEl = document.getElementById('sc-rr');
+  rrEl.textContent = '1:' + rr.toFixed(1);
+  rrEl.style.color = rr >= 4 ? 'var(--green)' : rr >= 2 ? 'var(--orange)' : 'var(--red)';
+}
+
+function sendToCalculator() {
+  const entry = document.getElementById('sc-entry').value;
+  const sl = document.getElementById('sc-sl').value;
+  const target = document.getElementById('sc-target').value;
+  if (entry) document.getElementById('calc-entry').value = entry;
+  if (sl) document.getElementById('calc-sl').value = sl;
+  if (target) document.getElementById('calc-target').value = target;
+  switchTab('calculator');
+  calcPosition();
+}
+
+// ========== ANALYST COMPARISON ==========
+function checkAnalystConflict() {
+  const tv = document.getElementById('analyst-tv').value;
+  const ib = document.getElementById('analyst-ib').value;
+  const total = parseFloat(document.getElementById('total-score-num').textContent) || 0;
+  const warning = document.getElementById('analyst-warning');
+
+  const hasSell = tv === 'sell' || ib === 'sell';
+  const highScore = total >= 3.5;
+
+  if (hasSell && highScore) {
+    warning.style.display = 'block';
+    warning.innerHTML = '&#9888; <strong>סתירה!</strong> הציון שלך גבוה (' + total.toFixed(1) + '/5), אבל אנליסטים חיצוניים מצביעים על Sell. שקול לבדוק שוב את הניתוח.';
+  } else {
+    warning.style.display = 'none';
+  }
+}
+
+// ========== MARKET SENTIMENT ==========
+function updateMarketSentiment(vixPrice, sp500Chg) {
+  // VIX interpretation
+  const vixEl = document.getElementById('vix-interp');
+  if (vixPrice < 15) { vixEl.textContent = 'שקט - ' + vixPrice.toFixed(1); vixEl.style.background = 'rgba(22,163,74,.12)'; vixEl.style.color = 'var(--green)'; }
+  else if (vixPrice < 25) { vixEl.textContent = 'נורמלי - ' + vixPrice.toFixed(1); vixEl.style.background = 'rgba(217,119,6,.12)'; vixEl.style.color = 'var(--orange)'; }
+  else { vixEl.textContent = 'פחד - ' + vixPrice.toFixed(1); vixEl.style.background = 'rgba(220,38,38,.12)'; vixEl.style.color = 'var(--red)'; }
+
+  // Market badge
+  const badge = document.getElementById('market-badge');
+  if (sp500Chg > 0.5) { badge.textContent = 'Bullish'; badge.className = 'market-badge bullish'; }
+  else if (sp500Chg < -0.5) { badge.textContent = 'Bearish'; badge.className = 'market-badge bearish'; }
+  else { badge.textContent = 'Neutral'; badge.className = 'market-badge neutral'; }
+
+  // Action recommendation
+  const action = document.getElementById('market-action');
+  if (vixPrice > 30) { action.textContent = 'זהירות - תנודתיות גבוהה, צמצמו חשיפה'; action.style.color = 'var(--red)'; }
+  else if (vixPrice < 15 && sp500Chg > 0) { action.textContent = 'שוק רגוע - חפשו הזדמנויות כניסה'; action.style.color = 'var(--green)'; }
+  else { action.textContent = 'שוק סטנדרטי - המשיכו לפי התוכנית'; action.style.color = 'var(--text2)'; }
+}
+
+function saveTfState() {
+  state.tfWeekly = document.getElementById('tf-weekly').value;
+  state.tfMonthly = document.getElementById('tf-monthly').value;
+  applyTfColors();
+  saveState();
+}
+
+function applyTfColors() {
+  ['tf-weekly', 'tf-monthly'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el.value === 'up') el.style.color = 'var(--green)';
+    else if (el.value === 'down') el.style.color = 'var(--red)';
+    else if (el.value === 'side') el.style.color = 'var(--orange)';
+    else el.style.color = 'var(--text)';
+  });
+}
+
+// ========== GLOSSARY CATEGORIES ==========
+let currentGlossaryCat = 'all';
+
+function filterGlossaryCat(cat) {
+  currentGlossaryCat = cat;
+  document.querySelectorAll('.glossary-cat-btn').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+  filterGlossary();
+}
+
+// ========== TERM POPUP ==========
+function showTermPopup(term, e) {
+  const item = GLOSSARY.find(g => g.term.toLowerCase().includes(term.toLowerCase()));
+  if (!item) return;
+  const popup = document.getElementById('term-popup');
+  document.getElementById('tp-term').textContent = item.term;
+  document.getElementById('tp-def').textContent = item.def;
+  popup.style.top = (e.clientY + 10) + 'px';
+  popup.style.right = (window.innerWidth - e.clientX + 10) + 'px';
+  popup.classList.add('show');
+}
+
+function closeTermPopup() {
+  document.getElementById('term-popup').classList.remove('show');
+}
+
+// Close popup on click outside
+document.addEventListener('click', e => {
+  if (!e.target.closest('.term-popup') && !e.target.closest('.term-link')) closeTermPopup();
+});
+
+// ========== TRADE INSTRUCTIONS ==========
+function updateTradeInstructions() {
+  const entry = parseFloat(document.getElementById('calc-entry').value);
+  const sl = parseFloat(document.getElementById('calc-sl').value);
+  const target = parseFloat(document.getElementById('calc-target').value);
+  const shares = document.getElementById('cr-shares').textContent;
+  const el = document.getElementById('trade-instructions');
+  if (!entry || !sl || !shares || shares === '--') {
+    el.textContent = 'הזן מחיר כניסה, Stop Loss ו-Target לקבלת הוראות.';
+    return;
+  }
+  const direction = entry > sl ? 'Long' : 'Short';
+  el.innerHTML = `<strong>${direction} | ${shares} מניות</strong><br>` +
+    `Limit Buy @ $${entry.toFixed(2)} | Stop Loss @ $${sl.toFixed(2)}` +
+    (target ? ` | Take Profit @ $${target.toFixed(2)}` : '');
+}
+
 // ========== SETTINGS ==========
 function openSettings() { document.getElementById('settings-modal').classList.add('show');
   document.getElementById('grok-api-key').value = state.settings.grokKey || '';
   document.getElementById('grok-model').value = state.settings.grokModel || 'grok-3-mini';
   document.getElementById('default-currency').value = state.settings.currency || 'USD';
+  document.getElementById('setting-portfolio').value = state.settings.portfolioSize || '';
+  document.getElementById('setting-risk').value = state.settings.riskPct || '';
 }
 function closeSettings() { document.getElementById('settings-modal').classList.remove('show'); }
 function saveSettings() {
   state.settings.grokKey = document.getElementById('grok-api-key').value;
   state.settings.grokModel = document.getElementById('grok-model').value;
   state.settings.currency = document.getElementById('default-currency').value;
+  state.settings.portfolioSize = parseFloat(document.getElementById('setting-portfolio').value) || 10000;
+  state.settings.riskPct = parseFloat(document.getElementById('setting-risk').value) || 1;
+  // Auto-fill calculator
+  document.getElementById('calc-capital').value = state.settings.portfolioSize;
+  document.getElementById('calc-risk-pct').value = state.settings.riskPct;
   saveState();
   closeSettings();
 }
@@ -1754,7 +2328,7 @@ function loadExercise(num) {
 
 function restoreExerciseStatus() {
   if (!state.exercises) return;
-  for (let i = 1; i <= 5; i++) {
+  for (let i = 1; i <= 10; i++) {
     if (state.exercises['ex' + i]) {
       const numEl = document.getElementById('ex-num-' + i);
       if (numEl) { numEl.classList.remove('pending'); numEl.classList.add('done'); }
@@ -1770,10 +2344,15 @@ document.addEventListener('DOMContentLoaded', () => {
   renderWatchlist();
   renderJournal();
   restoreWeekly();
+  updateWeeklyDate();
   document.getElementById('j-date').value = new Date().toISOString().split('T')[0];
 
   // Restore exercise status
   restoreExerciseStatus();
+
+  // Auto-fill calculator from settings
+  if (state.settings.portfolioSize) document.getElementById('calc-capital').value = state.settings.portfolioSize;
+  if (state.settings.riskPct) document.getElementById('calc-risk-pct').value = state.settings.riskPct;
 
   // Load indices (non-blocking)
   loadIndices();
