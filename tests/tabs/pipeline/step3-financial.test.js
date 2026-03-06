@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { calculateFinancialScore } from '../../../js/tabs/pipeline/step3-financial.js';
+import { calculateFinancialScore } from '../../../js/tabs/pipeline/step2-analysis.js';
 
 describe('Financial Score Calculation', () => {
   it('all good ratios → score 5.0', () => {

@@ -6,16 +6,16 @@ import { initSidebar } from './components/sidebar.js';
 import { renderPipelineNav, initPipeline, STEPS, goToStep, getCurrentStep } from './tabs/pipeline/pipeline-manager.js';
 import { showModal } from './components/modal.js';
 
-// Step renderers — lazy loaded
+// Step renderers — lazy loaded (match STEPS in pipeline-manager.js)
 const stepRenderers = {
-  idea:       () => import('./tabs/pipeline/step1-idea.js'),
-  bus:        () => import('./tabs/pipeline/step2-bus.js'),
-  financial:  () => import('./tabs/pipeline/step3-financial.js'),
-  technical:  () => import('./tabs/pipeline/step4-technical.js'),
-  valuation:  () => import('./tabs/pipeline/step5-valuation.js'),
-  risk:       () => import('./tabs/pipeline/step6-risk.js'),
-  decision:   () => import('./tabs/pipeline/step7-decision.js'),
-  monitoring: () => import('./tabs/pipeline/step8-monitoring.js')
+  market:    () => import('./tabs/pipeline/step0-market.js'),
+  sourcing:  () => import('./tabs/pipeline/step1-sourcing.js'),
+  analysis:  () => import('./tabs/pipeline/step2-analysis.js'),
+  lists:     () => import('./tabs/pipeline/step3-lists.js'),
+  scenario:  () => import('./tabs/pipeline/step4-scenario.js'),
+  position:  () => import('./tabs/pipeline/step5-position.js'),
+  journal:   () => import('./tabs/pipeline/step6-journal.js'),
+  insights:  () => import('./tabs/pipeline/step7-insights.js')
 };
 
 // Tab renderers
@@ -49,7 +49,7 @@ async function renderPipelineTab(subtab) {
   main.appendChild(layout);
 
   // Render active step
-  const stepId = subtab || STEPS.find(s => s.num === getCurrentStep())?.id || 'idea';
+  const stepId = subtab || STEPS.find(s => s.num === getCurrentStep())?.id || 'market';
   const loader = stepRenderers[stepId];
   if (loader) {
     const mod = await loader();

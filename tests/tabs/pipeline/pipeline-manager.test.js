@@ -29,8 +29,8 @@ describe('Pipeline Manager', () => {
 
   it('STEPS has 8 steps', () => {
     expect(STEPS).toHaveLength(8);
-    expect(STEPS[0].id).toBe('idea');
-    expect(STEPS[7].id).toBe('monitoring');
+    expect(STEPS[0].id).toBe('market');
+    expect(STEPS[7].id).toBe('insights');
   });
 
   it('step 1 is unlocked by default', () => {

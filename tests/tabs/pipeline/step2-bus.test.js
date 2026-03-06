@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { calculateBusScore } from '../../../js/tabs/pipeline/step2-bus.js';
+import { calculateBusScore } from '../../../js/tabs/pipeline/step2-analysis.js';
 
 describe('BUS Score Calculation', () => {
   it('calculates average of scores correctly', () => {

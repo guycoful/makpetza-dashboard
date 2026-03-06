@@ -4,14 +4,14 @@ import { emit, on } from '../../core/events.js';
 import { navigate, getStepName } from '../../core/router.js';
 
 const STEPS = [
-  { num: 1, id: 'idea',       title: 'רעיון השקעה',    icon: '\u{1F4A1}' },
-  { num: 2, id: 'bus',        title: 'BUS Score',       icon: '\u{1F3E2}' },
-  { num: 3, id: 'financial',  title: 'יחסים פיננסיים', icon: '\u{1F4CA}' },
-  { num: 4, id: 'technical',  title: 'ניתוח טכני',     icon: '\u{1F4C8}' },
-  { num: 5, id: 'valuation',  title: 'תמחור',          icon: '\u{1F4B0}' },
-  { num: 6, id: 'risk',       title: 'סיכונים',        icon: '\u{26A0}\u{FE0F}' },
-  { num: 7, id: 'decision',   title: 'החלטה',          icon: '\u{2696}\u{FE0F}' },
-  { num: 8, id: 'monitoring', title: 'מעקב',           icon: '\u{1F4CB}' }
+  { num: 1, id: 'market',    title: 'שלב 0 — סקירת שווקים', icon: '\u{1F30D}' },
+  { num: 2, id: 'sourcing',  title: 'שלב 1 — איתור',        icon: '\u{1F50E}' },
+  { num: 3, id: 'analysis',  title: 'שלב 2 — הניתוח',       icon: '\u{1F9E0}' },
+  { num: 4, id: 'lists',     title: 'שלב 3 — רשימות',       icon: '\u{1F4CB}' },
+  { num: 5, id: 'scenario',  title: 'שלב 4 — תרחיש',        icon: '\u{1F3AF}' },
+  { num: 6, id: 'position',  title: 'שלב 5 — פוזיציה',      icon: '\u{1F6E1}\u{FE0F}' },
+  { num: 7, id: 'journal',   title: 'שלב 6 — יומן',         icon: '\u{1F4D3}' },
+  { num: 8, id: 'insights',  title: 'שלב 7 — תובנות',       icon: '\u{1F4A1}' }
 ];
 
 export { STEPS };
