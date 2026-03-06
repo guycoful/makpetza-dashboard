@@ -2,6 +2,7 @@
 // Opens only for stocks in the "hot list"
 import { getState, setState } from '../../core/state.js';
 import { completeStep } from './pipeline-manager.js';
+import { createTooltipLabel } from '../../components/glossary-tooltip.js';
 
 export function render(container) {
   container.textContent = '';
@@ -55,19 +56,23 @@ export function render(container) {
 
   const fields = [
     { id: 'sc-entry', label: 'מחיר כניסה ($)', type: 'number' },
-    { id: 'sc-stop', label: 'Stop Loss ($)', type: 'number' },
+    { id: 'sc-stop', label: 'Stop Loss ($)', type: 'number', glossaryKey: 'stop' },
     { id: 'sc-target', label: 'Target ($)', type: 'number' },
     { id: 'sc-shares', label: 'כמות מניות', type: 'number' },
-    { id: 'sc-portfolio', label: 'גודל תיק ($)', type: 'number' }
+    { id: 'sc-portfolio', label: 'גודל תיק ($)', type: 'number', glossaryKey: 'position' }
   ];
 
   fields.forEach(f => {
     const group = document.createElement('div');
     group.style.marginBottom = '12px';
     const lbl = document.createElement('label');
-    lbl.textContent = f.label;
     lbl.htmlFor = f.id;
     lbl.style.cssText = 'display:block;margin-bottom:4px;font-weight:500;font-size:13px';
+    if (f.glossaryKey) {
+      lbl.appendChild(createTooltipLabel(f.label, f.glossaryKey));
+    } else {
+      lbl.textContent = f.label;
+    }
     group.appendChild(lbl);
     const input = document.createElement('input');
     input.type = f.type;

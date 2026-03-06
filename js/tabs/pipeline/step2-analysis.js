@@ -3,6 +3,7 @@ import { getState, setState } from '../../core/state.js';
 import { fetchSummary } from '../../core/api.js';
 import { completeStep } from './pipeline-manager.js';
 import { BUS_ITEMS } from '../../data/bus-criteria.js';
+import { createTooltipLabel, getRatioGlossaryKey, getTechGlossaryKey } from '../../components/glossary-tooltip.js';
 
 // ===== RATIO CONFIG (Financial Agent) =====
 const RATIO_CONFIG = [
@@ -360,7 +361,7 @@ function renderTechnicalAgent(container) {
     const titleDiv = document.createElement('div');
     const lbl = document.createElement('div');
     lbl.style.fontWeight = '600';
-    lbl.textContent = layer.label;
+    lbl.appendChild(createTooltipLabel(layer.label, getTechGlossaryKey(layer.id)));
     titleDiv.appendChild(lbl);
     const d = document.createElement('div');
     d.style.cssText = 'font-size:11px;color:var(--text3)';
@@ -496,7 +497,7 @@ function renderFinancialAgent(container) {
 
     const lbl = document.createElement('div');
     lbl.style.cssText = 'font-size:11px;color:var(--text3);margin-bottom:4px';
-    lbl.textContent = r.label;
+    lbl.appendChild(createTooltipLabel(r.label, getRatioGlossaryKey(r.id)));
     rCard.appendChild(lbl);
 
     const val = document.createElement('div');

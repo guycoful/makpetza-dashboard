@@ -55,18 +55,18 @@ describe('Router', () => {
     });
 
     it('navigate to locked step is blocked', () => {
-      // Step 3 (financial) requires step 2 (bus) to be complete
+      // Step 3 (analysis) requires step 2 (sourcing) to be complete
       vi.spyOn(state, 'getState').mockImplementation((path) => {
         if (path === 'pipeline.completed') return [false, false, false, false, false, false, false, false];
         return undefined;
       });
-      const result = navigate('pipeline', 'financial');
+      const result = navigate('pipeline', 'analysis');
       expect(result).toBe(false);
       state.getState.mockRestore();
     });
 
-    it('navigate to step 1 (idea) is always allowed', () => {
-      const result = navigate('pipeline', 'idea');
+    it('navigate to step 1 (market) is always allowed', () => {
+      const result = navigate('pipeline', 'market');
       expect(result).not.toBe(false);
     });
   });

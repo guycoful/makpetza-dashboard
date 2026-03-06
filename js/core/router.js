@@ -40,8 +40,8 @@ export function navigate(tab, subtab) {
 
 // Map subtab names to step numbers
 const STEP_MAP = {
-  'idea': 1, 'bus': 2, 'financial': 3, 'technical': 4,
-  'valuation': 5, 'risk': 6, 'decision': 7, 'monitoring': 8
+  'market': 1, 'sourcing': 2, 'analysis': 3, 'lists': 4,
+  'scenario': 5, 'position': 6, 'journal': 7, 'insights': 8
 };
 
 function getStepNumber(subtab) {
