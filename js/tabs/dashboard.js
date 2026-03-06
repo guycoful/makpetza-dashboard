@@ -39,7 +39,8 @@ export function render(container) {
 
   // Stats row
   const statsRow = document.createElement('div');
-  statsRow.style.cssText = 'display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px;margin-bottom:20px';
+  statsRow.className = 'dashboard-stats-grid';
+  statsRow.style.cssText = 'display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px;margin-bottom:20px';
 
   const stats = [
     { label: '\u{1F525} רשימה חמה', value: lists.hot.length, icon: '\u{1F525}', color: 'var(--green)' },

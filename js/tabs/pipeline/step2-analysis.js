@@ -130,6 +130,7 @@ function renderMarketAgent(container) {
   // Index data display
   if (marketData.indices) {
     const grid = document.createElement('div');
+    grid.className = 'mobile-grid-3';
     grid.style.cssText = 'display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px';
 
     Object.entries(marketData.indices).forEach(([key, data]) => {

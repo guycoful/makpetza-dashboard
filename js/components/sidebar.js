@@ -45,6 +45,7 @@ export function initSidebar(container) {
 
   // Bottom section: Guide + Settings
   const bottomDiv = document.createElement('div');
+  bottomDiv.className = 'bottom-section';
   bottomDiv.style.cssText = 'padding:12px;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:6px';
 
   const guideLink = document.createElement('a');

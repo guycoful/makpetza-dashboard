@@ -87,6 +87,7 @@ function renderVideos(container) {
   VIDEO_MODULES.forEach(mod => {
     const card = document.createElement('div');
     card.className = 'card';
+    card.className = 'card academy-card';
     card.style.cssText = 'margin-bottom:12px;padding:16px;display:flex;gap:16px;align-items:center;position:relative';
 
     // Thumbnail placeholder
@@ -162,6 +163,7 @@ function renderPresentations(container) {
   PRESENTATIONS.forEach(pres => {
     const card = document.createElement('div');
     card.className = 'card';
+    card.className = 'card academy-card';
     card.style.cssText = 'margin-bottom:12px;padding:16px;display:flex;gap:16px;align-items:center;position:relative';
 
     // Icon

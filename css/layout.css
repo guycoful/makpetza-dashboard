@@ -36,10 +36,57 @@
 .pipeline-step .step-title { font-size: 13px; }
 .pipeline-step .step-status { font-size: 11px; color: var(--text3); }
 
-/* ========== RESPONSIVE ========== */
+/* ========== RESPONSIVE — TABLET ========== */
 @media (max-width: 768px) {
   .sidebar { width: 60px; }
   .sidebar .logo small, .sidebar nav button span:not(.icon) { display: none; }
   .sidebar nav button { justify-content: center; padding: 12px; }
+  .sidebar .bottom-section span:not(.icon) { display: none; }
   .main { padding: 12px; }
+  .sub-tabs { flex-wrap: wrap; gap: 2px; }
+  .sub-tab-btn { padding: 8px 12px; font-size: 12px; }
+  .pipeline-step .step-info .step-title { font-size: 12px; }
+  .pipeline-step .step-info .step-status { font-size: 10px; }
+}
+
+/* ========== RESPONSIVE — MOBILE ========== */
+@media (max-width: 600px) {
+  .app { flex-direction: column; height: 100vh; height: 100dvh; }
+
+  /* Sidebar → bottom navigation bar */
+  .sidebar {
+    width: 100%; order: 2;
+    flex-direction: row; flex-shrink: 0;
+    border-left: none; border-top: 1px solid var(--border);
+    position: fixed; bottom: 0; left: 0; right: 0; z-index: 50;
+    height: 56px; background: var(--bg2);
+  }
+  .sidebar .logo { display: none; }
+  .sidebar nav { display: flex; flex-direction: row; padding: 0; flex: 1; }
+  .sidebar nav button {
+    flex: 1; padding: 8px 0; justify-content: center;
+    flex-direction: column; gap: 2px; font-size: 10px;
+  }
+  .sidebar nav button span:not(.icon) { display: block; font-size: 9px; }
+  .sidebar nav button .icon { font-size: 20px; }
+  .sidebar nav button.active { border-right: none; border-top: 2px solid var(--accent); }
+  .sidebar .bottom-section { display: none; }
+
+  /* Main area adjusts for bottom bar */
+  .main { order: 1; padding: 12px 10px 68px; flex: 1; }
+
+  /* Pipeline layout → vertical */
+  .pipeline-layout { flex-direction: column !important; gap: 10px !important; }
+  .pipeline-nav-col { min-width: unset !important; width: 100% !important; }
+  .pipeline-content-col { width: 100% !important; }
+
+  /* Pipeline steps → horizontal scrollable */
+  .pipeline-steps { flex-direction: row; overflow-x: auto; gap: 6px; padding: 6px 0; -webkit-overflow-scrolling: touch; }
+  .pipeline-step { flex-shrink: 0; padding: 8px 10px; min-width: auto; }
+  .pipeline-step .step-info { display: none; }
+  .pipeline-step .step-icon { width: 32px; height: 32px; font-size: 14px; }
+
+  /* Sub-tabs */
+  .sub-tabs { overflow-x: auto; flex-wrap: nowrap; gap: 2px; -webkit-overflow-scrolling: touch; padding-bottom: 6px; }
+  .sub-tab-btn { white-space: nowrap; padding: 8px 12px; font-size: 12px; flex-shrink: 0; }
 }

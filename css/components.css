@@ -170,3 +170,96 @@
 /* ========== WEEKLY ========== */
 .weekly-progress { height: 8px; background: var(--bg4); border-radius: 4px; margin-bottom: 16px; overflow: hidden; }
 .weekly-progress .fill { height: 100%; background: var(--green); border-radius: 4px; transition: .3s; }
+
+/* ========== RESPONSIVE — TABLET ========== */
+@media (max-width: 768px) {
+  .card { padding: 14px; margin-bottom: 12px; }
+  .card-grid { grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 8px; }
+  .red-flag-grid { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 8px; }
+  .benchmark-vs { gap: 20px; flex-wrap: wrap; }
+  .benchmark-vs .bm-val { font-size: 22px; }
+  .score-breakdown { gap: 16px; flex-wrap: wrap; }
+  .total-score .big-num { font-size: 48px; }
+  .total-score { padding: 16px; }
+  .glossary-cats { gap: 4px; }
+}
+
+/* ========== RESPONSIVE — MOBILE ========== */
+@media (max-width: 600px) {
+  .card { padding: 12px; margin-bottom: 10px; border-radius: 10px; }
+  .card h3 { font-size: 14px; gap: 6px; }
+  .card-grid { grid-template-columns: 1fr; gap: 8px; }
+  .red-flag-grid { grid-template-columns: 1fr; gap: 8px; }
+  .index-card { padding: 12px; }
+  .index-card .price { font-size: 18px; }
+  .index-card .change { font-size: 12px; }
+
+  /* Buttons */
+  .btn { padding: 10px 16px; font-size: 13px; width: 100%; text-align: center; }
+  .btn-sm { padding: 6px 12px; font-size: 11px; width: auto; }
+
+  /* Score */
+  .total-score { padding: 12px; }
+  .total-score .big-num { font-size: 40px; }
+  .score-breakdown { gap: 12px; flex-wrap: wrap; justify-content: space-around; }
+  .score-breakdown .part .val { font-size: 18px; }
+
+  /* BUS items */
+  .bus-item { padding: 12px; }
+  .bus-item .bus-score-val { font-size: 16px; }
+
+  /* Benchmark */
+  .benchmark-card { padding: 14px; }
+  .benchmark-vs { flex-direction: column; gap: 12px; }
+  .benchmark-vs .bm-val { font-size: 24px; }
+  .benchmark-vs .bm-divider { transform: rotate(90deg); }
+
+  /* Checklist */
+  .checklist-item { padding: 10px; gap: 8px; }
+  .checklist-item .cl-text { font-size: 13px; }
+
+  /* Chat panel */
+  .chat-panel { width: calc(100vw - 20px); left: 10px; bottom: 68px; max-height: 60vh; }
+  .chat-fab { bottom: 66px; left: 14px; width: 48px; height: 48px; font-size: 20px; }
+
+  /* Modal */
+  .modal { padding: 16px; width: 95%; }
+
+  /* Watchlist */
+  .wl-row { flex-wrap: wrap; gap: 6px; padding: 8px; }
+  .wl-row .ticker { font-size: 14px; }
+
+  /* Finance table */
+  .fin-table { font-size: 12px; }
+  .fin-table td, .fin-table th { padding: 6px 4px; }
+
+  /* Risk Free */
+  .rf-card { padding: 14px; }
+  .rf-row { font-size: 13px; }
+
+  /* Timeframe */
+  .timeframe-selector { flex-wrap: wrap; }
+  .timeframe-btn { padding: 6px 12px; font-size: 11px; }
+
+  /* Red flag markets */
+  .red-flag-market { padding: 10px; }
+
+  /* Glossary */
+  .glossary-cats { gap: 4px; }
+  .glossary-cat-btn { padding: 5px 10px; font-size: 11px; }
+  .glossary-item .term { font-size: 14px; }
+  .glossary-item .def { font-size: 12px; }
+
+  /* Term popup */
+  .term-popup { max-width: calc(100vw - 32px); left: 16px !important; right: 16px !important; }
+
+  /* Sentiment */
+  .sentiment-card { padding: 14px; }
+  .sentiment-row { flex-wrap: wrap; gap: 4px; }
+
+  /* Override inline grid styles on mobile (JS-generated elements) */
+  #market-grid { grid-template-columns: 1fr !important; gap: 10px !important; }
+  .mobile-grid-3 { grid-template-columns: 1fr !important; }
+  .mobile-grid-2 { grid-template-columns: 1fr !important; }
+  .dashboard-stats-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 8px !important; }
+}

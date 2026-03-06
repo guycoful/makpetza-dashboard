@@ -33,17 +33,20 @@ async function renderPipelineTab(subtab) {
   main.textContent = '';
 
   const layout = document.createElement('div');
+  layout.className = 'pipeline-layout';
   layout.style.cssText = 'display:flex;gap:20px';
 
   // Step navigation sidebar
   const navCol = document.createElement('div');
+  navCol.className = 'pipeline-nav-col';
   navCol.style.cssText = 'min-width:200px';
   renderPipelineNav(navCol);
   layout.appendChild(navCol);
 
   // Step content area
   const contentCol = document.createElement('div');
-  contentCol.style.cssText = 'flex:1';
+  contentCol.className = 'pipeline-content-col';
+  contentCol.style.cssText = 'flex:1;min-width:0';
   contentCol.id = 'pipeline-content';
   layout.appendChild(contentCol);
 

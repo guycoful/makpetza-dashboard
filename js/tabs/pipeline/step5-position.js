@@ -92,6 +92,7 @@ export function render(container) {
 
   stages.forEach(s => {
     const stageRow = document.createElement('div');
+    stageRow.className = 'mobile-grid-3';
     stageRow.style.cssText = 'display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:10px;align-items:end';
 
     const labelDiv = document.createElement('div');
@@ -165,6 +166,7 @@ export function render(container) {
   rfCard.appendChild(rfDesc);
 
   const rfFieldsRow = document.createElement('div');
+  rfFieldsRow.className = 'mobile-grid-2';
   rfFieldsRow.style.cssText = 'display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px';
 
   const rfTarget = document.createElement('div');
