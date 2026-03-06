@@ -5,6 +5,7 @@ import { on } from './core/events.js';
 import { initSidebar } from './components/sidebar.js';
 import { renderPipelineNav, initPipeline, STEPS, goToStep, getCurrentStep } from './tabs/pipeline/pipeline-manager.js';
 import { showModal } from './components/modal.js';
+import { render as renderChat } from './components/chat.js';
 
 // Step renderers — lazy loaded (match STEPS in pipeline-manager.js)
 const stepRenderers = {
@@ -113,6 +114,30 @@ function openSettings() {
   showModal('\u2699 הגדרות', content);
 }
 
+// Floating chat widget
+function initChatWidget() {
+  const fab = document.createElement('button');
+  fab.id = 'chat-fab';
+  fab.className = 'chat-fab';
+  fab.textContent = '\uD83D\uDCAC';
+  fab.title = 'עוזר מקפצה';
+
+  const panel = document.createElement('div');
+  panel.id = 'chat-panel';
+  panel.className = 'chat-panel';
+  renderChat(panel);
+
+  let open = false;
+  fab.addEventListener('click', () => {
+    open = !open;
+    panel.classList.toggle('open', open);
+    fab.textContent = open ? '\u2715' : '\uD83D\uDCAC';
+  });
+
+  document.body.appendChild(panel);
+  document.body.appendChild(fab);
+}
+
 // Initialize app
 function init() {
   loadState();
@@ -120,6 +145,7 @@ function init() {
   initPipeline();
   on('route:changed', onRouteChange);
   initRouter();
+  initChatWidget();
 
   // Wire settings button
   const settingsBtn = document.getElementById('settings-btn');

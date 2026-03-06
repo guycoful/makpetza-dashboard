@@ -122,6 +122,18 @@
 .sentiment-row:last-child { border: none; }
 .sentiment-label { font-size: 13px; color: var(--text2); }
 
+/* ========== FLOATING CHAT ========== */
+.chat-fab { position: fixed; bottom: 24px; left: 24px; width: 56px; height: 56px; border-radius: 50%; background: var(--accent); color: #fff; border: none; font-size: 24px; cursor: pointer; box-shadow: 0 4px 16px rgba(37,99,235,.4); z-index: 300; transition: transform .2s, background .2s; }
+.chat-fab:hover { transform: scale(1.08); }
+.chat-panel { position: fixed; bottom: 92px; left: 24px; width: 380px; max-height: 520px; background: var(--bg2); border: 1px solid var(--border); border-radius: 16px; box-shadow: 0 12px 40px rgba(0,0,0,.15); z-index: 300; display: none; flex-direction: column; overflow: hidden; }
+.chat-panel.open { display: flex; }
+.chat-widget { display: flex; flex-direction: column; height: 100%; }
+.chat-header { display: flex; justify-content: space-between; align-items: center; padding: 14px 16px; border-bottom: 1px solid var(--border); background: var(--bg3); }
+.chat-msg { padding: 10px 14px; border-radius: 12px; font-size: 14px; line-height: 1.6; max-width: 85%; word-wrap: break-word; white-space: pre-wrap; }
+.chat-msg.user { background: var(--accent); color: #fff; align-self: flex-start; }
+.chat-msg.bot { background: var(--bg3); color: var(--text); align-self: flex-end; }
+@media (max-width: 480px) { .chat-panel { width: calc(100vw - 32px); left: 16px; bottom: 84px; } }
+
 /* ========== WEEKLY ========== */
 .weekly-progress { height: 8px; background: var(--bg4); border-radius: 4px; margin-bottom: 16px; overflow: hidden; }
 .weekly-progress .fill { height: 100%; background: var(--green); border-radius: 4px; transition: .3s; }
