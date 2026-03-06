@@ -70,10 +70,34 @@ function persist() {
   } catch(e) { /* quota exceeded */ }
 }
 
+function sanitizeState(parsed) {
+  const safe = { ...defaultState };
+  if (Array.isArray(parsed.watchlist)) safe.watchlist = parsed.watchlist;
+  if (Array.isArray(parsed.journal)) safe.journal = parsed.journal;
+  if (Array.isArray(parsed.weeklyChecks)) safe.weeklyChecks = parsed.weeklyChecks;
+  if (parsed.analyses && typeof parsed.analyses === 'object') safe.analyses = parsed.analyses;
+  if (Array.isArray(parsed.chatHistory)) safe.chatHistory = parsed.chatHistory;
+  if (typeof parsed.currentTicker === 'string') safe.currentTicker = parsed.currentTicker;
+  if (parsed.exercises && typeof parsed.exercises === 'object') safe.exercises = parsed.exercises;
+  if (parsed.settings && typeof parsed.settings === 'object') {
+    safe.settings = { ...defaultState.settings };
+    if (typeof parsed.settings.grokKey === 'string') safe.settings.grokKey = parsed.settings.grokKey;
+    if (typeof parsed.settings.grokModel === 'string') safe.settings.grokModel = parsed.settings.grokModel;
+    if (typeof parsed.settings.currency === 'string') safe.settings.currency = parsed.settings.currency;
+  }
+  if (parsed.pipeline && typeof parsed.pipeline === 'object') {
+    safe.pipeline = { ...defaultState.pipeline };
+    if (typeof parsed.pipeline.currentStep === 'number') safe.pipeline.currentStep = parsed.pipeline.currentStep;
+    if (parsed.pipeline.steps && typeof parsed.pipeline.steps === 'object') safe.pipeline.steps = parsed.pipeline.steps;
+    if (Array.isArray(parsed.pipeline.completed)) safe.pipeline.completed = parsed.pipeline.completed;
+  }
+  return safe;
+}
+
 export function loadState() {
   try {
     const saved = localStorage.getItem(STORAGE_KEY);
-    if (saved) state = { ...defaultState, ...JSON.parse(saved) };
+    if (saved) state = sanitizeState(JSON.parse(saved));
   } catch(e) {
     console.warn('Failed to load state', e);
   }

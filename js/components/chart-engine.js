@@ -1,8 +1,9 @@
 // ========== CANDLESTICK CHART ENGINE ==========
-import { yahooFetch } from '../core/api.js';
+import { yahooFetch, isValidTicker } from '../core/api.js';
 
 // Fetch chart data from Yahoo Finance
 export async function fetchChartData(ticker, range) {
+  if (!isValidTicker(ticker)) return null;
   const interval = '1d';
   const url = 'https://query1.finance.yahoo.com/v8/finance/chart/' + ticker + '?range=' + range + '&interval=' + interval;
   const data = await yahooFetch(url);
