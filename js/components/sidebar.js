@@ -43,16 +43,24 @@ export function initSidebar(container) {
   });
   container.appendChild(nav);
 
-  // Settings button
-  const settingsDiv = document.createElement('div');
-  settingsDiv.style.cssText = 'padding:12px;border-top:1px solid var(--border)';
+  // Bottom section: Guide + Settings
+  const bottomDiv = document.createElement('div');
+  bottomDiv.style.cssText = 'padding:12px;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:6px';
+
+  const guideLink = document.createElement('a');
+  guideLink.href = 'guide.html';
+  guideLink.className = 'btn btn-outline btn-sm';
+  guideLink.style.cssText = 'width:100%;text-align:center;text-decoration:none;display:block';
+  guideLink.textContent = '\u{1F4D6} מדריך למשתמש';
+  bottomDiv.appendChild(guideLink);
+
   const settingsBtn = document.createElement('button');
   settingsBtn.className = 'btn btn-outline btn-sm';
   settingsBtn.style.width = '100%';
   settingsBtn.id = 'settings-btn';
   settingsBtn.textContent = '\u2699 הגדרות';
-  settingsDiv.appendChild(settingsBtn);
-  container.appendChild(settingsDiv);
+  bottomDiv.appendChild(settingsBtn);
+  container.appendChild(bottomDiv);
 
   // Update active state on route change
   on('route:changed', (route) => {

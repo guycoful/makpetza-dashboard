@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>מדריך למשתמש — מקפצה פיננסית</title>
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root { --bg: #f5f7fa; --bg2: #fff; --bg3: #eef1f6; --text: #1a1d23; --text2: #5f6b7a; --accent: #2563eb; --green: #16a34a; --orange: #d97706; --red: #dc2626; --border: #d8dde6; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Rubik', sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
+  .container { max-width: 800px; margin: 0 auto; padding: 32px 20px 60px; }
+  .back-link { display: inline-block; margin-bottom: 24px; color: var(--accent); text-decoration: none; font-weight: 500; font-size: 14px; }
+  .back-link:hover { text-decoration: underline; }
+  h1 { font-size: 32px; font-weight: 900; margin-bottom: 8px; color: var(--accent); }
+  .subtitle { color: var(--text2); font-size: 16px; margin-bottom: 32px; }
+  h2 { font-size: 22px; font-weight: 700; margin: 32px 0 12px; padding-bottom: 8px; border-bottom: 2px solid var(--accent); }
+  h3 { font-size: 17px; font-weight: 600; margin: 20px 0 8px; }
+  p { margin-bottom: 12px; }
+  .card { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin-bottom: 16px; }
+  .step-card { border-right: 4px solid var(--accent); }
+  .step-num { display: inline-block; width: 32px; height: 32px; line-height: 32px; text-align: center; background: var(--accent); color: #fff; border-radius: 50%; font-weight: 700; font-size: 14px; margin-left: 10px; }
+  .tip { background: rgba(37,99,235,.06); border: 1px solid rgba(37,99,235,.15); border-radius: 10px; padding: 14px 18px; margin: 12px 0; font-size: 14px; }
+  .tip::before { content: '💡 '; }
+  .warn { background: rgba(234,179,8,.08); border: 1px solid rgba(234,179,8,.2); border-radius: 10px; padding: 14px 18px; margin: 12px 0; font-size: 14px; }
+  .warn::before { content: '⚠️ '; }
+  .nav-table { width: 100%; border-collapse: collapse; margin: 12px 0; }
+  .nav-table td { padding: 10px 12px; border-bottom: 1px solid var(--border); font-size: 14px; }
+  .nav-table td:first-child { font-weight: 600; white-space: nowrap; width: 140px; }
+  .icon { font-size: 20px; margin-left: 6px; }
+  .kbd { display: inline-block; background: var(--bg3); border: 1px solid var(--border); border-radius: 4px; padding: 2px 8px; font-family: 'JetBrains Mono', monospace; font-size: 12px; }
+  .flow { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 16px 0; }
+  .flow-step { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 8px 14px; font-size: 13px; font-weight: 500; }
+  .flow-arrow { color: var(--accent); font-size: 18px; }
+  .toc { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin-bottom: 24px; }
+  .toc a { display: block; padding: 6px 0; color: var(--accent); text-decoration: none; font-size: 14px; }
+  .toc a:hover { text-decoration: underline; }
+  .emoji-list { list-style: none; padding: 0; }
+  .emoji-list li { padding: 6px 0; font-size: 14px; }
+  @media (max-width: 600px) { .container { padding: 16px 12px 40px; } h1 { font-size: 24px; } }
+</style>
+</head>
+<body>
+<div class="container">
+
+<a href="index.html" class="back-link">← חזרה לדשבורד</a>
+
+<h1>מדריך למשתמש</h1>
+<p class="subtitle">מקפצה פיננסית — דשבורד השקעות לפי שיטת המנטור</p>
+
+<div class="toc">
+  <strong>תוכן עניינים</strong>
+  <a href="#overview">1. מה זה האתר הזה?</a>
+  <a href="#nav">2. ניווט באתר</a>
+  <a href="#pipeline">3. קו הייצור — 8 השלבים</a>
+  <a href="#academy">4. אקדמיה</a>
+  <a href="#glossary">5. מילון מושגים</a>
+  <a href="#dashboard">6. דשבורד</a>
+  <a href="#chat">7. העוזר החכם (צ'אט)</a>
+  <a href="#settings">8. הגדרות</a>
+  <a href="#tips">9. טיפים חשובים</a>
+</div>
+
+<!-- ===== 1. OVERVIEW ===== -->
+<h2 id="overview">1. מה זה האתר הזה?</h2>
+<p>האתר מלווה אותך בתהליך מובנה של ניתוח השקעה — מרגע שאתה רואה מניה מעניינת ועד לסיכום הלקחים מהעסקה. הוא בנוי לפי שיטת המנטור ב-8 שלבים.</p>
+<p>הכל נשמר אוטומטית בדפדפן שלך. אפשר לסגור ולחזור — המידע ישמר.</p>
+
+<!-- ===== 2. NAV ===== -->
+<h2 id="nav">2. ניווט באתר</h2>
+<p>בצד ימין יש סרגל ניווט עם 4 כפתורים:</p>
+<table class="nav-table">
+  <tr><td><span class="icon">🔧</span> קו ייצור</td><td>התהליך המרכזי — 8 שלבים לניתוח מניה</td></tr>
+  <tr><td><span class="icon">🎓</span> אקדמיה</td><td>סרטונים, מצגות ותרגילים מעשיים</td></tr>
+  <tr><td><span class="icon">📚</span> מילון מושגים</td><td>39 מונחים פיננסיים מוסברים בעברית</td></tr>
+  <tr><td><span class="icon">🏠</span> דשבורד</td><td>מבט כללי על ביצועים ורשימות</td></tr>
+</table>
+<p>בתחתית הסרגל יש כפתור <strong>הגדרות</strong> ⚙️</p>
+
+<!-- ===== 3. PIPELINE ===== -->
+<h2 id="pipeline">3. קו הייצור — 8 השלבים</h2>
+<p>זה הלב של האתר. כל שלב חייב להסתיים לפני שאפשר לעבור לבא. ככה אתה לא מדלג על שום שלב חשוב.</p>
+
+<div class="flow">
+  <span class="flow-step">🌍 שווקים</span><span class="flow-arrow">←</span>
+  <span class="flow-step">📎 איתור</span><span class="flow-arrow">←</span>
+  <span class="flow-step">🧠 ניתוח</span><span class="flow-arrow">←</span>
+  <span class="flow-step">📋 רשימות</span><span class="flow-arrow">←</span>
+  <span class="flow-step">🎯 תרחיש</span><span class="flow-arrow">←</span>
+  <span class="flow-step">🛡️ פוזיציה</span><span class="flow-arrow">←</span>
+  <span class="flow-step">📓 יומן</span><span class="flow-arrow">←</span>
+  <span class="flow-step">💡 תובנות</span>
+</div>
+
+<div class="card step-card">
+  <h3><span class="step-num">0</span> סקירת שווקים</h3>
+  <p>בדוק את מצב השוק הכללי לפני שמתחילים. לחץ "טען נתוני שוק" לקבל מחירי SPY, QQQ ו-VIX.</p>
+  <p><strong>מה לעשות:</strong> בחר מצב שוק (שורי/דובי/צדדי), כתוב הערות → לחץ "סיים שלב".</p>
+</div>
+
+<div class="card step-card">
+  <h3><span class="step-num">1</span> איתור רעיון השקעה</h3>
+  <p>מאיפה הגיע הרעיון? סמן את שיטת האיתור, הזן את ה-Ticker, כתוב את התזה שלך.</p>
+  <p><strong>חובה:</strong> Ticker + תזת השקעה. בלי זה אי אפשר להמשיך.</p>
+</div>
+
+<div class="card step-card">
+  <h3><span class="step-num">2</span> הניתוח (5 סוכנים)</h3>
+  <p>השלב הכי מקיף. יש 5 תת-כרטיסיות:</p>
+  <ul class="emoji-list">
+    <li>🌍 <strong>סוכן שווקים</strong> — הערכת מצב מאקרו</li>
+    <li>🏢 <strong>סוכן עסקי</strong> — 8 סליידרים של BUS Score (מודל עסקי, חפיר, תעשייה...)</li>
+    <li>📈 <strong>סוכן טכני</strong> — 4 שכבות (Price Action, Patterns, Indicators, VRVP)</li>
+    <li>📊 <strong>סוכן כספי</strong> — 9 יחסים פיננסיים (P/E, ROE, D/E...) — ניתן לטעון אוטומטית מ-Yahoo</li>
+    <li>⚖️ <strong>סוכן העל</strong> — שקלול אוטומטי של כל הציונים → החלטה (Strong Buy / Hold / Sell)</li>
+  </ul>
+  <div class="tip">כל סליידר שומר אוטומטית. אפשר לעבור בין הכרטיסיות בלי לאבד מידע.</div>
+</div>
+
+<div class="card step-card">
+  <h3><span class="step-num">3</span> ניהול רשימות</h3>
+  <p>המניה מנותבת אוטומטית לפי הציון:</p>
+  <ul class="emoji-list">
+    <li>🔥 <strong>חמה</strong> (4+) — מוכנה לתרחיש</li>
+    <li>🟡 <strong>פושרת</strong> (3-4) — במעקב</li>
+    <li>❄️ <strong>קרה</strong> (מתחת 3) — לא רלוונטית כרגע</li>
+  </ul>
+  <div class="warn">רק מניות ברשימה החמה יכולות להיכנס לשלב 4 (תרחיש). אם הציון נמוך — חזור לניתוח.</div>
+</div>
+
+<div class="card step-card">
+  <h3><span class="step-num">4</span> ביצוע תרחיש</h3>
+  <p>הזן מחיר כניסה, Stop Loss ו-Target. המערכת מחשבת אוטומטית:</p>
+  <ul class="emoji-list">
+    <li>📐 <strong>יחס סיכוי/סיכון</strong> — נדרש מינימום 1:5</li>
+    <li>📊 <strong>חוק ה-1%</strong> — לא לסכן יותר מ-1% מהתיק בעסקה בודדת</li>
+    <li>📈/📉 <strong>כיוון</strong> — המערכת מזהה אוטומטית Long או Short</li>
+  </ul>
+  <div class="tip">אם היחס מתחת ל-1:5, תקבל אזהרה כתומה. אם מתחת ל-1:3, אזהרה אדומה — אל תיכנס.</div>
+</div>
+
+<div class="card step-card">
+  <h3><span class="step-num">5</span> ניהול פוזיציה</h3>
+  <p>אחרי שביצעת את העסקה בפועל:</p>
+  <ul class="emoji-list">
+    <li>✅ אשר שהפוזיציה בוצעה (חובה)</li>
+    <li>📉 תכנן 3 שלבי מימוש ליצירת מצב Risk Free</li>
+    <li>🔄 הגדר Trailing Stop</li>
+  </ul>
+  <div class="warn">שלבי המימוש לא יכולים לעבור 100% ביחד. אם תזין 40% + 40% + 40% = 120%, תקבל שגיאה.</div>
+</div>
+
+<div class="card step-card">
+  <h3><span class="step-num">6</span> יומן מסחר</h3>
+  <p>תעד כל פעולה שעשית. זה הכלי הכי חשוב לשיפור!</p>
+  <ul class="emoji-list">
+    <li>📝 <strong>סוג פעולה</strong> — קנייה, מכירה, הזזת Stop, מעקב...</li>
+    <li>💭 <strong>מצב רגשי</strong> — לחץ על הרגש שמתאים (בטוח, חרד, חמדני...)</li>
+    <li>💰 <strong>מחיר + P&L</strong> — תעד רווח/הפסד בכל פעולה</li>
+  </ul>
+  <div class="tip">היומן הוא append-only — רשומות לא נמחקות, כמו יומן אמיתי. זה מכוון.</div>
+</div>
+
+<div class="card step-card">
+  <h3><span class="step-num">7</span> הפקת תובנות</h3>
+  <p>השלב האחרון — רפלקציה על מה שלמדת:</p>
+  <ul class="emoji-list">
+    <li>✅ <strong>מה עבד טוב?</strong></li>
+    <li>❌ <strong>מה לא עבד?</strong></li>
+    <li>🎯 <strong>תובנה מרכזית</strong> — חובה לכתוב לפחות אחת</li>
+    <li>😔 <strong>יומן פספוסים</strong> — מניות שזיהית אבל לא נכנסת, ולמה</li>
+  </ul>
+  <p>בסיום מופיע <strong>דו"ח סיכום</strong> שמציג את כל 8 השלבים במקום אחד.</p>
+</div>
+
+<!-- ===== 4. ACADEMY ===== -->
+<h2 id="academy">4. אקדמיה</h2>
+<p>3 כרטיסיות:</p>
+<ul class="emoji-list">
+  <li>🎬 <strong>סרטונים</strong> — 11 מודולי לימוד (מבוא עד פסיכולוגיית מסחר)</li>
+  <li>📊 <strong>מצגות</strong> — 6 חומרי עזר (Cheat Sheets, צ'קליסטים)</li>
+  <li>✏️ <strong>תרגילים</strong> — 10 תרגילים מעשיים שאפשר למלא ולשמור</li>
+</ul>
+<div class="tip">בתרגילים לחץ "שמור" כדי לשמור את העבודה, ו"טען שמור" כדי לחזור אליה מאוחר יותר.</div>
+
+<!-- ===== 5. GLOSSARY ===== -->
+<h2 id="glossary">5. מילון מושגים</h2>
+<p>39 מונחים פיננסיים מוסברים בעברית פשוטה. אפשר לסנן לפי קטגוריה:</p>
+<ul class="emoji-list">
+  <li>💰 <strong>פיננסי</strong> — P/E, P/B, ROE, EPS...</li>
+  <li>📈 <strong>טכני</strong> — RSI, MACD, נרות יפניים, תמיכה/התנגדות...</li>
+  <li>📋 <strong>מסחר</strong> — Risk/Reward, Stop Loss, חוק 1%...</li>
+  <li>🌍 <strong>כלכלה</strong> — VIX, אג"ח, סחורות, שווי שוק...</li>
+</ul>
+<p>בנוסף, כשמושג מופיע בתוך שלב ניתוח, אפשר <strong>ללחוץ עליו</strong> לקבל הסבר מהיר ב-tooltip.</p>
+
+<!-- ===== 6. DASHBOARD ===== -->
+<h2 id="dashboard">6. דשבורד</h2>
+<p>מבט כללי על המצב שלך:</p>
+<ul class="emoji-list">
+  <li>🔥 כמה מניות ברשימה חמה / פושרת</li>
+  <li>🎯 Win Rate — אחוז ניצחונות מהיומן</li>
+  <li>💰 Expectancy — תוחלת רווח ממוצעת</li>
+  <li>🔧 שלבי Pipeline שהושלמו</li>
+  <li>📓 רשומות יומן אחרונות</li>
+  <li>📊 פוזיציה פתוחה (אם יש)</li>
+</ul>
+
+<!-- ===== 7. CHAT ===== -->
+<h2 id="chat">7. העוזר החכם (צ'אט)</h2>
+<p>בפינה השמאלית התחתונה יש כפתור כחול עגול 💬. לחיצה עליו פותחת את הצ'אט.</p>
+<p>שני מצבים:</p>
+<table class="nav-table">
+  <tr><td><strong>מקומי</strong></td><td>חיפוש בבסיס הידע המובנה (14 ערכים מהקורס). עובד תמיד, בלי אינטרנט.</td></tr>
+  <tr><td><strong>Grok AI</strong></td><td>תשובות מ-AI של xAI. דורש מפתח API (ראה הגדרות).</td></tr>
+</table>
+<div class="tip">נסה לשאול: "מה זה BUS Score?" או "איך מחשבים Risk Reward?" — הצ'אט המקומי ידע לענות.</div>
+
+<!-- ===== 8. SETTINGS ===== -->
+<h2 id="settings">8. הגדרות</h2>
+<p>לחץ ⚙️ בתחתית סרגל הצד:</p>
+<ul class="emoji-list">
+  <li>🔑 <strong>Grok API Key</strong> — מפתח מ-xAI לשימוש בצ'אט AI</li>
+  <li>🤖 <strong>מודל</strong> — grok-3-mini (ברירת מחדל) או אחר</li>
+  <li>💱 <strong>מטבע</strong> — USD / ILS / EUR</li>
+</ul>
+
+<!-- ===== 9. TIPS ===== -->
+<h2 id="tips">9. טיפים חשובים</h2>
+
+<div class="card">
+  <h3>💾 שמירה אוטומטית</h3>
+  <p>כל מה שאתה מזין נשמר אוטומטית בדפדפן. אפשר לסגור את הדף ולחזור — הכל ישמר.</p>
+</div>
+
+<div class="card">
+  <h3>🔄 התחלה מחדש</h3>
+  <p>רוצה לנתח מניה חדשה? חזור לשלב 1 (איתור) והזן Ticker חדש. הנתונים הישנים ישארו ברשימות.</p>
+</div>
+
+<div class="card">
+  <h3>🧹 ניקוי מלא</h3>
+  <p>לחץ <span class="kbd">F12</span> → Console → הקלד: <span class="kbd">localStorage.clear()</span> → רענן את הדף.</p>
+</div>
+
+<div class="card">
+  <h3>📱 נייד</h3>
+  <p>האתר עובד גם בנייד, אבל חוויה טובה יותר במחשב בגלל ריבוי השדות והגרפים.</p>
+</div>
+
+<div style="text-align:center;margin-top:40px;padding:20px;color:var(--text2);font-size:13px">
+  מקפצה פיננסית — דשבורד השקעות &copy; 2026
+</div>
+
+</div>
+</body>
+</html>
