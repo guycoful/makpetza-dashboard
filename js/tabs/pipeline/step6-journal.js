@@ -129,10 +129,13 @@ export function render(container) {
       emotionGrid.querySelectorAll('button').forEach(b => {
         b.style.background = 'var(--bg2)';
         b.style.borderColor = 'var(--border)';
+        b.style.color = 'var(--text1)';
+        delete b.dataset.selected;
       });
       btn.style.background = e.color;
       btn.style.borderColor = e.color;
       btn.style.color = '#fff';
+      btn.dataset.selected = 'true';
     });
     emotionGrid.appendChild(btn);
   });
@@ -190,9 +193,7 @@ function addJournalEntry() {
     return;
   }
 
-  const selectedEmotion = document.querySelector('#step-journal [data-emotion][style*="color: rgb(255"]')?.dataset?.emotion
-    || document.querySelector('#step-journal [data-emotion][style*="#fff"]')?.dataset?.emotion
-    || 'neutral';
+  const selectedEmotion = document.querySelector('#step-journal [data-emotion][data-selected="true"]')?.dataset?.emotion || 'neutral';
 
   const entry = {
     action,
@@ -218,6 +219,7 @@ function addJournalEntry() {
     b.style.background = 'var(--bg2)';
     b.style.borderColor = 'var(--border)';
     b.style.color = 'var(--text1)';
+    delete b.dataset.selected;
   });
 
   renderJournalEntries(entries);

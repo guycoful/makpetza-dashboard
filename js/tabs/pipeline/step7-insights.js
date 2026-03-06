@@ -53,19 +53,36 @@ export function render(container) {
   wrap.appendChild(tabNav);
   wrap.appendChild(contentDiv);
 
+  // Summary report section
+  const summaryDiv = document.createElement('div');
+  summaryDiv.id = 'pipeline-summary';
+  summaryDiv.style.marginTop = '20px';
+  wrap.appendChild(summaryDiv);
+
   // Complete button
   const btn = document.createElement('button');
   btn.className = 'btn btn-primary';
   btn.textContent = 'סיים ניתוח — שמור הכל';
   btn.style.marginTop = '20px';
   btn.addEventListener('click', () => {
+    const lessons = getState('pipeline.steps.insights.lessons') || {};
+    const hasContent = (lessons.worked || '').trim() || (lessons.failed || '').trim() || (lessons.takeaway || '').trim();
+    if (!hasContent) {
+      alert('כתוב לפחות תובנה אחת (מה עבד / מה לא עבד / תובנה מרכזית) לפני סיום');
+      return;
+    }
     completeStep(8);
+    renderSummary(summaryDiv);
     alert('\u{1F389} הניתוח הושלם ונשמר!');
   });
   wrap.appendChild(btn);
 
   container.appendChild(wrap);
   renderLessons(contentDiv);
+
+  // Show summary if already completed
+  const completed = getState('pipeline.completed') || [];
+  if (completed[7]) renderSummary(summaryDiv);
 }
 
 // ===== LESSONS TAB =====
@@ -276,6 +293,83 @@ function renderMissedEntries(entries) {
 
     list.appendChild(item);
   });
+}
+
+// ===== PIPELINE SUMMARY REPORT =====
+function renderSummary(container) {
+  container.textContent = '';
+
+  const card = document.createElement('div');
+  card.className = 'card';
+  card.style.cssText = 'padding:24px;background:linear-gradient(135deg, var(--bg2), var(--bg3));border:2px solid var(--accent)';
+
+  const title = document.createElement('h3');
+  title.textContent = '\u{1F4CA} דו"ח סיכום — ניתוח מלא';
+  title.style.cssText = 'margin-bottom:20px;color:var(--accent);font-size:18px';
+  card.appendChild(title);
+
+  const ticker = getState('currentTicker') || '???';
+  const sourcing = getState('pipeline.steps.sourcing') || {};
+  const meta = getState('pipeline.steps.analysis.meta') || {};
+  const listData = getState('pipeline.steps.lists') || {};
+  const scenario = getState('pipeline.steps.scenario') || {};
+  const position = getState('pipeline.steps.position') || {};
+  const journal = getState('pipeline.steps.journal') || {};
+  const lessons = getState('pipeline.steps.insights.lessons') || {};
+
+  const entry = parseFloat(scenario['sc-entry']) || 0;
+  const stop = parseFloat(scenario['sc-stop']) || 0;
+  const target = parseFloat(scenario['sc-target']) || 0;
+  const risk = Math.abs(entry - stop);
+  const reward = Math.abs(target - entry);
+  const ratio = risk > 0 ? (reward / risk).toFixed(1) : '0';
+
+  const sections = [
+    { icon: '\u{1F4CE}', title: 'מניה: ' + ticker, items: [
+      sourcing.companyName ? 'חברה: ' + sourcing.companyName : null,
+      sourcing.thesis ? 'תזה: ' + sourcing.thesis : null,
+      sourcing.horizon ? 'אופק: ' + sourcing.horizon : null,
+    ]},
+    { icon: '\u{1F9E0}', title: 'ניתוח (ציון כולל: ' + (meta.total || 0).toFixed(1) + '/5)', items: [
+      meta.verdict ? 'החלטה: ' + meta.verdict : null,
+    ]},
+    { icon: '\u{1F4CB}', title: 'רשימה: ' + (listData.assignedList === 'hot' ? '\u{1F525} חמה' : listData.assignedList === 'warm' ? '\u{1F7E1} פושרת' : '\u{2744}\u{FE0F} קרה'), items: []},
+    { icon: '\u{1F3AF}', title: 'תרחיש', items: [
+      entry ? 'כניסה: $' + entry + ' | Stop: $' + stop + ' | Target: $' + target : null,
+      'יחס R/R: 1:' + ratio,
+    ]},
+    { icon: '\u{1F6E1}\u{FE0F}', title: 'פוזיציה', items: [
+      position['pos-entry-price'] ? 'כניסה בפועל: $' + position['pos-entry-price'] : null,
+      position['pos-shares'] ? 'מניות: ' + position['pos-shares'] : null,
+    ]},
+    { icon: '\u{1F4D3}', title: 'יומן', items: [
+      (journal.entries || []).length + ' רשומות',
+    ]},
+    { icon: '\u{1F4A1}', title: 'תובנות', items: [
+      lessons.takeaway ? '\u{1F3AF} ' + lessons.takeaway : null,
+    ]},
+  ];
+
+  sections.forEach(section => {
+    const row = document.createElement('div');
+    row.style.cssText = 'padding:10px 0;border-bottom:1px solid var(--border)';
+
+    const header = document.createElement('div');
+    header.style.cssText = 'font-weight:600;font-size:14px;margin-bottom:4px';
+    header.textContent = section.icon + ' ' + section.title;
+    row.appendChild(header);
+
+    section.items.filter(Boolean).forEach(item => {
+      const line = document.createElement('div');
+      line.style.cssText = 'font-size:13px;color:var(--text2);padding-right:20px';
+      line.textContent = item;
+      row.appendChild(line);
+    });
+
+    card.appendChild(row);
+  });
+
+  container.appendChild(card);
 }
 
 export function validate() { return true; }

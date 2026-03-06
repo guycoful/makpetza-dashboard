@@ -151,6 +151,20 @@ function calculateScenario() {
     return;
   }
 
+  // Detect direction: Long (target > entry) or Short (target < entry)
+  const isLong = target > entry;
+  const stopValid = isLong ? (stop < entry) : (stop > entry);
+
+  if (!stopValid) {
+    const warning = document.createElement('div');
+    warning.style.cssText = 'padding:10px;background:rgba(239,68,68,.1);border-radius:8px;color:var(--red);font-size:13px;text-align:center';
+    warning.textContent = isLong
+      ? '\u{26A0}\u{FE0F} פוזיציית Long: Stop Loss חייב להיות מתחת למחיר כניסה'
+      : '\u{26A0}\u{FE0F} פוזיציית Short: Stop Loss חייב להיות מעל מחיר כניסה';
+    results.appendChild(warning);
+    return;
+  }
+
   const risk = Math.abs(entry - stop);
   const reward = Math.abs(target - entry);
   const ratio = risk > 0 ? reward / risk : 0;
@@ -159,6 +173,7 @@ function calculateScenario() {
   const portfolioRisk = portfolio > 0 ? (riskDollars / portfolio * 100) : 0;
 
   const rows = [
+    { label: 'כיוון', val: isLong ? '\u{1F4C8} Long (קנייה)' : '\u{1F4C9} Short (מכירה בחסר)' },
     { label: 'סיכון למניה', val: '$' + risk.toFixed(2) },
     { label: 'רווח פוטנציאלי למניה', val: '$' + reward.toFixed(2) },
     { label: 'יחס סיכוי/סיכון', val: '1:' + ratio.toFixed(1), highlight: true },
@@ -230,6 +245,8 @@ export function getData() { return getState('pipeline.steps.scenario') || {}; }
 
 // Pure calculation (exported for testing)
 export function calculateRiskReward(entry, stop, target, shares, portfolio) {
+  const isLong = target > entry;
+  const stopValid = isLong ? (stop < entry) : (stop > entry);
   const risk = Math.abs(entry - stop);
   const reward = Math.abs(target - entry);
   const ratio = risk > 0 ? Math.round((reward / risk) * 10) / 10 : 0;
@@ -238,5 +255,5 @@ export function calculateRiskReward(entry, stop, target, shares, portfolio) {
   const portfolioRisk = portfolio > 0 ? Math.round((riskDollars / portfolio * 100) * 10) / 10 : 0;
   const passesMinRatio = ratio >= 5;
   const passesOnePercent = portfolioRisk <= 1;
-  return { risk, reward, ratio, riskDollars, rewardDollars, portfolioRisk, passesMinRatio, passesOnePercent };
+  return { isLong, stopValid, risk, reward, ratio, riskDollars, rewardDollars, portfolioRisk, passesMinRatio, passesOnePercent };
 }

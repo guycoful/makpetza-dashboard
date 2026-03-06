@@ -67,7 +67,8 @@ export function render(container) {
   listsTitle.style.marginBottom = '12px';
   wrap.appendChild(listsTitle);
 
-  const allLists = getState('lists') || { hot: [], warm: [], cold: [] };
+  const rawLists = getState('lists') || { hot: [], warm: [], cold: [] };
+  const allLists = JSON.parse(JSON.stringify(rawLists));
 
   // Add current stock to the appropriate list if not already there
   if (ticker && ticker !== '???') {

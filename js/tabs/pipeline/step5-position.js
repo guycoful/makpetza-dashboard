@@ -194,6 +194,17 @@ function saveData() {
 export function validate() {
   const exec = document.getElementById('pos-executed');
   if (!exec || !exec.checked) { alert('אשר שהפוזיציה בוצעה'); return false; }
+
+  // Validate stages sum to <= 100%
+  const pct1 = parseFloat(document.getElementById('pos-stage1-pct')?.value) || 0;
+  const pct2 = parseFloat(document.getElementById('pos-stage2-pct')?.value) || 0;
+  const pct3 = parseFloat(document.getElementById('pos-stage3-pct')?.value) || 0;
+  const totalPct = pct1 + pct2 + pct3;
+  if (totalPct > 100) {
+    alert('שלבי המימוש סוכמים ל-' + totalPct + '% — לא ניתן למכור יותר מ-100% מהפוזיציה');
+    return false;
+  }
+
   return true;
 }
 
