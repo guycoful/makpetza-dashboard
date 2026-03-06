@@ -1,11 +1,10 @@
 // ========== APP ENTRY POINT ==========
-import { loadState } from './core/state.js';
+import { loadState, getState, setState } from './core/state.js';
 import { initRouter } from './core/router.js';
 import { on } from './core/events.js';
 import { initSidebar } from './components/sidebar.js';
 import { renderPipelineNav, initPipeline, STEPS, goToStep, getCurrentStep } from './tabs/pipeline/pipeline-manager.js';
 import { showModal } from './components/modal.js';
-import { getState, setState } from './core/state.js';
 
 // Step renderers — lazy loaded
 const stepRenderers = {

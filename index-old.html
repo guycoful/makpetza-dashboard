@@ -1,0 +1,2370 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>מקפצה פיננסית - דשבורד השקעות</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&family=Rubik:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+/* ========== RESET & BASE ========== */
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#f5f7fa;--bg2:#ffffff;--bg3:#eef1f6;--bg4:#dfe3eb;
+  --text:#1a1d23;--text2:#5f6b7a;--text3:#8896a6;
+  --green:#16a34a;--red:#dc2626;--orange:#d97706;--blue:#2563eb;--purple:#7c3aed;
+  --accent:#2563eb;--border:#d8dde6;
+  --font:'Rubik','Space Grotesk',sans-serif;--mono:'JetBrains Mono',monospace;
+  --shadow:0 1px 3px rgba(0,0,0,.07),0 1px 2px rgba(0,0,0,.04);
+}
+body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:100vh;direction:rtl}
+a{color:var(--accent);text-decoration:none}
+input,select,textarea,button{font-family:var(--font);direction:rtl}
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--bg4);border-radius:3px}
+::-webkit-scrollbar-thumb:hover{background:#c1c7d0}
+
+/* ========== LAYOUT ========== */
+.app{display:flex;height:100vh}
+.sidebar{width:220px;background:var(--bg2);border-left:1px solid var(--border);display:flex;flex-direction:column;flex-shrink:0}
+.sidebar .logo{padding:20px;text-align:center;border-bottom:1px solid var(--border)}
+.sidebar .logo h2{font-size:16px;font-weight:700;color:var(--accent)}
+.sidebar .logo small{color:var(--text2);font-size:11px}
+.sidebar nav{flex:1;padding:10px 0}
+.sidebar nav button{width:100%;padding:12px 20px;background:none;border:none;color:var(--text2);
+  text-align:right;cursor:pointer;font-size:14px;transition:.2s;display:flex;align-items:center;gap:10px}
+.sidebar nav button:hover{background:var(--bg3);color:var(--text)}
+.sidebar nav button.active{background:#eef3ff;color:var(--accent);border-right:3px solid var(--accent);font-weight:500}
+.sidebar nav button .icon{font-size:18px;width:24px;text-align:center}
+.main{flex:1;overflow-y:auto;padding:24px}
+.tab{display:none}.tab.active{display:block}
+
+/* ========== CARDS ========== */
+.card{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:var(--shadow)}
+.card h3{font-size:16px;margin-bottom:12px;color:var(--text);display:flex;align-items:center;gap:8px}
+.card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+
+/* ========== INDEX CARDS ========== */
+.index-card{background:var(--bg3);border-radius:10px;padding:16px;text-align:center}
+.index-card .name{font-size:12px;color:var(--text2);margin-bottom:4px}
+.index-card .price{font-size:22px;font-family:var(--mono);font-weight:700}
+.index-card .change{font-size:14px;font-family:var(--mono);margin-top:4px}
+.index-card .change.up{color:var(--green)}.index-card .change.down{color:var(--red)}
+
+/* ========== INPUTS ========== */
+.input-group{margin-bottom:12px}
+.input-group label{display:block;font-size:13px;color:var(--text2);margin-bottom:4px}
+.input-group input,.input-group select,.input-group textarea{
+  width:100%;padding:10px 12px;background:var(--bg3);border:1px solid var(--border);
+  border-radius:8px;color:var(--text);font-size:14px;outline:none;transition:.2s}
+.input-group input:focus,.input-group textarea:focus{border-color:var(--accent)}
+.input-group input[type=range]{padding:0;height:6px;-webkit-appearance:none;appearance:none;background:var(--bg4);border:none;border-radius:3px}
+.input-group input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;background:var(--accent);border-radius:50%;cursor:pointer}
+
+/* ========== BUTTONS ========== */
+.btn{padding:10px 20px;border:none;border-radius:8px;cursor:pointer;font-size:14px;font-weight:500;transition:.2s}
+.btn-primary{background:var(--accent);color:#fff;box-shadow:0 1px 2px rgba(37,99,235,.3)}.btn-primary:hover{opacity:.9}
+.btn-success{background:var(--green);color:#fff}
+.btn-danger{background:var(--red);color:#fff}
+.btn-outline{background:none;border:1px solid var(--border);color:var(--text)}.btn-outline:hover{background:var(--bg3)}
+.btn-sm{padding:6px 12px;font-size:12px}
+
+/* ========== TABLES ========== */
+table{width:100%;border-collapse:collapse}
+th,td{padding:10px 12px;text-align:right;border-bottom:1px solid var(--border);font-size:13px}
+th{color:var(--text2);font-weight:500;font-size:12px;text-transform:uppercase}
+td{color:var(--text)}
+tr:hover{background:var(--bg3)}
+
+/* ========== BUS SCORE ========== */
+.bus-item{background:var(--bg3);border-radius:10px;padding:16px;margin-bottom:10px}
+.bus-item .bus-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.bus-item .bus-title{font-weight:500;font-size:14px}
+.bus-item .bus-score-val{font-family:var(--mono);font-size:20px;font-weight:700;min-width:40px;text-align:center}
+.bus-item textarea{width:100%;min-height:60px;margin-top:8px;padding:8px;background:var(--bg);border:1px solid var(--border);border-radius:6px;color:var(--text);font-size:13px;resize:vertical}
+.score-badge{display:inline-block;padding:4px 12px;border-radius:20px;font-family:var(--mono);font-weight:700;font-size:14px}
+.score-badge.high{background:rgba(63,185,80,.15);color:var(--green)}
+.score-badge.mid{background:rgba(210,153,34,.15);color:var(--orange)}
+.score-badge.low{background:rgba(248,81,73,.15);color:var(--red)}
+
+/* ========== TOTAL SCORE ========== */
+.total-score{text-align:center;padding:30px}
+.total-score .big-num{font-size:72px;font-family:var(--mono);font-weight:900}
+.total-score .label{font-size:14px;color:var(--text2);margin-top:4px}
+.score-breakdown{display:flex;justify-content:center;gap:30px;margin-top:20px}
+.score-breakdown .part{text-align:center}
+.score-breakdown .part .val{font-family:var(--mono);font-size:24px;font-weight:700}
+.score-breakdown .part .name{font-size:11px;color:var(--text2);margin-top:2px}
+
+/* ========== CHECKLIST ========== */
+.checklist-item{display:flex;align-items:center;gap:10px;padding:12px;background:var(--bg3);border-radius:8px;margin-bottom:6px;cursor:pointer;transition:.2s}
+.checklist-item:hover{background:var(--bg4)}
+.checklist-item.checked{opacity:.6}
+.checklist-item.checked .cl-text{text-decoration:line-through}
+.checklist-item input[type=checkbox]{width:18px;height:18px;accent-color:var(--green)}
+.checklist-item .cl-text{flex:1;font-size:14px}
+.checklist-item .cl-sub{font-size:11px;color:var(--text2)}
+
+/* ========== CALCULATOR ========== */
+.calc-result{background:var(--bg3);border-radius:10px;padding:20px;margin-top:12px}
+.calc-result .calc-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border)}
+.calc-result .calc-row:last-child{border:none;font-weight:700;font-size:16px}
+.calc-result .calc-label{color:var(--text2)}
+.calc-result .calc-val{font-family:var(--mono);font-weight:700}
+
+/* ========== CHAT ========== */
+.chat-container{display:flex;flex-direction:column;height:calc(100vh - 100px)}
+.chat-messages{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:12px}
+.chat-msg{max-width:80%;padding:12px 16px;border-radius:12px;font-size:14px;line-height:1.6;position:relative}
+.chat-msg.user{background:var(--accent);color:#fff;align-self:flex-end;border-bottom-left:4px}
+.chat-msg.bot{background:var(--bg3);align-self:flex-start;border-bottom-right:4px}
+.chat-msg .source-tag{display:inline-block;background:var(--bg4);padding:2px 8px;border-radius:4px;font-size:11px;color:var(--text2);margin-top:8px}
+.chat-input-area{display:flex;gap:8px;padding:12px;background:var(--bg2);border-top:1px solid var(--border);border-radius:0 0 12px 12px}
+.chat-input-area input{flex:1;padding:12px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:14px;outline:none}
+.chat-input-area input:focus{border-color:var(--accent)}
+.chat-mode-toggle{display:flex;gap:8px;padding:8px 12px;background:var(--bg2);border-bottom:1px solid var(--border)}
+.chat-mode-toggle button{padding:6px 14px;border-radius:6px;border:1px solid var(--border);background:none;color:var(--text2);cursor:pointer;font-size:12px}
+.chat-mode-toggle button.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.suggested-q{display:flex;flex-wrap:wrap;gap:6px;padding:8px 12px}
+.suggested-q button{padding:6px 12px;background:var(--bg3);border:1px solid var(--border);border-radius:20px;color:var(--text2);cursor:pointer;font-size:12px;transition:.2s}
+.suggested-q button:hover{border-color:var(--accent);color:var(--accent)}
+
+/* ========== WEEKLY ========== */
+.weekly-progress{height:8px;background:var(--bg4);border-radius:4px;margin-bottom:16px;overflow:hidden}
+.weekly-progress .fill{height:100%;background:var(--green);border-radius:4px;transition:.3s}
+
+/* ========== WATCHLIST ========== */
+.wl-row{display:flex;align-items:center;justify-content:space-between;padding:10px;background:var(--bg3);border-radius:8px;margin-bottom:6px}
+.wl-row .ticker{font-family:var(--mono);font-weight:700;font-size:15px}
+.wl-row .wl-price{font-family:var(--mono);font-size:14px}
+.wl-row .wl-change{font-family:var(--mono);font-size:13px;padding:2px 8px;border-radius:4px}
+.wl-row .wl-change.up{background:rgba(63,185,80,.15);color:var(--green)}
+.wl-row .wl-change.down{background:rgba(248,81,73,.15);color:var(--red)}
+
+/* ========== RATIOS TABLE ========== */
+.ratio-status{width:10px;height:10px;border-radius:50%;display:inline-block}
+.ratio-status.good{background:var(--green)}.ratio-status.ok{background:var(--orange)}.ratio-status.bad{background:var(--red)}
+
+/* ========== GLOSSARY ========== */
+.glossary-item{padding:12px;border-bottom:1px solid var(--border)}
+.glossary-item .term{font-weight:700;color:var(--accent);font-size:15px}
+.glossary-item .def{color:var(--text2);font-size:13px;margin-top:4px;line-height:1.5}
+
+/* ========== RESPONSIVE ========== */
+@media(max-width:768px){
+  .sidebar{width:60px}.sidebar .logo small,.sidebar nav button span:not(.icon){display:none}
+  .sidebar nav button{justify-content:center;padding:12px}
+  .main{padding:12px}
+}
+
+/* ========== SETTINGS MODAL ========== */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.3);z-index:100;justify-content:center;align-items:center}
+.modal-overlay.show{display:flex}
+.modal{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:24px;width:90%;max-width:500px}
+.modal h3{margin-bottom:16px}
+
+/* ========== FINANCE TABLE ========== */
+.fin-table td:nth-child(2),.fin-table td:nth-child(3){font-family:var(--mono);text-align:center}
+.fin-table th:nth-child(2),.fin-table th:nth-child(3){text-align:center}
+
+/* ========== CANDLESTICK CHART ========== */
+.chart-wrap{position:relative;background:var(--bg2);border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-top:12px}
+.chart-wrap canvas{display:block;width:100%;cursor:crosshair}
+.chart-controls{display:flex;gap:6px;padding:8px 12px;background:var(--bg3);border-bottom:1px solid var(--border)}
+.chart-controls button{padding:4px 12px;border:1px solid var(--border);border-radius:6px;background:var(--bg2);color:var(--text2);cursor:pointer;font-size:12px;font-family:var(--mono);transition:.2s}
+.chart-controls button.active,.chart-controls button:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
+.chart-tooltip{position:absolute;top:8px;left:8px;background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:8px 12px;font-size:12px;font-family:var(--mono);pointer-events:none;opacity:0;transition:opacity .15s;box-shadow:var(--shadow);z-index:10}
+.chart-tooltip.show{opacity:1}
+.chart-tooltip .tt-row{display:flex;justify-content:space-between;gap:16px}
+.chart-tooltip .tt-label{color:var(--text2)}
+.chart-legend{display:flex;gap:16px;padding:6px 12px;font-size:11px;color:var(--text2)}
+.chart-legend span::before{content:'';display:inline-block;width:12px;height:3px;border-radius:2px;margin-left:4px;vertical-align:middle}
+.chart-legend .ma20::before{background:var(--orange)}
+.chart-legend .ma50::before{background:var(--blue)}
+
+/* ========== EXERCISES TAB ========== */
+.exercise-card{background:var(--bg2);border:1px solid var(--border);border-radius:12px;margin-bottom:12px;overflow:hidden;box-shadow:var(--shadow)}
+.exercise-header{display:flex;align-items:center;gap:12px;padding:16px 20px;cursor:pointer;transition:.2s;user-select:none}
+.exercise-header:hover{background:var(--bg3)}
+.exercise-header .ex-num{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-weight:700;font-size:16px;flex-shrink:0}
+.exercise-header .ex-num.pending{background:var(--bg4);color:var(--text2)}
+.exercise-header .ex-num.active{background:rgba(37,99,235,.1);color:var(--accent)}
+.exercise-header .ex-num.done{background:rgba(22,163,74,.1);color:var(--green)}
+.exercise-header .ex-title{flex:1;font-weight:500;font-size:15px}
+.exercise-header .ex-arrow{font-size:18px;color:var(--text3);transition:transform .2s}
+.exercise-card.open .ex-arrow{transform:rotate(180deg)}
+.exercise-body{display:none;padding:0 20px 20px;border-top:1px solid var(--border)}
+.exercise-card.open .exercise-body{display:block}
+.exercise-links{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.exercise-links a{display:inline-flex;align-items:center;gap:4px;padding:6px 14px;background:var(--bg3);border:1px solid var(--border);border-radius:20px;font-size:12px;color:var(--accent);transition:.2s}
+.exercise-links a:hover{background:var(--accent);color:#fff}
+.prompt-box{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:12px;margin:12px 0;position:relative;font-size:13px;color:var(--text2);line-height:1.6;white-space:pre-wrap}
+.prompt-box .copy-btn{position:absolute;top:8px;left:8px;padding:4px 10px;background:var(--bg2);border:1px solid var(--border);border-radius:6px;font-size:11px;cursor:pointer;color:var(--text2)}
+.prompt-box .copy-btn:hover{background:var(--accent);color:#fff}
+.ex-field-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:768px){.ex-field-grid{grid-template-columns:1fr}}
+.ex-save-row{display:flex;gap:8px;margin-top:16px;padding-top:12px;border-top:1px solid var(--border)}
+
+/* ========== SUB-TABS ========== */
+.sub-tabs{display:flex;gap:4px;padding:8px 0;margin-bottom:16px;border-bottom:2px solid var(--border)}
+.sub-tab-btn{padding:10px 20px;border:none;border-radius:8px 8px 0 0;background:none;color:var(--text2);cursor:pointer;font-size:14px;font-weight:500;transition:.2s;border-bottom:2px solid transparent;margin-bottom:-2px}
+.sub-tab-btn:hover{background:var(--bg3);color:var(--text)}
+.sub-tab-btn.active{color:var(--accent);border-bottom-color:var(--accent);background:rgba(37,99,235,.05)}
+.sub-tab-content{display:none}.sub-tab-content.active{display:block}
+
+/* ========== RED FLAGS ========== */
+.red-flags-card{background:rgba(220,38,38,.04);border:1px solid rgba(220,38,38,.2);border-radius:12px;padding:20px;margin-bottom:16px}
+.red-flags-card h3{color:var(--red)}
+.red-flag{display:flex;align-items:flex-start;gap:10px;padding:10px 12px;background:rgba(220,38,38,.06);border-radius:8px;margin-bottom:8px;font-size:13px;line-height:1.5}
+.red-flag .rf-icon{font-size:18px;flex-shrink:0;margin-top:1px}
+.red-flag .rf-title{font-weight:600;color:var(--red)}
+.red-flag .rf-desc{color:var(--text2);margin-top:2px}
+.no-flags{text-align:center;padding:20px;color:var(--green);font-weight:500}
+
+/* ========== MARKET SENTIMENT ========== */
+.market-badge{display:inline-block;padding:4px 14px;border-radius:20px;font-size:12px;font-weight:600;letter-spacing:.3px}
+.market-badge.bullish{background:rgba(22,163,74,.12);color:var(--green)}
+.market-badge.neutral{background:rgba(217,119,6,.12);color:var(--orange)}
+.market-badge.bearish{background:rgba(220,38,38,.12);color:var(--red)}
+.sentiment-card{background:linear-gradient(135deg,var(--bg2),var(--bg3));border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:16px}
+.sentiment-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border)}
+.sentiment-row:last-child{border:none}
+.sentiment-label{font-size:13px;color:var(--text2)}
+.vix-interp{font-size:12px;padding:3px 10px;border-radius:12px;font-weight:500}
+
+/* ========== SCENARIO PLANNING ========== */
+.scenario-card{background:var(--bg2);border:1px solid var(--accent);border-radius:12px;padding:20px;margin-bottom:16px}
+.scenario-card h3{color:var(--accent)}
+.scenario-result{background:var(--bg3);border-radius:10px;padding:16px;margin-top:12px}
+.scenario-result .sr-row{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border);font-size:14px}
+.scenario-result .sr-row:last-child{border:none;font-weight:700}
+
+/* ========== ANALYST COMPARE ========== */
+.analyst-card{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:16px}
+.analyst-row{display:flex;align-items:center;gap:12px;padding:10px;background:var(--bg3);border-radius:8px;margin-bottom:8px}
+.analyst-row .ar-source{font-weight:500;min-width:140px;font-size:14px}
+.analyst-row select{padding:6px 12px;border:1px solid var(--border);border-radius:6px;background:var(--bg);color:var(--text);font-size:13px}
+.analyst-warning{padding:12px;background:rgba(220,38,38,.06);border:1px solid rgba(220,38,38,.2);border-radius:8px;margin-top:10px;font-size:13px;color:var(--red);display:none}
+
+/* ========== TERM POPUP ========== */
+.term-link{color:var(--accent);cursor:pointer;border-bottom:1px dashed var(--accent);position:relative}
+.term-popup{position:fixed;background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:14px 18px;max-width:350px;box-shadow:0 8px 30px rgba(0,0,0,.12);z-index:200;font-size:13px;line-height:1.6;display:none}
+.term-popup.show{display:block}
+.term-popup .tp-term{font-weight:700;color:var(--accent);margin-bottom:4px;font-size:14px}
+.term-popup .tp-def{color:var(--text2)}
+.term-popup .tp-close{position:absolute;top:6px;left:6px;background:none;border:none;font-size:16px;cursor:pointer;color:var(--text3)}
+
+/* ========== GLOSSARY CATEGORIES ========== */
+.glossary-cats{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.glossary-cat-btn{padding:6px 14px;border:1px solid var(--border);border-radius:20px;background:none;color:var(--text2);cursor:pointer;font-size:12px;transition:.2s}
+.glossary-cat-btn:hover,.glossary-cat-btn.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.glossary-cat-header{font-size:13px;font-weight:600;color:var(--accent);padding:10px 12px;background:var(--bg3);border-radius:8px;margin:12px 0 6px}
+
+/* ========== LEARNING TAB ========== */
+.learning-sub-tabs{display:flex;gap:8px;margin-bottom:16px}
+.learning-sub-btn{padding:8px 18px;border:1px solid var(--border);border-radius:8px;background:none;color:var(--text2);cursor:pointer;font-size:13px;transition:.2s}
+.learning-sub-btn:hover{background:var(--bg3)}
+.learning-sub-btn.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.video-placeholder{background:var(--bg3);border:2px dashed var(--border);border-radius:12px;padding:40px;text-align:center;margin-bottom:12px}
+.video-placeholder .vp-icon{font-size:48px;margin-bottom:8px}
+.video-placeholder .vp-title{font-weight:600;font-size:15px;margin-bottom:4px}
+.video-placeholder .vp-desc{font-size:12px;color:var(--text2)}
+</style>
+</head>
+<body>
+<div class="app">
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="logo">
+      <h2>מקפצה פיננסית</h2>
+      <small>דשבורד השקעות</small>
+    </div>
+    <nav>
+      <button class="active" onclick="switchTab('dashboard')"><span class="icon">&#127968;</span><span>דשבורד</span></button>
+      <button onclick="switchTab('analysis')"><span class="icon">&#128202;</span><span>ניתוח מניה</span></button>
+      <button onclick="switchTab('checklist')"><span class="icon">&#9989;</span><span>צ'קליסט כניסה</span></button>
+      <button onclick="switchTab('calculator')"><span class="icon">&#128170;</span><span>מחשבון פוזיציה</span></button>
+      <button onclick="switchTab('journal')"><span class="icon">&#128221;</span><span>יומן מסחר</span></button>
+      <button onclick="switchTab('learning')"><span class="icon">&#127891;</span><span>למידה</span></button>
+      <button onclick="switchTab('weekly')"><span class="icon">&#128203;</span><span>פעולות שבועי</span></button>
+      <button onclick="switchTab('glossary')"><span class="icon">&#128218;</span><span>מילון מושגים</span></button>
+      <button onclick="switchTab('chat')"><span class="icon">&#128172;</span><span>צ'אט יועץ</span></button>
+    </nav>
+    <div style="padding:12px;border-top:1px solid var(--border)">
+      <button class="btn btn-outline btn-sm" style="width:100%" onclick="openSettings()">&#9881; הגדרות</button>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="main">
+
+    <!-- ===== TAB 1: DASHBOARD ===== -->
+    <div id="tab-dashboard" class="tab active">
+      <h2 style="margin-bottom:20px">&#127968; דשבורד ראשי</h2>
+      <div class="card">
+        <h3>&#128200; מדדים מובילים</h3>
+        <div class="card-grid" id="indices-grid">
+          <div class="index-card"><div class="name">S&P 500</div><div class="price" id="idx-sp500">--</div><div class="change" id="idx-sp500-chg">--</div></div>
+          <div class="index-card"><div class="name">NASDAQ</div><div class="price" id="idx-nasdaq">--</div><div class="change" id="idx-nasdaq-chg">--</div></div>
+          <div class="index-card"><div class="name">Dow Jones</div><div class="price" id="idx-dow">--</div><div class="change" id="idx-dow-chg">--</div></div>
+          <div class="index-card"><div class="name">VIX</div><div class="price" id="idx-vix">--</div><div class="change" id="idx-vix-chg">--</div></div>
+        </div>
+      </div>
+      <!-- Market Sentiment -->
+      <div class="sentiment-card" id="sentiment-card">
+        <h3 style="margin-bottom:12px">&#127760; סקירת מצב שוק <span class="market-badge neutral" id="market-badge">טוען...</span></h3>
+        <div class="card-grid" style="grid-template-columns:repeat(3,1fr)">
+          <div class="index-card"><div class="name">יומי</div><div id="tf-daily" style="font-size:18px;font-weight:700">--</div></div>
+          <div class="index-card"><div class="name">שבועי</div><select id="tf-weekly" style="font-size:14px;font-weight:700;border:1px solid var(--border);border-radius:6px;padding:2px 6px;background:var(--bg2);color:var(--text);cursor:pointer" onchange="saveTfState()"><option value="">--</option><option value="up">▲ עולה</option><option value="side">↔ צדדי</option><option value="down">▼ יורד</option></select></div>
+          <div class="index-card"><div class="name">חודשי</div><select id="tf-monthly" style="font-size:14px;font-weight:700;border:1px solid var(--border);border-radius:6px;padding:2px 6px;background:var(--bg2);color:var(--text);cursor:pointer" onchange="saveTfState()"><option value="">--</option><option value="up">▲ עולה</option><option value="side">↔ צדדי</option><option value="down">▼ יורד</option></select></div>
+        </div>
+        <div style="margin-top:12px">
+          <div class="sentiment-row">
+            <span class="sentiment-label">VIX - מדד הפחד</span>
+            <span id="vix-interp" class="vix-interp" style="background:var(--bg3)">--</span>
+          </div>
+          <div class="sentiment-row">
+            <span class="sentiment-label">המלצת פעולה</span>
+            <span id="market-action" style="font-weight:600;font-size:14px">--</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>&#11088; Watchlist <button class="btn btn-sm btn-outline" style="margin-right:auto" onclick="addToWatchlist()">+ הוסף מניה</button></h3>
+        <div id="watchlist-container">
+          <p style="color:var(--text2);text-align:center;padding:20px">אין מניות ברשימת מעקב. לחץ "הוסף מניה" להתחיל.</p>
+        </div>
+      </div>
+      <div class="card">
+        <h3>&#128202; סטטיסטיקת תיק</h3>
+        <div class="card-grid">
+          <div class="index-card"><div class="name">פוזיציות פתוחות</div><div class="price" id="stat-positions">0</div></div>
+          <div class="index-card"><div class="name">Win Rate</div><div class="price" id="stat-winrate">--</div></div>
+          <div class="index-card"><div class="name">רווח/הפסד כולל</div><div class="price" id="stat-pnl">--</div></div>
+          <div class="index-card"><div class="name">תוחלת (Expectancy)</div><div class="price" id="stat-expect">--</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== TAB 2: STOCK ANALYSIS ===== -->
+    <div id="tab-analysis" class="tab">
+      <h2 style="margin-bottom:20px">&#128202; ניתוח מניה</h2>
+      <div class="card">
+        <div style="display:flex;gap:10px;align-items:end">
+          <div class="input-group" style="flex:1;margin:0">
+            <label>Ticker (סימול מניה)</label>
+            <input type="text" id="ticker-input" placeholder="AAPL" style="text-transform:uppercase;font-family:var(--mono);font-size:18px" onkeypress="if(event.key==='Enter')loadStock()">
+          </div>
+          <button class="btn btn-primary" onclick="loadStock()" style="height:44px">&#128269; נתח</button>
+          <button class="btn btn-outline" onclick="saveAnalysis()" style="height:44px">&#128190; שמור</button>
+          <button class="btn btn-outline" onclick="loadSavedAnalysis()" style="height:44px">&#128194; טען</button>
+        </div>
+        <div id="stock-info" style="margin-top:12px;display:none">
+          <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap">
+            <span id="stock-name" style="font-size:20px;font-weight:700"></span>
+            <span id="stock-price" style="font-family:var(--mono);font-size:24px;font-weight:900"></span>
+            <span id="stock-change" style="font-family:var(--mono);font-size:16px"></span>
+            <span id="stock-sector" style="font-size:12px;background:var(--bg4);padding:4px 10px;border-radius:4px;color:var(--text2)"></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- SUB-TABS -->
+      <div class="sub-tabs">
+        <button class="sub-tab-btn active" onclick="switchSubTab('business')">&#127919; הבנת העסק</button>
+        <button class="sub-tab-btn" onclick="switchSubTab('financial')">&#128200; יחסים פיננסיים</button>
+        <button class="sub-tab-btn" onclick="switchSubTab('technical')">&#128202; ניתוח טכני</button>
+      </div>
+
+      <!-- SUB-TAB: BUSINESS -->
+      <div id="subtab-business" class="sub-tab-content active">
+
+      <!-- CANDLESTICK CHART -->
+      <div class="card" id="chart-card" style="display:none">
+        <h3>&#128200; גרף נרות יפניים</h3>
+        <div class="chart-wrap">
+          <div class="chart-controls">
+            <button onclick="changeChartRange('5d')">1W</button>
+            <button onclick="changeChartRange('1mo')">1M</button>
+            <button class="active" onclick="changeChartRange('3mo')">3M</button>
+            <button onclick="changeChartRange('6mo')">6M</button>
+            <button onclick="changeChartRange('1y')">1Y</button>
+          </div>
+          <div style="position:relative">
+            <canvas id="main-chart" height="400"></canvas>
+            <div class="chart-tooltip" id="main-tooltip">
+              <div class="tt-row"><span class="tt-label">Date</span><span id="tt-date">--</span></div>
+              <div class="tt-row"><span class="tt-label">O</span><span id="tt-open">--</span></div>
+              <div class="tt-row"><span class="tt-label">H</span><span id="tt-high">--</span></div>
+              <div class="tt-row"><span class="tt-label">L</span><span id="tt-low">--</span></div>
+              <div class="tt-row"><span class="tt-label">C</span><span id="tt-close">--</span></div>
+              <div class="tt-row"><span class="tt-label">Vol</span><span id="tt-vol">--</span></div>
+            </div>
+          </div>
+          <div class="chart-legend"><span class="ma20">MA20</span><span class="ma50">MA50</span></div>
+        </div>
+      </div>
+
+      <!-- 2A: BUS Score -->
+      <div class="card">
+        <h3>&#127919; Business Understanding Score (33%)</h3>
+        <p style="font-size:12px;color:var(--text2);margin-bottom:16px">העניקו ציון 1-5 (כולל חצאי נקודות) לכל רכיב. ככל שאתם מבינים את הביזנס טוב יותר - הציון גבוה יותר.</p>
+        <div id="bus-items"></div>
+        <div style="text-align:center;padding:16px;background:var(--bg3);border-radius:10px;margin-top:12px">
+          <div style="font-size:13px;color:var(--text2)">ציון BUS כולל</div>
+          <div id="bus-total" style="font-size:48px;font-family:var(--mono);font-weight:900;color:var(--accent)">0.0</div>
+        </div>
+      </div>
+
+      </div><!-- /subtab-business -->
+
+      <!-- SUB-TAB: FINANCIAL -->
+      <div id="subtab-financial" class="sub-tab-content">
+      <!-- 2B: Financial Ratios -->
+      <div class="card">
+        <h3>&#128200; יחסים פיננסיים (33%)</h3>
+        <table class="fin-table">
+          <thead><tr><th>יחס</th><th>ערך</th><th>סטטוס</th></tr></thead>
+          <tbody id="ratios-body">
+            <tr><td><span class="term-link" onclick="showTermPopup('P/E',event)">P/E</span></td><td id="r-pe">--</td><td><span class="ratio-status" id="rs-pe"></span></td></tr>
+            <tr><td><span class="term-link" onclick="showTermPopup('P/B',event)">P/B</span></td><td id="r-pb">--</td><td><span class="ratio-status" id="rs-pb"></span></td></tr>
+            <tr><td><span class="term-link" onclick="showTermPopup('ROE',event)">ROE</span></td><td id="r-roe">--</td><td><span class="ratio-status" id="rs-roe"></span></td></tr>
+            <tr><td><span class="term-link" onclick="showTermPopup('Debt/Equity',event)">Debt/Equity</span></td><td id="r-de">--</td><td><span class="ratio-status" id="rs-de"></span></td></tr>
+            <tr><td><span class="term-link" onclick="showTermPopup('Current Ratio',event)">Current Ratio</span></td><td id="r-cr">--</td><td><span class="ratio-status" id="rs-cr"></span></td></tr>
+            <tr><td><span class="term-link" onclick="showTermPopup('EPS',event)">EPS</span></td><td id="r-eps">--</td><td><span class="ratio-status" id="rs-eps"></span></td></tr>
+            <tr><td><span class="term-link" onclick="showTermPopup('Revenue Growth',event)">Revenue Growth</span></td><td id="r-rg">--</td><td><span class="ratio-status" id="rs-rg"></span></td></tr>
+            <tr><td><span class="term-link" onclick="showTermPopup('Net Margin',event)">Net Margin</span></td><td id="r-nm">--</td><td><span class="ratio-status" id="rs-nm"></span></td></tr>
+            <tr><td><span class="term-link" onclick="showTermPopup('Free Cash Flow',event)">Free Cash Flow</span></td><td id="r-fcf">--</td><td><span class="ratio-status" id="rs-fcf"></span></td></tr>
+          </tbody>
+        </table>
+        <div style="text-align:center;padding:16px;background:var(--bg3);border-radius:10px;margin-top:12px">
+          <div style="font-size:13px;color:var(--text2)">ציון פונדמנטלי</div>
+          <div id="fund-score" style="font-size:48px;font-family:var(--mono);font-weight:900;color:var(--green)">0.0</div>
+        </div>
+      </div>
+
+      </div><!-- /subtab-financial -->
+
+      <!-- SUB-TAB: TECHNICAL -->
+      <div id="subtab-technical" class="sub-tab-content">
+      <!-- 2C: Technical Score -->
+      <div class="card">
+        <h3>&#128200; ניתוח טכני (34%)</h3>
+        <div class="input-group">
+          <label>ציון טכני (1-5, כולל חצאי נקודות)</label>
+          <input type="range" id="tech-score" min="1" max="5" step="0.5" value="3" oninput="updateTechScore()">
+          <div style="text-align:center;font-family:var(--mono);font-size:32px;font-weight:700;color:var(--purple);margin-top:8px" id="tech-score-display">3.0</div>
+        </div>
+        <div class="input-group">
+          <label>הערות ניתוח טכני</label>
+          <textarea id="tech-notes" placeholder="תבניות נרות, תמיכה/התנגדות, אינדיקטורים..." rows="3"></textarea>
+        </div>
+      </div>
+
+      <!-- Scenario Planning -->
+      <div class="scenario-card">
+        <h3>&#127919; תכנון תרחיש (Scenario Planning)</h3>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px">
+          <div class="input-group"><label>מחיר כניסה ($)</label><input type="number" id="sc-entry" step="0.01" style="font-family:var(--mono)" oninput="calcScenario()"></div>
+          <div class="input-group"><label>Stop Loss ($)</label><input type="number" id="sc-sl" step="0.01" style="font-family:var(--mono)" oninput="calcScenario()"></div>
+          <div class="input-group"><label>Target ($)</label><input type="number" id="sc-target" step="0.01" style="font-family:var(--mono)" oninput="calcScenario()"></div>
+        </div>
+        <div class="scenario-result" id="scenario-result" style="display:none">
+          <div class="sr-row"><span style="color:var(--text2)">כמות מניות לרכישה</span><span style="font-family:var(--mono);font-weight:700" id="sc-shares">--</span></div>
+          <div class="sr-row"><span style="color:var(--text2)">שווי פוזיציה</span><span style="font-family:var(--mono)" id="sc-posval">--</span></div>
+          <div class="sr-row"><span style="color:var(--text2)">סיכון מקסימלי</span><span style="font-family:var(--mono);color:var(--red)" id="sc-risk">--</span></div>
+          <div class="sr-row"><span style="color:var(--text2)">רווח פוטנציאלי</span><span style="font-family:var(--mono);color:var(--green)" id="sc-profit">--</span></div>
+          <div class="sr-row"><span style="color:var(--text2)">Risk/Reward</span><span style="font-family:var(--mono);font-weight:700" id="sc-rr">--</span></div>
+        </div>
+        <button class="btn btn-outline btn-sm" style="margin-top:10px" onclick="sendToCalculator()">&#128170; העבר למחשבון פוזיציה</button>
+      </div>
+
+      </div><!-- /subtab-technical -->
+
+      <!-- 2D: TOTAL SCORE -->
+      <div class="card">
+        <div class="total-score">
+          <div style="font-size:13px;color:var(--text2)">ציון כולל למניה</div>
+          <div class="big-num" id="total-score-num">0.0</div>
+          <div id="total-verdict" style="font-size:18px;margin-top:8px"></div>
+        </div>
+        <div class="score-breakdown">
+          <div class="part"><div class="val" id="bd-bus">0</div><div class="name">BUS (33%)</div></div>
+          <div class="part"><div class="val" id="bd-fund">0</div><div class="name">פונדמנטלי (33%)</div></div>
+          <div class="part"><div class="val" id="bd-tech">0</div><div class="name">טכני (34%)</div></div>
+        </div>
+      </div>
+
+      <!-- Red Flags -->
+      <div class="red-flags-card" id="red-flags-card" style="display:none">
+        <h3>&#9888; דגלים אדומים (Red Flags)</h3>
+        <div id="red-flags-list"></div>
+      </div>
+
+      <!-- Analyst Comparison -->
+      <div class="analyst-card">
+        <h3>&#128101; השוואה לאנליסטים</h3>
+        <div class="analyst-row">
+          <span class="ar-source">TradingView</span>
+          <select id="analyst-tv" onchange="checkAnalystConflict()"><option value="">-- בחר --</option><option value="buy">Strong Buy</option><option value="hold">Hold</option><option value="sell">Sell</option></select>
+        </div>
+        <div class="analyst-row">
+          <span class="ar-source">Interactive Brokers</span>
+          <select id="analyst-ib" onchange="checkAnalystConflict()"><option value="">-- בחר --</option><option value="buy">Buy</option><option value="hold">Hold</option><option value="sell">Sell</option></select>
+        </div>
+        <div class="analyst-row">
+          <span class="ar-source">הציון שלי</span>
+          <span id="analyst-my" style="font-family:var(--mono);font-weight:700;font-size:16px">--</span>
+        </div>
+        <div class="analyst-warning" id="analyst-warning">
+          &#9888; <strong>סתירה!</strong> הציון שלך גבוה, אבל אנליסטים חיצוניים מצביעים על Sell. שקול לבדוק שוב.
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== TAB 3: ENTRY CHECKLIST ===== -->
+    <div id="tab-checklist" class="tab">
+      <h2 style="margin-bottom:20px">&#9989; צ'קליסט כניסה לעסקה</h2>
+      <div class="card">
+        <h3>&#128270; בדיקות לפני כניסה (מפגש 12 - ניהול סיכונים)</h3>
+        <div id="entry-checklist">
+          <label class="checklist-item"><input type="checkbox" onchange="updateChecklistProgress()"><div><div class="cl-text">מגמה - האם המגמה בכיוון העסקה?</div><div class="cl-sub">בדקו מגמה ראשית בגרף יומי/שבועי</div></div></label>
+          <label class="checklist-item"><input type="checkbox" onchange="updateChecklistProgress()"><div><div class="cl-text">תמיכה/התנגדות - האם יש רמה טכנית ברורה?</div><div class="cl-sub">סמנו קווי תמיכה/התנגדות על הגרף</div></div></label>
+          <label class="checklist-item"><input type="checkbox" onchange="updateChecklistProgress()"><div><div class="cl-text">נפח מסחר - האם הווליום מאשר?</div><div class="cl-sub">ווליום גבוה מהממוצע מחזק את האות</div></div></label>
+          <label class="checklist-item"><input type="checkbox" onchange="updateChecklistProgress()"><div><div class="cl-text">אינדיקטורים - RSI / MACD / Bollinger Bands מאשרים?</div><div class="cl-sub">לפחות 2 מתוך 3 אינדיקטורים בכיוון</div></div></label>
+          <label class="checklist-item"><input type="checkbox" onchange="updateChecklistProgress()"><div><div class="cl-text">תבנית נרות - האם יש תבנית כניסה מזוהה?</div><div class="cl-sub">Hammer, Engulfing, Doji וכו'</div></div></label>
+          <label class="checklist-item"><input type="checkbox" onchange="updateChecklistProgress()"><div><div class="cl-text">ניתוח פונדמנטלי - הציון מצדיק כניסה?</div><div class="cl-sub">ציון BUS + פונדמנטלי מעל 5</div></div></label>
+          <label class="checklist-item"><input type="checkbox" onchange="updateChecklistProgress()"><div><div class="cl-text">Risk/Reward ≥ 1:4 - יחס סיכון/סיכוי מינימלי</div><div class="cl-sub">השתמשו במחשבון למטה</div></div></label>
+        </div>
+        <div style="margin-top:12px;text-align:center">
+          <span id="checklist-progress" style="font-family:var(--mono);font-size:18px;font-weight:700">0/7</span>
+          <span style="color:var(--text2);font-size:13px;margin-right:8px">פריטים הושלמו</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ===== TAB 3B: POSITION CALCULATOR (SEPARATE) ===== -->
+    <div id="tab-calculator" class="tab">
+      <h2 style="margin-bottom:20px">&#128170; מחשבון פוזיציה (כלל 1%)</h2>
+      <div class="card">
+        <h3>&#128176; פרטי תיק</h3>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+          <div class="input-group"><label>הון כולל בתיק ($)</label><input type="number" id="calc-capital" value="10000" oninput="calcPosition()"></div>
+          <div class="input-group"><label>אחוז סיכון לעסקה (%)</label><input type="number" id="calc-risk-pct" value="1" step="0.5" oninput="calcPosition()"></div>
+        </div>
+      </div>
+      <div class="card">
+        <h3>&#127919; פרטי עסקה</h3>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px">
+          <div class="input-group"><label>מחיר כניסה ($)</label><input type="number" id="calc-entry" step="0.01" oninput="calcPosition()"></div>
+          <div class="input-group"><label>Stop Loss ($)</label><input type="number" id="calc-sl" step="0.01" oninput="calcPosition()"></div>
+          <div class="input-group"><label>Target ($)</label><input type="number" id="calc-target" step="0.01" oninput="calcPosition()"></div>
+        </div>
+        <div class="calc-result" id="calc-results">
+          <div class="calc-row"><span class="calc-label">סיכון מקסימלי ($)</span><span class="calc-val" id="cr-maxrisk">--</span></div>
+          <div class="calc-row"><span class="calc-label">מרחק ל-Stop Loss ($)</span><span class="calc-val" id="cr-sldist">--</span></div>
+          <div class="calc-row"><span class="calc-label">גודל פוזיציה (מניות)</span><span class="calc-val" id="cr-shares">--</span></div>
+          <div class="calc-row"><span class="calc-label">שווי פוזיציה ($)</span><span class="calc-val" id="cr-posval">--</span></div>
+          <div class="calc-row"><span class="calc-label">רווח פוטנציאלי ($)</span><span class="calc-val" id="cr-profit" style="color:var(--green)">--</span></div>
+          <div class="calc-row"><span class="calc-label">Risk/Reward Ratio</span><span class="calc-val" id="cr-rr">--</span></div>
+        </div>
+        <div style="margin-top:12px;padding:12px;background:var(--bg3);border-radius:8px;font-size:13px;color:var(--text2)">
+          &#128161; <strong>הוראות פקודה:</strong> <span id="trade-instructions">הזן מחיר כניסה, Stop Loss ו-Target לקבלת הוראות.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== TAB 4: TRADING JOURNAL ===== -->
+    <div id="tab-journal" class="tab">
+      <h2 style="margin-bottom:20px">&#128221; יומן מסחר</h2>
+      <div class="card">
+        <h3>&#10133; הוסף עסקה</h3>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px">
+          <div class="input-group"><label>תאריך</label><input type="date" id="j-date"></div>
+          <div class="input-group"><label>Ticker</label><input type="text" id="j-ticker" style="text-transform:uppercase;font-family:var(--mono)"></div>
+          <div class="input-group"><label>כיוון</label><select id="j-direction"><option value="long">Long</option><option value="short">Short</option></select></div>
+          <div class="input-group"><label>מחיר כניסה</label><input type="number" id="j-entry" step="0.01"></div>
+          <div class="input-group"><label>מחיר יציאה</label><input type="number" id="j-exit" step="0.01"></div>
+          <div class="input-group"><label>כמות מניות</label><input type="number" id="j-qty" value="1"></div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px">
+          <div class="input-group"><label>סיבת כניסה</label><textarea id="j-reason-in" rows="2"></textarea></div>
+          <div class="input-group"><label>סיבת יציאה / לקחים</label><textarea id="j-reason-out" rows="2"></textarea></div>
+        </div>
+        <button class="btn btn-success" onclick="addJournalEntry()" style="margin-top:10px">&#10133; הוסף לייומן</button>
+      </div>
+      <div class="card">
+        <h3>&#128203; היסטוריית עסקאות</h3>
+        <div style="overflow-x:auto">
+          <table>
+            <thead><tr><th>תאריך</th><th>Ticker</th><th>כיוון</th><th>כניסה</th><th>יציאה</th><th>כמות</th><th>רווח/הפסד</th><th>%</th><th>פעולות</th></tr></thead>
+            <tbody id="journal-body"><tr><td colspan="9" style="text-align:center;color:var(--text2);padding:30px">אין עסקאות ביומן</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+      <div class="card">
+        <h3>&#128200; סטטיסטיקות</h3>
+        <div class="card-grid">
+          <div class="index-card"><div class="name">סה"כ עסקאות</div><div class="price" id="js-total">0</div></div>
+          <div class="index-card"><div class="name">Win Rate</div><div class="price" id="js-winrate">--</div></div>
+          <div class="index-card"><div class="name">ממוצע רווח (מנצחת)</div><div class="price" id="js-avgwin" style="color:var(--green)">--</div></div>
+          <div class="index-card"><div class="name">ממוצע הפסד (מפסידה)</div><div class="price" id="js-avgloss" style="color:var(--red)">--</div></div>
+          <div class="index-card"><div class="name">תוחלת (Expectancy)</div><div class="price" id="js-expect">--</div></div>
+          <div class="index-card"><div class="name">סה"כ רווח/הפסד</div><div class="price" id="js-totalpnl">--</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== TAB 5: WEEKLY WORKFLOW ===== -->
+    <div id="tab-weekly" class="tab">
+      <h2 style="margin-bottom:20px">&#128203; סדר פעולות שבועי</h2>
+      <div class="card" style="background:var(--bg3);border:1px dashed var(--border);margin-bottom:16px;padding:12px 16px;font-size:13px;color:var(--text2)">
+        &#128221; <strong>הערה:</strong> רשימת הפעולות תתעדכן מעת לעת ע"י עומרי. הרשימה הנוכחית מבוססת על מפגש 12-13.
+      </div>
+      <div class="card">
+        <h3>&#128197; שבוע של <span id="weekly-date-range"></span>
+          <span style="margin-right:auto;display:flex;gap:6px">
+            <button class="btn btn-sm btn-outline" onclick="markAllWeekly()">&#9989; סמן הכל</button>
+            <button class="btn btn-sm btn-outline" onclick="resetWeekly()">&#128260; איפוס</button>
+          </span>
+        </h3>
+        <div class="weekly-progress"><div class="fill" id="weekly-fill" style="width:0%"></div></div>
+        <span id="weekly-pct" style="font-family:var(--mono);font-size:14px;color:var(--text2)">0% הושלם</span>
+        <div style="margin-top:16px" id="weekly-items">
+          <label class="checklist-item"><input type="checkbox" data-weekly="0" onchange="updateWeeklyProgress()"><div><div class="cl-text">1. סקירת מדדים</div><div class="cl-sub">S&P 500, NASDAQ, מדדים בינלאומיים, סחורות</div></div></label>
+          <label class="checklist-item"><input type="checkbox" data-weekly="1" onchange="updateWeeklyProgress()"><div><div class="cl-text">2. יומן אירועים כלכליים</div><div class="cl-sub">ריבית, אינפלציה, תעסוקה, החלטות בנקים מרכזיים</div></div></label>
+          <label class="checklist-item"><input type="checkbox" data-weekly="2" onchange="updateWeeklyProgress()"><div><div class="cl-text">3. מעקב חדשות מאקרו</div><div class="cl-sub">חדשות כלכליות, גיאופוליטיקה, מגמות סקטוריאליות</div></div></label>
+          <label class="checklist-item"><input type="checkbox" data-weekly="3" onchange="updateWeeklyProgress()"><div><div class="cl-text">4. בדיקת תיק השקעות</div><div class="cl-sub">עדכון פוזיציות, חדשות ספציפיות, דוחות קרובים (Earnings Whisper)</div></div></label>
+          <label class="checklist-item"><input type="checkbox" data-weekly="4" onchange="updateWeeklyProgress()"><div><div class="cl-text">5. בדיקת רשימות מעקב</div><div class="cl-sub">עדכון תרחישים והתראות בהתאם לשינויים</div></div></label>
+          <label class="checklist-item"><input type="checkbox" data-weekly="5" onchange="updateWeeklyProgress()"><div><div class="cl-text">6. חיפוש מניות אטרקטיביות</div><div class="cl-sub">שימוש בסורקים (Finviz), סינון לפי קריטריונים</div></div></label>
+          <label class="checklist-item"><input type="checkbox" data-weekly="6" onchange="updateWeeklyProgress()"><div><div class="cl-text">7. ניתוח מניות</div><div class="cl-sub">ניתוח פונדמנטלי + טכני מעמיק למניות מועמדות</div></div></label>
+          <label class="checklist-item"><input type="checkbox" data-weekly="7" onchange="updateWeeklyProgress()"><div><div class="cl-text">8. בניית תרחיש השקעה</div><div class="cl-sub">כניסה/יציאה, תנאים מקדימים, טריגרים</div></div></label>
+          <label class="checklist-item"><input type="checkbox" data-weekly="8" onchange="updateWeeklyProgress()"><div><div class="cl-text">9. יצירת פוזיציה</div><div class="cl-sub">פתיחת עסקה בפועל אם כל התנאים מתקיימים</div></div></label>
+          <label class="checklist-item"><input type="checkbox" data-weekly="9" onchange="updateWeeklyProgress()"><div><div class="cl-text">10. תיעוד ביומן מסחר</div><div class="cl-sub">עדכון יומן מסחר + יומן פיספוסים ללמידה מתמדת</div></div></label>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== TAB 6: GLOSSARY ===== -->
+    <div id="tab-glossary" class="tab">
+      <h2 style="margin-bottom:20px">&#128218; מילון מושגים</h2>
+      <div class="card">
+        <div class="input-group" style="margin:0 0 12px">
+          <input type="text" id="glossary-search" placeholder="&#128269; חפש מושג..." oninput="filterGlossary()">
+        </div>
+        <div class="glossary-cats">
+          <button class="glossary-cat-btn active" onclick="filterGlossaryCat('all')">הכל</button>
+          <button class="glossary-cat-btn" onclick="filterGlossaryCat('financial')">דוחות כספיים</button>
+          <button class="glossary-cat-btn" onclick="filterGlossaryCat('technical')">ניתוח טכני</button>
+          <button class="glossary-cat-btn" onclick="filterGlossaryCat('trading')">מושגי מסחר</button>
+          <button class="glossary-cat-btn" onclick="filterGlossaryCat('economy')">כלכלה</button>
+        </div>
+      </div>
+      <div class="card" id="glossary-list"></div>
+    </div>
+
+    <!-- ===== TAB 7: CHAT ===== -->
+    <div id="tab-chat" class="tab">
+      <h2 style="margin-bottom:20px">&#128172; צ'אט יועץ מקפצה</h2>
+      <div class="card" style="padding:0;overflow:hidden">
+        <div class="chat-mode-toggle">
+          <button class="active" id="mode-local" onclick="setChatMode('local')">&#128994; מקומי</button>
+          <button id="mode-grok" onclick="setChatMode('grok')">&#129302; Grok AI</button>
+          <span style="margin-right:auto;font-size:11px;color:var(--text3);align-self:center" id="chat-mode-label">חיפוש בבסיס הידע המקומי</span>
+        </div>
+        <div class="suggested-q" id="suggested-questions">
+          <button onclick="askSuggested(this)">מה זה חפיר תחרותי?</button>
+          <button onclick="askSuggested(this)">איך מחשבים P/E?</button>
+          <button onclick="askSuggested(this)">מה הצ'קליסט לכניסה לעסקה?</button>
+          <button onclick="askSuggested(this)">מה זה Risk/Reward?</button>
+          <button onclick="askSuggested(this)">איך מנתחים דוחות כספיים?</button>
+          <button onclick="askSuggested(this)">מה זה BUS Score?</button>
+        </div>
+        <div class="chat-container">
+          <div class="chat-messages" id="chat-messages">
+            <div class="chat-msg bot">שלום! אני היועץ של תוכנית המקפצה הפיננסית. אפשר לשאול אותי כל שאלה על שוק ההון, ניתוח מניות, יחסים פיננסיים ועוד - על בסיס חומרי התוכנית.<br><span class="source-tag">מקור: בסיס ידע מקפצה פיננסית</span></div>
+          </div>
+          <div class="chat-input-area">
+            <input type="text" id="chat-input" placeholder="שאל שאלה..." onkeypress="if(event.key==='Enter')sendChat()">
+            <button class="btn btn-primary" onclick="sendChat()">&#128228;</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== TAB 8: LEARNING (replaces EXERCISES) ===== -->
+    <div id="tab-learning" class="tab">
+      <h2 style="margin-bottom:20px">&#127891; למידה</h2>
+      <div class="learning-sub-tabs">
+        <button class="learning-sub-btn active" onclick="switchLearningTab('exercises')">&#9999; תרגילים</button>
+        <button class="learning-sub-btn" onclick="switchLearningTab('videos')">&#127909; סרטונים</button>
+      </div>
+
+      <!-- Videos section -->
+      <div id="learning-videos" style="display:none">
+        <div class="card">
+          <h3>&#127909; סרטוני לימוד - מודולרי</h3>
+          <p style="font-size:13px;color:var(--text2);margin-bottom:16px">סרטונים מפולחים לקטעים של 5-10 דקות כל אחד. כל סגמנט כולל הסבר, מצגת ותרגיל מעשי.</p>
+          <div class="video-placeholder"><div class="vp-icon">&#127909;</div><div class="vp-title">מבוא לשוק ההון</div><div class="vp-desc">קטע 1: מהו שוק ההון? (8 דקות) - יעלה בקרוב</div></div>
+          <div class="video-placeholder"><div class="vp-icon">&#127909;</div><div class="vp-title">ניתוח פונדמנטלי</div><div class="vp-desc">קטע 2: קריאת דוחות כספיים (10 דקות) - יעלה בקרוב</div></div>
+          <div class="video-placeholder"><div class="vp-icon">&#127909;</div><div class="vp-title">ניתוח טכני</div><div class="vp-desc">קטע 3: נרות יפניים ותבניות (7 דקות) - יעלה בקרוב</div></div>
+          <div class="video-placeholder"><div class="vp-icon">&#127909;</div><div class="vp-title">ניהול סיכונים</div><div class="vp-desc">קטע 4: כלל 1% ו-Position Sizing (6 דקות) - יעלה בקרוב</div></div>
+          <div class="video-placeholder"><div class="vp-icon">&#127909;</div><div class="vp-title">פסיכולוגיית מסחר</div><div class="vp-desc">קטע 5: שנאת הפסד והטיות קוגניטיביות (9 דקות) - יעלה בקרוב</div></div>
+        </div>
+      </div>
+
+      <!-- Exercises section -->
+      <div id="learning-exercises">
+
+      <!-- Exercise 1 -->
+      <div class="exercise-card" id="ex-1">
+        <div class="exercise-header" onclick="toggleExercise(1)">
+          <div class="ex-num pending" id="ex-num-1">1</div>
+          <div class="ex-title">מציאת מניה ודוחות כספיים</div>
+          <span class="ex-arrow">&#9660;</span>
+        </div>
+        <div class="exercise-body">
+          <p style="color:var(--text2);font-size:13px;margin-bottom:12px">השתמשו ב-Finviz Screener כדי למצוא מניה מעניינת, ואז חפשו את הדוחות הכספיים שלה ב-SEC EDGAR ובדף ה-IR של החברה.</p>
+          <div class="exercise-links">
+            <a href="https://finviz.com/screener.ashx" target="_blank">&#128269; Finviz Screener</a>
+            <a href="https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany" target="_blank">&#128196; SEC EDGAR</a>
+          </div>
+          <div class="ex-field-grid">
+            <div class="input-group"><label>Ticker</label><input type="text" id="ex1-ticker" style="text-transform:uppercase;font-family:var(--mono)" placeholder="AAPL"></div>
+            <div class="input-group"><label>שם החברה</label><input type="text" id="ex1-name" placeholder="Apple Inc."></div>
+            <div class="input-group"><label>סקטור</label><input type="text" id="ex1-sector" placeholder="Technology"></div>
+            <div class="input-group"><label>שווי שוק (Market Cap)</label><input type="text" id="ex1-mcap" placeholder="$3.2T" style="font-family:var(--mono)"></div>
+            <div class="input-group"><label>Revenue (הכנסות)</label><input type="text" id="ex1-revenue" placeholder="$383B" style="font-family:var(--mono)"></div>
+            <div class="input-group"><label>Net Income (רווח נקי)</label><input type="text" id="ex1-netincome" placeholder="$97B" style="font-family:var(--mono)"></div>
+          </div>
+          <div class="input-group"><label>ממצאים ותובנות</label><textarea id="ex1-notes" rows="3" placeholder="מה גיליתם על החברה? האם היא מעניינת להשקעה?"></textarea></div>
+          <div class="prompt-box">Prompt ל-AI: "נתח את המניה [TICKER]. ספק סקירה כללית של העסק, המודל העסקי, המתחרים העיקריים, וסיכום הדוחות הכספיים האחרונים. כלול Revenue, Net Income, ו-Free Cash Flow."<button class="copy-btn" onclick="copyPrompt(this)">&#128203; העתק</button></div>
+          <div class="ex-save-row">
+            <button class="btn btn-primary btn-sm" onclick="saveExercise(1)">&#128190; שמור תרגיל</button>
+            <button class="btn btn-outline btn-sm" onclick="loadExercise(1)">&#128194; טען שמור</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Exercise 2 -->
+      <div class="exercise-card" id="ex-2">
+        <div class="exercise-header" onclick="toggleExercise(2)">
+          <div class="ex-num pending" id="ex-num-2">2</div>
+          <div class="ex-title">ניתוח טכני - תמיכה, התנגדות ומגמות</div>
+          <span class="ex-arrow">&#9660;</span>
+        </div>
+        <div class="exercise-body">
+          <p style="color:var(--text2);font-size:13px;margin-bottom:12px">הזינו Ticker כדי לטעון גרף נרות. זהו רמות תמיכה והתנגדות, וקבעו את כיוון המגמה.</p>
+          <div style="display:flex;gap:10px;align-items:end;margin-bottom:12px">
+            <div class="input-group" style="flex:1;margin:0"><label>Ticker</label><input type="text" id="ex2-ticker" style="text-transform:uppercase;font-family:var(--mono)" placeholder="AAPL"></div>
+            <button class="btn btn-primary btn-sm" onclick="loadExChart(2)" style="height:40px">&#128200; טען גרף</button>
+          </div>
+          <div class="chart-wrap" id="ex2-chart-wrap" style="display:none">
+            <div class="chart-controls">
+              <button onclick="changeExChartRange(2,'1mo')">1M</button>
+              <button class="active" onclick="changeExChartRange(2,'3mo')">3M</button>
+              <button onclick="changeExChartRange(2,'6mo')">6M</button>
+            </div>
+            <div style="position:relative"><canvas id="ex2-chart" height="350"></canvas></div>
+            <div class="chart-legend"><span class="ma20">MA20</span><span class="ma50">MA50</span></div>
+          </div>
+          <div class="exercise-links" style="margin-top:12px">
+            <a href="https://www.tradingview.com/" target="_blank">&#128202; TradingView</a>
+          </div>
+          <div class="ex-field-grid" style="margin-top:12px">
+            <div class="input-group"><label>תמיכה 1</label><input type="number" id="ex2-s1" step="0.01" style="font-family:var(--mono)"></div>
+            <div class="input-group"><label>התנגדות 1</label><input type="number" id="ex2-r1" step="0.01" style="font-family:var(--mono)"></div>
+            <div class="input-group"><label>תמיכה 2</label><input type="number" id="ex2-s2" step="0.01" style="font-family:var(--mono)"></div>
+            <div class="input-group"><label>התנגדות 2</label><input type="number" id="ex2-r2" step="0.01" style="font-family:var(--mono)"></div>
+            <div class="input-group"><label>תמיכה 3</label><input type="number" id="ex2-s3" step="0.01" style="font-family:var(--mono)"></div>
+            <div class="input-group"><label>התנגדות 3</label><input type="number" id="ex2-r3" step="0.01" style="font-family:var(--mono)"></div>
+          </div>
+          <div class="input-group"><label>כיוון מגמה</label><select id="ex2-trend"><option value="">-- בחר --</option><option value="up">עולה (Uptrend)</option><option value="down">יורדת (Downtrend)</option><option value="side">צידית (Sideways)</option></select></div>
+          <div class="input-group"><label>הערות ניתוח</label><textarea id="ex2-notes" rows="3" placeholder="תארו את המגמה, רמות מפתח, ווליום..."></textarea></div>
+          <div class="prompt-box">Prompt ל-AI: "נתח טכנית את המניה [TICKER]. זהה רמות תמיכה והתנגדות מרכזיות, כיוון מגמה (עולה/יורדת/צידית), ובדוק את RSI, MACD ו-Bollinger Bands. המלץ על נקודות כניסה ויציאה אפשריות."<button class="copy-btn" onclick="copyPrompt(this)">&#128203; העתק</button></div>
+          <div class="ex-save-row">
+            <button class="btn btn-primary btn-sm" onclick="saveExercise(2)">&#128190; שמור תרגיל</button>
+            <button class="btn btn-outline btn-sm" onclick="loadExercise(2)">&#128194; טען שמור</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Exercise 3 -->
+      <div class="exercise-card" id="ex-3">
+        <div class="exercise-header" onclick="toggleExercise(3)">
+          <div class="ex-num pending" id="ex-num-3">3</div>
+          <div class="ex-title">ניתוח P/E ודוח רווח והפסד</div>
+          <span class="ex-arrow">&#9660;</span>
+        </div>
+        <div class="exercise-body">
+          <p style="color:var(--text2);font-size:13px;margin-bottom:12px">הזינו Ticker כדי לשלוף נתוני P/E ורווח והפסד אוטומטית מ-Yahoo Finance.</p>
+          <div style="display:flex;gap:10px;align-items:end;margin-bottom:12px">
+            <div class="input-group" style="flex:1;margin:0"><label>Ticker</label><input type="text" id="ex3-ticker" style="text-transform:uppercase;font-family:var(--mono)" placeholder="MSFT"></div>
+            <button class="btn btn-primary btn-sm" onclick="loadEx3Data()" style="height:40px">&#128200; שלוף נתונים</button>
+          </div>
+          <div id="ex3-data" style="display:none">
+            <table class="fin-table">
+              <thead><tr><th>מדד</th><th>ערך</th></tr></thead>
+              <tbody>
+                <tr><td>P/E (Trailing)</td><td id="ex3-pe" style="font-family:var(--mono)">--</td></tr>
+                <tr><td>P/E (Forward)</td><td id="ex3-fpe" style="font-family:var(--mono)">--</td></tr>
+                <tr><td>EPS</td><td id="ex3-eps" style="font-family:var(--mono)">--</td></tr>
+                <tr><td>Revenue</td><td id="ex3-rev" style="font-family:var(--mono)">--</td></tr>
+                <tr><td>Gross Profit</td><td id="ex3-gp" style="font-family:var(--mono)">--</td></tr>
+                <tr><td>Operating Income</td><td id="ex3-oi" style="font-family:var(--mono)">--</td></tr>
+                <tr><td>Net Income</td><td id="ex3-ni" style="font-family:var(--mono)">--</td></tr>
+                <tr><td>Profit Margin</td><td id="ex3-margin" style="font-family:var(--mono)">--</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="input-group" style="margin-top:12px"><label>האם ה-P/E גבוה או נמוך? למה?</label><textarea id="ex3-analysis" rows="3" placeholder="השוו לממוצע בסקטור, קצב צמיחה, ותוחלת רווחים..."></textarea></div>
+          <div class="prompt-box">Prompt ל-AI: "נתח את יחס ה-P/E של [TICKER]. האם הוא גבוה או נמוך ביחס לסקטור? מה מסביר את המכפיל? נתח את דוח הרווח וההפסד האחרון - Revenue, Gross Margin, Operating Income, ו-Net Income. האם יש מגמת צמיחה?"<button class="copy-btn" onclick="copyPrompt(this)">&#128203; העתק</button></div>
+          <div class="ex-save-row">
+            <button class="btn btn-primary btn-sm" onclick="saveExercise(3)">&#128190; שמור תרגיל</button>
+            <button class="btn btn-outline btn-sm" onclick="loadExercise(3)">&#128194; טען שמור</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Exercise 4 -->
+      <div class="exercise-card" id="ex-4">
+        <div class="exercise-header" onclick="toggleExercise(4)">
+          <div class="ex-num pending" id="ex-num-4">4</div>
+          <div class="ex-title">תבניות נרות ובניית תרחיש השקעה</div>
+          <span class="ex-arrow">&#9660;</span>
+        </div>
+        <div class="exercise-body">
+          <p style="color:var(--text2);font-size:13px;margin-bottom:12px">טענו גרף נרות, זהו תבנית (Hammer, Engulfing, Doji), ובנו תרחיש כניסה עם Stop Loss ו-Target.</p>
+          <div style="display:flex;gap:10px;align-items:end;margin-bottom:12px">
+            <div class="input-group" style="flex:1;margin:0"><label>Ticker</label><input type="text" id="ex4-ticker" style="text-transform:uppercase;font-family:var(--mono)" placeholder="TSLA"></div>
+            <button class="btn btn-primary btn-sm" onclick="loadExChart(4)" style="height:40px">&#128200; טען גרף</button>
+          </div>
+          <div class="chart-wrap" id="ex4-chart-wrap" style="display:none">
+            <div class="chart-controls">
+              <button onclick="changeExChartRange(4,'1mo')">1M</button>
+              <button class="active" onclick="changeExChartRange(4,'3mo')">3M</button>
+              <button onclick="changeExChartRange(4,'6mo')">6M</button>
+            </div>
+            <div style="position:relative"><canvas id="ex4-chart" height="350"></canvas></div>
+            <div class="chart-legend"><span class="ma20">MA20</span><span class="ma50">MA50</span></div>
+          </div>
+          <div class="input-group" style="margin-top:12px"><label>תבנית נרות שזוהתה</label><select id="ex4-pattern"><option value="">-- בחר תבנית --</option><option value="hammer">Hammer (פטיש)</option><option value="engulfing-bull">Bullish Engulfing</option><option value="engulfing-bear">Bearish Engulfing</option><option value="doji">Doji</option><option value="morning-star">Morning Star</option><option value="evening-star">Evening Star</option><option value="shooting-star">Shooting Star</option><option value="other">אחר</option></select></div>
+          <div class="ex-field-grid">
+            <div class="input-group"><label>מחיר כניסה ($)</label><input type="number" id="ex4-entry" step="0.01" style="font-family:var(--mono)"></div>
+            <div class="input-group"><label>Stop Loss ($)</label><input type="number" id="ex4-sl" step="0.01" style="font-family:var(--mono)"></div>
+            <div class="input-group"><label>Target ($)</label><input type="number" id="ex4-target" step="0.01" style="font-family:var(--mono)"></div>
+            <div class="input-group"><label>Risk/Reward</label><input type="text" id="ex4-rr" readonly style="font-family:var(--mono);background:var(--bg4)"></div>
+          </div>
+          <div class="input-group"><label>נימוק התרחיש</label><textarea id="ex4-notes" rows="3" placeholder="למה בחרתם בכניסה הזו? מה מחזק את התרחיש?"></textarea></div>
+          <div class="prompt-box">Prompt ל-AI: "בנה תרחיש השקעה עבור [TICKER] על בסיס ניתוח טכני. זהה תבניות נרות יפניים בגרף, הצע נקודת כניסה, Stop Loss ו-Target עם יחס R/R של לפחות 1:4. כלול אינדיקטורים (RSI, MACD) כתמיכה."<button class="copy-btn" onclick="copyPrompt(this)">&#128203; העתק</button></div>
+          <div class="ex-save-row">
+            <button class="btn btn-primary btn-sm" onclick="saveExercise(4)">&#128190; שמור תרגיל</button>
+            <button class="btn btn-outline btn-sm" onclick="loadExercise(4)">&#128194; טען שמור</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Exercise 5 -->
+      <div class="exercise-card" id="ex-5">
+        <div class="exercise-header" onclick="toggleExercise(5)">
+          <div class="ex-num pending" id="ex-num-5">5</div>
+          <div class="ex-title">P/B, מאזן ויחסי נזילות</div>
+          <span class="ex-arrow">&#9660;</span>
+        </div>
+        <div class="exercise-body">
+          <p style="color:var(--text2);font-size:13px;margin-bottom:12px">שלפו נתוני P/B ומאזן מ-API. חשבו Book Value per Share ובדקו יחסי נזילות.</p>
+          <div style="display:flex;gap:10px;align-items:end;margin-bottom:12px">
+            <div class="input-group" style="flex:1;margin:0"><label>Ticker</label><input type="text" id="ex5-ticker" style="text-transform:uppercase;font-family:var(--mono)" placeholder="JPM"></div>
+            <button class="btn btn-primary btn-sm" onclick="loadEx5Data()" style="height:40px">&#128200; שלוף נתונים</button>
+          </div>
+          <div id="ex5-data" style="display:none">
+            <table class="fin-table">
+              <thead><tr><th>מדד</th><th>ערך</th></tr></thead>
+              <tbody>
+                <tr><td>P/B (Price to Book)</td><td id="ex5-pb" style="font-family:var(--mono)">--</td></tr>
+                <tr><td>Book Value per Share</td><td id="ex5-bvps" style="font-family:var(--mono)">--</td></tr>
+                <tr><td>Current Ratio</td><td id="ex5-cr" style="font-family:var(--mono)">--</td></tr>
+                <tr><td>Debt/Equity</td><td id="ex5-de" style="font-family:var(--mono)">--</td></tr>
+                <tr><td>Total Assets</td><td id="ex5-assets" style="font-family:var(--mono)">--</td></tr>
+                <tr><td>Total Liabilities</td><td id="ex5-liab" style="font-family:var(--mono)">--</td></tr>
+                <tr><td>Stockholders Equity</td><td id="ex5-equity" style="font-family:var(--mono)">--</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="input-group" style="margin-top:12px"><label>מה P/B מלמד על החברה?</label><textarea id="ex5-analysis" rows="3" placeholder="האם החברה נסחרת מעל/מתחת לשווי ספרים? מה זה אומר?"></textarea></div>
+          <div class="prompt-box">Prompt ל-AI: "נתח את יחס ה-P/B של [TICKER]. האם החברה נסחרת מעל או מתחת לשווי הספרים? נתח את המאזן: נכסים שוטפים מול התחייבויות שוטפות, Current Ratio, ו-Debt/Equity. האם יש סיכון נזילות?"<button class="copy-btn" onclick="copyPrompt(this)">&#128203; העתק</button></div>
+          <div class="ex-save-row">
+            <button class="btn btn-primary btn-sm" onclick="saveExercise(5)">&#128190; שמור תרגיל</button>
+            <button class="btn btn-outline btn-sm" onclick="loadExercise(5)">&#128194; טען שמור</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Exercise 6 -->
+      <div class="exercise-card" id="ex-6">
+        <div class="exercise-header" onclick="toggleExercise(6)">
+          <div class="ex-num pending" id="ex-num-6">6</div>
+          <div class="ex-title">חפיר תחרותי (Competitive Moat)</div>
+          <span class="ex-arrow">&#9660;</span>
+        </div>
+        <div class="exercise-body">
+          <p style="color:var(--text2);font-size:13px;margin-bottom:12px">בחרו חברה וזהו את סוג החפיר התחרותי שלה: מותג, פטנטים, אפקט רשת, עלויות מעבר, או יתרון בעלויות.</p>
+          <div class="ex-field-grid">
+            <div class="input-group"><label>Ticker</label><input type="text" id="ex6-ticker" style="text-transform:uppercase;font-family:var(--mono)"></div>
+            <div class="input-group"><label>סוג חפיר</label><select id="ex6-moat"><option value="">-- בחר --</option><option value="brand">מותג חזק</option><option value="patents">פטנטים/IP</option><option value="network">אפקט רשת</option><option value="switching">עלויות מעבר</option><option value="cost">יתרון בעלויות</option><option value="multiple">מספר חפירים</option></select></div>
+          </div>
+          <div class="input-group"><label>ניתוח החפיר</label><textarea id="ex6-notes" rows="3" placeholder="הסבירו למה החפיר חזק/חלש, והאם הוא בר-קיימא?"></textarea></div>
+          <div class="prompt-box">Prompt ל-AI: "נתח את החפיר התחרותי של [TICKER]. זהה את סוג החפיר (מותג, פטנטים, אפקט רשת, עלויות מעבר, יתרון בעלויות). האם החפיר בר-קיימא? מה המתחרים המרכזיים?"<button class="copy-btn" onclick="copyPrompt(this)">&#128203; העתק</button></div>
+          <div class="ex-save-row">
+            <button class="btn btn-primary btn-sm" onclick="saveExercise(6)">&#128190; שמור</button>
+            <button class="btn btn-outline btn-sm" onclick="loadExercise(6)">&#128194; טען</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Exercise 7 -->
+      <div class="exercise-card" id="ex-7">
+        <div class="exercise-header" onclick="toggleExercise(7)">
+          <div class="ex-num pending" id="ex-num-7">7</div>
+          <div class="ex-title">ניתוח תזרים מזומנים (Cash Flow)</div>
+          <span class="ex-arrow">&#9660;</span>
+        </div>
+        <div class="exercise-body">
+          <p style="color:var(--text2);font-size:13px;margin-bottom:12px">בדקו את דוח תזרים המזומנים של חברה: תפעולי, השקעות, מימון. האם ה-FCF חיובי?</p>
+          <div class="ex-field-grid">
+            <div class="input-group"><label>Ticker</label><input type="text" id="ex7-ticker" style="text-transform:uppercase;font-family:var(--mono)"></div>
+            <div class="input-group"><label>Operating Cash Flow</label><input type="text" id="ex7-ocf" style="font-family:var(--mono)" placeholder="$XX.XB"></div>
+            <div class="input-group"><label>CapEx</label><input type="text" id="ex7-capex" style="font-family:var(--mono)" placeholder="$XX.XB"></div>
+            <div class="input-group"><label>Free Cash Flow</label><input type="text" id="ex7-fcf" style="font-family:var(--mono)" placeholder="$XX.XB"></div>
+          </div>
+          <div class="input-group"><label>ניתוח</label><textarea id="ex7-notes" rows="3" placeholder="האם החברה מייצרת מזומנים? מה עושים עם ה-FCF?"></textarea></div>
+          <div class="ex-save-row">
+            <button class="btn btn-primary btn-sm" onclick="saveExercise(7)">&#128190; שמור</button>
+            <button class="btn btn-outline btn-sm" onclick="loadExercise(7)">&#128194; טען</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Exercise 8 -->
+      <div class="exercise-card" id="ex-8">
+        <div class="exercise-header" onclick="toggleExercise(8)">
+          <div class="ex-num pending" id="ex-num-8">8</div>
+          <div class="ex-title">השוואת מתחרים בסקטור</div>
+          <span class="ex-arrow">&#9660;</span>
+        </div>
+        <div class="exercise-body">
+          <p style="color:var(--text2);font-size:13px;margin-bottom:12px">בחרו 3 חברות מאותו סקטור והשוו ביניהן: P/E, ROE, צמיחת הכנסות, ושולי רווח.</p>
+          <div class="ex-field-grid">
+            <div class="input-group"><label>חברה 1</label><input type="text" id="ex8-t1" style="text-transform:uppercase;font-family:var(--mono)"></div>
+            <div class="input-group"><label>חברה 2</label><input type="text" id="ex8-t2" style="text-transform:uppercase;font-family:var(--mono)"></div>
+            <div class="input-group"><label>חברה 3</label><input type="text" id="ex8-t3" style="text-transform:uppercase;font-family:var(--mono)"></div>
+            <div class="input-group"><label>סקטור</label><input type="text" id="ex8-sector"></div>
+          </div>
+          <div class="input-group"><label>מסקנות ההשוואה</label><textarea id="ex8-notes" rows="3" placeholder="איזו חברה הכי אטרקטיבית ולמה?"></textarea></div>
+          <div class="ex-save-row">
+            <button class="btn btn-primary btn-sm" onclick="saveExercise(8)">&#128190; שמור</button>
+            <button class="btn btn-outline btn-sm" onclick="loadExercise(8)">&#128194; טען</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Exercise 9 -->
+      <div class="exercise-card" id="ex-9">
+        <div class="exercise-header" onclick="toggleExercise(9)">
+          <div class="ex-num pending" id="ex-num-9">9</div>
+          <div class="ex-title">בניית BUS Score מלא</div>
+          <span class="ex-arrow">&#9660;</span>
+        </div>
+        <div class="exercise-body">
+          <p style="color:var(--text2);font-size:13px;margin-bottom:12px">בחרו מניה ומלאו BUS Score מלא עם כל 7 הרכיבים. השתמשו בטאב ניתוח מניה.</p>
+          <div class="input-group"><label>Ticker</label><input type="text" id="ex9-ticker" style="text-transform:uppercase;font-family:var(--mono)"></div>
+          <div class="input-group"><label>סיכום הניתוח</label><textarea id="ex9-notes" rows="4" placeholder="מה הציון הסופי? האם המניה שווה השקעה?"></textarea></div>
+          <div class="ex-save-row">
+            <button class="btn btn-primary btn-sm" onclick="saveExercise(9)">&#128190; שמור</button>
+            <button class="btn btn-outline btn-sm" onclick="loadExercise(9)">&#128194; טען</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Exercise 10 -->
+      <div class="exercise-card" id="ex-10">
+        <div class="exercise-header" onclick="toggleExercise(10)">
+          <div class="ex-num pending" id="ex-num-10">10</div>
+          <div class="ex-title">סימולציית עסקה מלאה</div>
+          <span class="ex-arrow">&#9660;</span>
+        </div>
+        <div class="exercise-body">
+          <p style="color:var(--text2);font-size:13px;margin-bottom:12px">בצעו סימולציה מלאה: ניתוח מניה → צ'קליסט → מחשבון פוזיציה → תיעוד ביומן.</p>
+          <div class="input-group"><label>Ticker</label><input type="text" id="ex10-ticker" style="text-transform:uppercase;font-family:var(--mono)"></div>
+          <div class="input-group"><label>ציון BUS</label><input type="text" id="ex10-bus" style="font-family:var(--mono)" placeholder="X.X / 5"></div>
+          <div class="input-group"><label>ציון פונדמנטלי</label><input type="text" id="ex10-fund" style="font-family:var(--mono)" placeholder="X.X / 5"></div>
+          <div class="input-group"><label>ציון טכני</label><input type="text" id="ex10-tech" style="font-family:var(--mono)" placeholder="X.X / 5"></div>
+          <div class="input-group"><label>החלטה סופית</label><select id="ex10-decision"><option value="">-- בחר --</option><option value="buy">קנייה</option><option value="watch">המתנה/מעקב</option><option value="pass">דילוג</option></select></div>
+          <div class="input-group"><label>נימוק</label><textarea id="ex10-notes" rows="3" placeholder="למה החלטתם כך? מה היו הגורמים המכריעים?"></textarea></div>
+          <div class="ex-save-row">
+            <button class="btn btn-primary btn-sm" onclick="saveExercise(10)">&#128190; שמור</button>
+            <button class="btn btn-outline btn-sm" onclick="loadExercise(10)">&#128194; טען</button>
+          </div>
+        </div>
+      </div>
+
+      </div><!-- /learning-exercises -->
+    </div>
+
+  </main>
+</div>
+
+<!-- SETTINGS MODAL -->
+<div class="modal-overlay" id="settings-modal">
+  <div class="modal">
+    <h3>&#9881; הגדרות</h3>
+    <div class="input-group">
+      <label>מפתח Grok API (xAI)</label>
+      <input type="password" id="grok-api-key" placeholder="xai-...">
+      <small style="color:var(--text3)">המפתח נשמר מקומית בדפדפן בלבד</small>
+    </div>
+    <div class="input-group">
+      <label>מודל Grok</label>
+      <select id="grok-model">
+        <option value="grok-3-mini">grok-3-mini (מהיר וזול)</option>
+        <option value="grok-3">grok-3 (מעמיק)</option>
+      </select>
+    </div>
+    <div class="input-group">
+      <label>גודל תיק ($)</label>
+      <input type="number" id="setting-portfolio" placeholder="10000">
+    </div>
+    <div class="input-group">
+      <label>אחוז סיכון ברירת מחדל (%)</label>
+      <input type="number" id="setting-risk" placeholder="1" step="0.5">
+    </div>
+    <div class="input-group">
+      <label>מטבע ברירת מחדל</label>
+      <select id="default-currency">
+        <option value="USD">$ דולר</option>
+        <option value="ILS">&#8362; שקל</option>
+      </select>
+    </div>
+    <div style="display:flex;gap:8px;margin-top:16px">
+      <button class="btn btn-primary" onclick="saveSettings()">שמור</button>
+      <button class="btn btn-outline" onclick="closeSettings()">סגור</button>
+      <button class="btn btn-danger btn-sm" style="margin-right:auto" onclick="clearAllData()">&#128465; מחק הכל</button>
+    </div>
+  </div>
+</div>
+
+<!-- TERM POPUP -->
+<div class="term-popup" id="term-popup">
+  <button class="tp-close" onclick="closeTermPopup()">&times;</button>
+  <div class="tp-term" id="tp-term"></div>
+  <div class="tp-def" id="tp-def"></div>
+</div>
+
+<script>
+// ========== STATE ==========
+let state = {
+  watchlist: [],
+  journal: [],
+  weeklyChecks: [false,false,false,false,false,false,false,false,false,false],
+  analyses: {},
+  chatHistory: [],
+  settings: { grokKey: '', grokModel: 'grok-3-mini', currency: 'USD' },
+  currentTicker: '',
+  exercises: {}
+};
+
+// Load state from localStorage
+function loadState() {
+  try {
+    const saved = localStorage.getItem('makpetza-state');
+    if (saved) state = { ...state, ...JSON.parse(saved) };
+  } catch(e) { console.warn('Failed to load state', e); }
+}
+function saveState() {
+  try { localStorage.setItem('makpetza-state', JSON.stringify(state)); } catch(e) {}
+}
+
+// ========== TAB NAVIGATION ==========
+function switchTab(name) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.sidebar nav button').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
+  const btns = document.querySelectorAll('.sidebar nav button');
+  const tabs = ['dashboard','analysis','checklist','calculator','journal','learning','weekly','glossary','chat'];
+  const idx = tabs.indexOf(name);
+  if (idx >= 0 && btns[idx]) btns[idx].classList.add('active');
+}
+
+// ========== SUB-TABS (Analysis) ==========
+function switchSubTab(name) {
+  document.querySelectorAll('#tab-analysis .sub-tab-content').forEach(c => c.classList.remove('active'));
+  document.querySelectorAll('#tab-analysis .sub-tab-btn').forEach(b => b.classList.remove('active'));
+  const content = document.getElementById('subtab-' + name);
+  if (content) content.classList.add('active');
+  event.target.classList.add('active');
+}
+
+// ========== LEARNING TAB ==========
+function switchLearningTab(name) {
+  document.querySelectorAll('.learning-sub-btn').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+  document.getElementById('learning-exercises').style.display = name === 'exercises' ? 'block' : 'none';
+  document.getElementById('learning-videos').style.display = name === 'videos' ? 'block' : 'none';
+}
+
+// ========== YAHOO FINANCE API ==========
+const CORS_PROXIES = [
+  'https://corsproxy.io/?',
+  'https://api.allorigins.win/raw?url='
+];
+let currentProxy = 0;
+
+async function yahooFetch(url) {
+  for (let i = 0; i < CORS_PROXIES.length; i++) {
+    try {
+      const proxyUrl = CORS_PROXIES[(currentProxy + i) % CORS_PROXIES.length] + encodeURIComponent(url);
+      const res = await fetch(proxyUrl);
+      if (res.ok) { currentProxy = (currentProxy + i) % CORS_PROXIES.length; return await res.json(); }
+    } catch(e) {}
+  }
+  return null;
+}
+
+async function fetchQuote(ticker) {
+  const url = `https://query1.finance.yahoo.com/v8/finance/chart/${ticker}?interval=1d&range=5d`;
+  return await yahooFetch(url);
+}
+
+async function fetchSummary(ticker) {
+  const modules = 'price,summaryDetail,defaultKeyStatistics,financialData,earningsTrend';
+  const url = `https://query1.finance.yahoo.com/v10/finance/quoteSummary/${ticker}?modules=${modules}`;
+  return await yahooFetch(url);
+}
+
+// ========== DASHBOARD: INDICES ==========
+async function loadIndices() {
+  const indices = [
+    { sym: '%5EGSPC', el: 'sp500' },
+    { sym: '%5EIXIC', el: 'nasdaq' },
+    { sym: '%5EDJI', el: 'dow' },
+    { sym: '%5EVIX', el: 'vix' }
+  ];
+  for (const idx of indices) {
+    try {
+      const data = await fetchQuote(idx.sym);
+      if (!data || !data.chart || !data.chart.result) continue;
+      const r = data.chart.result[0];
+      const meta = r.meta;
+      const price = meta.regularMarketPrice;
+      const prevClose = meta.chartPreviousClose || meta.previousClose;
+      const change = price - prevClose;
+      const changePct = (change / prevClose * 100);
+      document.getElementById('idx-' + idx.el).textContent = price.toLocaleString('en', {maximumFractionDigits:2});
+      const chgEl = document.getElementById('idx-' + idx.el + '-chg');
+      chgEl.textContent = `${changePct >= 0 ? '+' : ''}${changePct.toFixed(2)}%`;
+      chgEl.className = 'change ' + (changePct >= 0 ? 'up' : 'down');
+      // Update sentiment for VIX and S&P
+      if (idx.el === 'vix') { window._vixPrice = price; }
+      if (idx.el === 'sp500') { window._sp500Chg = changePct; }
+    } catch(e) { console.warn('Index fetch error:', idx.sym, e); }
+  }
+  // Update market sentiment
+  if (window._vixPrice && window._sp500Chg != null) {
+    updateMarketSentiment(window._vixPrice, window._sp500Chg);
+    // Multi-timeframe display
+    document.getElementById('tf-daily').textContent = window._sp500Chg >= 0 ? '▲ עולה' : '▼ יורד';
+    document.getElementById('tf-daily').style.color = window._sp500Chg >= 0 ? 'var(--green)' : 'var(--red)';
+    // Restore weekly/monthly from state if available
+    if (state.tfWeekly) document.getElementById('tf-weekly').value = state.tfWeekly;
+    if (state.tfMonthly) document.getElementById('tf-monthly').value = state.tfMonthly;
+    applyTfColors();
+  }
+}
+
+// ========== DASHBOARD: WATCHLIST ==========
+function renderWatchlist() {
+  const c = document.getElementById('watchlist-container');
+  if (!state.watchlist.length) {
+    c.innerHTML = '<p style="color:var(--text2);text-align:center;padding:20px">אין מניות ברשימת מעקב. לחץ "הוסף מניה" להתחיל.</p>';
+    return;
+  }
+  c.innerHTML = state.watchlist.map((w, i) => `
+    <div class="wl-row">
+      <span class="ticker">${w.ticker}</span>
+      <span class="wl-price">${w.price || '--'}</span>
+      <span class="wl-change ${w.changePct >= 0 ? 'up' : 'down'}">${w.changePct != null ? (w.changePct >= 0 ? '+' : '') + w.changePct.toFixed(2) + '%' : '--'}</span>
+      <button class="btn btn-sm btn-outline" onclick="removeWatchlist(${i})">&#10006;</button>
+    </div>
+  `).join('');
+}
+
+async function addToWatchlist() {
+  const ticker = prompt('הזן סימול מניה (למשל AAPL):');
+  if (!ticker) return;
+  const t = ticker.toUpperCase().trim();
+  if (state.watchlist.find(w => w.ticker === t)) { alert('המניה כבר ברשימה'); return; }
+  state.watchlist.push({ ticker: t, price: null, changePct: null });
+  saveState();
+  renderWatchlist();
+  await refreshWatchlist();
+}
+
+function removeWatchlist(i) {
+  state.watchlist.splice(i, 1);
+  saveState();
+  renderWatchlist();
+}
+
+async function refreshWatchlist() {
+  for (const w of state.watchlist) {
+    try {
+      const data = await fetchQuote(w.ticker);
+      if (!data || !data.chart || !data.chart.result) continue;
+      const meta = data.chart.result[0].meta;
+      w.price = meta.regularMarketPrice?.toFixed(2);
+      const prev = meta.chartPreviousClose || meta.previousClose;
+      w.changePct = prev ? ((meta.regularMarketPrice - prev) / prev * 100) : 0;
+    } catch(e) {}
+  }
+  saveState();
+  renderWatchlist();
+}
+
+// ========== STOCK ANALYSIS ==========
+const BUS_ITEMS = [
+  { id: 'business', title: '1. הביזנס', desc: 'מה החברה עושה? מודל עסקי, מוצרים, לקוחות' },
+  { id: 'moat', title: '2. חפיר תחרותי', desc: 'מותג, פטנטים, עלויות מעבר, אפקט רשת, יתרון בעלויות' },
+  { id: 'industry', title: '3. תעשייה', desc: 'גודל שוק, רגולציה, קצב צמיחה, מחסומי כניסה' },
+  { id: 'competitors', title: '4. מתחרות', desc: 'מי המתחרים? יתרונות וחסרונות יחסיים' },
+  { id: 'sector', title: '5. השוואה ענפית', desc: 'ביצועים מול הסקטור, יחסים פיננסיים יחסיים' },
+  { id: 'strategy', title: '6. מיצוב אסטרטגי', desc: 'אסטרטגיה, מיקום עתידי, חדשנות' },
+  { id: 'risks', title: '7. סיכונים', desc: 'סיכונים מרכזיים: תפעוליים, רגולטוריים, תחרותיים' }
+];
+
+function initBusItems() {
+  const c = document.getElementById('bus-items');
+  c.innerHTML = BUS_ITEMS.map(b => `
+    <div class="bus-item">
+      <div class="bus-header">
+        <div>
+          <div class="bus-title">${b.title}</div>
+          <div style="font-size:11px;color:var(--text3)">${b.desc}</div>
+        </div>
+        <div class="bus-score-val" id="bus-val-${b.id}" style="color:var(--orange)">3.0</div>
+      </div>
+      <input type="range" id="bus-${b.id}" min="1" max="5" step="0.5" value="3" oninput="updateBusScore('${b.id}')">
+      <textarea id="bus-notes-${b.id}" placeholder="תיעוד ממצאים..." oninput="updateBusScore('${b.id}')"></textarea>
+    </div>
+  `).join('');
+}
+
+function updateBusScore(id) {
+  const val = parseFloat(document.getElementById('bus-' + id).value);
+  const el = document.getElementById('bus-val-' + id);
+  el.textContent = val.toFixed(1);
+  el.style.color = val >= 4 ? 'var(--green)' : val >= 2.5 ? 'var(--orange)' : 'var(--red)';
+  calcTotalScore();
+}
+
+function getBusAverage() {
+  let sum = 0;
+  BUS_ITEMS.forEach(b => { sum += parseFloat(document.getElementById('bus-' + b.id).value); });
+  return sum / BUS_ITEMS.length;
+}
+
+function calcTotalScore() {
+  const bus = getBusAverage();
+  const fund = parseFloat(document.getElementById('fund-score').textContent) || 0;
+  const tech = parseFloat(document.getElementById('tech-score').value) || 0;
+  const total = bus * 0.33 + fund * 0.33 + tech * 0.34;
+
+  document.getElementById('bus-total').textContent = bus.toFixed(1);
+  document.getElementById('bd-bus').textContent = bus.toFixed(1);
+  document.getElementById('bd-fund').textContent = fund.toFixed(1);
+  document.getElementById('bd-tech').textContent = tech.toFixed(1);
+
+  const totalEl = document.getElementById('total-score-num');
+  totalEl.textContent = total.toFixed(1);
+  totalEl.style.color = total >= 4 ? 'var(--green)' : total >= 2.5 ? 'var(--orange)' : 'var(--red)';
+
+  const verdict = document.getElementById('total-verdict');
+  if (total >= 4.5) { verdict.textContent = 'Buy - מניה מצוינת'; verdict.style.color = 'var(--green)'; }
+  else if (total >= 3.5) { verdict.textContent = 'Hold - מניה סבירה, יש פוטנציאל'; verdict.style.color = 'var(--orange)'; }
+  else if (total >= 2.5) { verdict.textContent = 'Hold - מניה בינונית, זהירות'; verdict.style.color = 'var(--orange)'; }
+  else { verdict.textContent = 'Sell - מניה חלשה, לא מומלצת'; verdict.style.color = 'var(--red)'; }
+
+  // Update analyst comparison
+  document.getElementById('analyst-my').textContent = total.toFixed(1) + ' / 5';
+  checkAnalystConflict();
+}
+
+function updateTechScore() {
+  const val = parseFloat(document.getElementById('tech-score').value);
+  document.getElementById('tech-score-display').textContent = val.toFixed(1);
+  calcTotalScore();
+}
+
+async function loadStock() {
+  const ticker = document.getElementById('ticker-input').value.toUpperCase().trim();
+  if (!ticker) return;
+  state.currentTicker = ticker;
+
+  document.getElementById('stock-info').style.display = 'none';
+  document.getElementById('stock-name').textContent = 'טוען...';
+
+  try {
+    const summary = await fetchSummary(ticker);
+    if (!summary || !summary.quoteSummary || !summary.quoteSummary.result) {
+      alert('לא נמצאו נתונים עבור ' + ticker);
+      return;
+    }
+    const r = summary.quoteSummary.result[0];
+    const price = r.price || {};
+    const detail = r.summaryDetail || {};
+    const stats = r.defaultKeyStatistics || {};
+    const fin = r.financialData || {};
+
+    document.getElementById('stock-info').style.display = 'block';
+    document.getElementById('stock-name').textContent = (price.shortName || price.longName || ticker);
+    document.getElementById('stock-price').textContent = '$' + (price.regularMarketPrice?.raw?.toFixed(2) || '--');
+
+    const chg = price.regularMarketChangePercent?.raw || 0;
+    const chgEl = document.getElementById('stock-change');
+    chgEl.textContent = (chg >= 0 ? '+' : '') + (chg * 100).toFixed(2) + '%';
+    chgEl.style.color = chg >= 0 ? 'var(--green)' : 'var(--red)';
+    document.getElementById('stock-sector').textContent = price.sector || '';
+
+    // Fill financial ratios
+    const setRatio = (id, val, goodFn) => {
+      const el = document.getElementById('r-' + id);
+      const st = document.getElementById('rs-' + id);
+      if (val != null && !isNaN(val)) {
+        el.textContent = typeof val === 'number' ? val.toFixed(2) : val;
+        const status = goodFn(parseFloat(val));
+        st.className = 'ratio-status ' + status;
+      } else { el.textContent = '--'; st.className = 'ratio-status'; }
+    };
+
+    const pe = detail.trailingPE?.raw || stats.trailingPE?.raw;
+    const pb = detail.priceToBook?.raw || stats.priceToBook?.raw;
+    const roe = fin.returnOnEquity?.raw;
+    const de = fin.debtToEquity?.raw;
+    const cr = fin.currentRatio?.raw;
+    const eps = stats.trailingEps?.raw;
+    const rg = fin.revenueGrowth?.raw;
+    const nm = fin.profitMargins?.raw;
+    const fcf = fin.freeCashflow?.raw;
+
+    setRatio('pe', pe, v => v > 0 && v < 20 ? 'good' : v < 35 ? 'ok' : 'bad');
+    setRatio('pb', pb, v => v > 0 && v < 3 ? 'good' : v < 5 ? 'ok' : 'bad');
+    setRatio('roe', roe != null ? (roe * 100).toFixed(1) + '%' : null, v => v > 15 ? 'good' : v > 8 ? 'ok' : 'bad');
+    setRatio('de', de, v => v < 50 ? 'good' : v < 100 ? 'ok' : 'bad');
+    setRatio('cr', cr, v => v > 1.5 ? 'good' : v > 1 ? 'ok' : 'bad');
+    setRatio('eps', eps, v => v > 0 ? 'good' : 'bad');
+    setRatio('rg', rg != null ? (rg * 100).toFixed(1) + '%' : null, v => v > 10 ? 'good' : v > 0 ? 'ok' : 'bad');
+    setRatio('nm', nm != null ? (nm * 100).toFixed(1) + '%' : null, v => v > 15 ? 'good' : v > 5 ? 'ok' : 'bad');
+    setRatio('fcf', fcf != null ? (fcf / 1e9).toFixed(2) + 'B' : null, v => v > 0 ? 'good' : 'bad');
+
+    // Calculate fundamental score (1-5 scale)
+    let fScore = 0, fCount = 0;
+    const addF = (val, goodFn) => {
+      if (val == null || isNaN(val)) return;
+      fCount++;
+      const s = goodFn(val);
+      fScore += s === 'good' ? 5 : s === 'ok' ? 3 : 1;
+    };
+    addF(pe, v => v > 0 && v < 20 ? 'good' : v < 35 ? 'ok' : 'bad');
+    addF(pb, v => v > 0 && v < 3 ? 'good' : v < 5 ? 'ok' : 'bad');
+    addF(roe, v => v > 0.15 ? 'good' : v > 0.08 ? 'ok' : 'bad');
+    addF(de, v => v < 50 ? 'good' : v < 100 ? 'ok' : 'bad');
+    addF(cr, v => v > 1.5 ? 'good' : v > 1 ? 'ok' : 'bad');
+    addF(eps, v => v > 0 ? 'good' : 'bad');
+    addF(rg, v => v > 0.10 ? 'good' : v > 0 ? 'ok' : 'bad');
+    addF(nm, v => v > 0.15 ? 'good' : v > 0.05 ? 'ok' : 'bad');
+
+    const fundTotal = fCount > 0 ? (fScore / fCount) : 0;
+    const fundEl = document.getElementById('fund-score');
+    fundEl.textContent = fundTotal.toFixed(1);
+    fundEl.style.color = fundTotal >= 4 ? 'var(--green)' : fundTotal >= 2.5 ? 'var(--orange)' : 'var(--red)';
+
+    // Generate Red Flags
+    generateRedFlags({ pe, pb, roe, de, cr, eps, rg, nm, fcf });
+
+    calcTotalScore();
+
+    // Load candlestick chart
+    loadMainChart(ticker, currentChartRange);
+  } catch (e) {
+    console.error('Stock load error:', e);
+    alert('שגיאה בטעינת נתונים. נסה שוב.');
+  }
+}
+
+function saveAnalysis() {
+  if (!state.currentTicker) { alert('אין מניה נטענת'); return; }
+  const analysis = { ticker: state.currentTicker, date: new Date().toISOString() };
+  BUS_ITEMS.forEach(b => {
+    analysis['bus_' + b.id] = parseFloat(document.getElementById('bus-' + b.id).value);
+    analysis['notes_' + b.id] = document.getElementById('bus-notes-' + b.id).value;
+  });
+  analysis.techScore = parseFloat(document.getElementById('tech-score').value);
+  analysis.techNotes = document.getElementById('tech-notes').value;
+  state.analyses[state.currentTicker] = analysis;
+  saveState();
+  alert('ניתוח נשמר עבור ' + state.currentTicker);
+}
+
+function loadSavedAnalysis() {
+  const keys = Object.keys(state.analyses);
+  if (!keys.length) { alert('אין ניתוחים שמורים'); return; }
+  const ticker = prompt('בחר מניה:\n' + keys.join(', '));
+  if (!ticker || !state.analyses[ticker.toUpperCase()]) return;
+  const a = state.analyses[ticker.toUpperCase()];
+  document.getElementById('ticker-input').value = a.ticker;
+  BUS_ITEMS.forEach(b => {
+    document.getElementById('bus-' + b.id).value = a['bus_' + b.id] || 5;
+    document.getElementById('bus-notes-' + b.id).value = a['notes_' + b.id] || '';
+    updateBusScore(b.id);
+  });
+  document.getElementById('tech-score').value = a.techScore || 5;
+  document.getElementById('tech-notes').value = a.techNotes || '';
+  updateTechScore();
+  loadStock();
+}
+
+// ========== CHECKLIST & CALCULATOR ==========
+function updateChecklistProgress() {
+  const checks = document.querySelectorAll('#entry-checklist input[type=checkbox]');
+  let done = 0;
+  checks.forEach(c => { if (c.checked) done++; c.closest('.checklist-item').classList.toggle('checked', c.checked); });
+  document.getElementById('checklist-progress').textContent = done + '/' + checks.length;
+}
+
+function calcPosition() {
+  const capital = parseFloat(document.getElementById('calc-capital').value) || 0;
+  const riskPct = parseFloat(document.getElementById('calc-risk-pct').value) || 1;
+  const entry = parseFloat(document.getElementById('calc-entry').value) || 0;
+  const sl = parseFloat(document.getElementById('calc-sl').value) || 0;
+  const target = parseFloat(document.getElementById('calc-target').value) || 0;
+
+  const maxRisk = capital * (riskPct / 100);
+  const slDist = Math.abs(entry - sl);
+  const shares = slDist > 0 ? Math.floor(maxRisk / slDist) : 0;
+  const posVal = shares * entry;
+  const profit = shares * Math.abs(target - entry);
+  const rr = slDist > 0 ? (Math.abs(target - entry) / slDist) : 0;
+
+  document.getElementById('cr-maxrisk').textContent = '$' + maxRisk.toFixed(2);
+  document.getElementById('cr-sldist').textContent = '$' + slDist.toFixed(2);
+  document.getElementById('cr-shares').textContent = shares;
+  document.getElementById('cr-posval').textContent = '$' + posVal.toFixed(2);
+  document.getElementById('cr-profit').textContent = '$' + profit.toFixed(2);
+
+  const rrEl = document.getElementById('cr-rr');
+  rrEl.textContent = '1:' + rr.toFixed(1);
+  rrEl.style.color = rr >= 4 ? 'var(--green)' : rr >= 2 ? 'var(--orange)' : 'var(--red)';
+
+  updateTradeInstructions();
+}
+
+// ========== JOURNAL ==========
+function addJournalEntry() {
+  const entry = {
+    date: document.getElementById('j-date').value,
+    ticker: document.getElementById('j-ticker').value.toUpperCase(),
+    direction: document.getElementById('j-direction').value,
+    entryPrice: parseFloat(document.getElementById('j-entry').value),
+    exitPrice: parseFloat(document.getElementById('j-exit').value),
+    qty: parseInt(document.getElementById('j-qty').value) || 1,
+    reasonIn: document.getElementById('j-reason-in').value,
+    reasonOut: document.getElementById('j-reason-out').value
+  };
+  if (!entry.date || !entry.ticker || !entry.entryPrice) { alert('מלא לפחות תאריך, Ticker ומחיר כניסה'); return; }
+  state.journal.push(entry);
+  saveState();
+  renderJournal();
+  // Clear form
+  ['j-ticker','j-entry','j-exit','j-reason-in','j-reason-out'].forEach(id => document.getElementById(id).value = '');
+}
+
+function renderJournal() {
+  const body = document.getElementById('journal-body');
+  if (!state.journal.length) {
+    body.innerHTML = '<tr><td colspan="9" style="text-align:center;color:var(--text2);padding:30px">אין עסקאות ביומן</td></tr>';
+    updateJournalStats();
+    return;
+  }
+  body.innerHTML = state.journal.map((j, i) => {
+    const pnl = j.exitPrice ? (j.direction === 'long' ? j.exitPrice - j.entryPrice : j.entryPrice - j.exitPrice) * j.qty : null;
+    const pnlPct = j.exitPrice ? ((j.direction === 'long' ? j.exitPrice - j.entryPrice : j.entryPrice - j.exitPrice) / j.entryPrice * 100) : null;
+    return `<tr>
+      <td>${j.date}</td><td style="font-family:var(--mono)">${j.ticker}</td><td>${j.direction === 'long' ? 'Long' : 'Short'}</td>
+      <td style="font-family:var(--mono)">${j.entryPrice}</td><td style="font-family:var(--mono)">${j.exitPrice || '--'}</td><td>${j.qty}</td>
+      <td style="font-family:var(--mono);color:${pnl != null ? (pnl >= 0 ? 'var(--green)' : 'var(--red)') : ''}">${pnl != null ? (pnl >= 0 ? '+' : '') + pnl.toFixed(2) : '--'}</td>
+      <td style="font-family:var(--mono);color:${pnlPct != null ? (pnlPct >= 0 ? 'var(--green)' : 'var(--red)') : ''}">${pnlPct != null ? (pnlPct >= 0 ? '+' : '') + pnlPct.toFixed(1) + '%' : '--'}</td>
+      <td><button class="btn btn-sm btn-danger" onclick="deleteJournal(${i})">&#128465;</button></td>
+    </tr>`;
+  }).join('');
+  updateJournalStats();
+}
+
+function deleteJournal(i) {
+  if (!confirm('למחוק עסקה זו?')) return;
+  state.journal.splice(i, 1);
+  saveState();
+  renderJournal();
+}
+
+function updateJournalStats() {
+  const closed = state.journal.filter(j => j.exitPrice);
+  const wins = closed.filter(j => {
+    const pnl = j.direction === 'long' ? j.exitPrice - j.entryPrice : j.entryPrice - j.exitPrice;
+    return pnl > 0;
+  });
+  const losses = closed.filter(j => {
+    const pnl = j.direction === 'long' ? j.exitPrice - j.entryPrice : j.entryPrice - j.exitPrice;
+    return pnl <= 0;
+  });
+
+  document.getElementById('js-total').textContent = state.journal.length;
+  document.getElementById('js-winrate').textContent = closed.length ? (wins.length / closed.length * 100).toFixed(0) + '%' : '--';
+
+  const avgWin = wins.length ? wins.reduce((s, j) => s + Math.abs(j.direction === 'long' ? j.exitPrice - j.entryPrice : j.entryPrice - j.exitPrice) * j.qty, 0) / wins.length : 0;
+  const avgLoss = losses.length ? losses.reduce((s, j) => s + Math.abs(j.direction === 'long' ? j.exitPrice - j.entryPrice : j.entryPrice - j.exitPrice) * j.qty, 0) / losses.length : 0;
+
+  document.getElementById('js-avgwin').textContent = avgWin ? '$' + avgWin.toFixed(2) : '--';
+  document.getElementById('js-avgloss').textContent = avgLoss ? '$' + avgLoss.toFixed(2) : '--';
+
+  const totalPnl = closed.reduce((s, j) => {
+    const pnl = (j.direction === 'long' ? j.exitPrice - j.entryPrice : j.entryPrice - j.exitPrice) * j.qty;
+    return s + pnl;
+  }, 0);
+  document.getElementById('js-totalpnl').textContent = closed.length ? (totalPnl >= 0 ? '+' : '') + '$' + totalPnl.toFixed(2) : '--';
+  document.getElementById('js-totalpnl').style.color = totalPnl >= 0 ? 'var(--green)' : 'var(--red)';
+
+  // Expectancy
+  if (closed.length) {
+    const wr = wins.length / closed.length;
+    const expectancy = (wr * avgWin) - ((1 - wr) * avgLoss);
+    document.getElementById('js-expect').textContent = '$' + expectancy.toFixed(2);
+    document.getElementById('js-expect').style.color = expectancy >= 0 ? 'var(--green)' : 'var(--red)';
+  }
+
+  // Dashboard stats
+  document.getElementById('stat-positions').textContent = state.journal.filter(j => !j.exitPrice).length;
+  document.getElementById('stat-winrate').textContent = document.getElementById('js-winrate').textContent;
+  document.getElementById('stat-pnl').textContent = document.getElementById('js-totalpnl').textContent;
+  document.getElementById('stat-expect').textContent = document.getElementById('js-expect').textContent;
+}
+
+// ========== WEEKLY WORKFLOW ==========
+function updateWeeklyProgress() {
+  const checks = document.querySelectorAll('#weekly-items input[type=checkbox]');
+  let done = 0;
+  checks.forEach((c, i) => {
+    state.weeklyChecks[i] = c.checked;
+    c.closest('.checklist-item').classList.toggle('checked', c.checked);
+    if (c.checked) done++;
+  });
+  const pct = (done / checks.length * 100);
+  document.getElementById('weekly-fill').style.width = pct + '%';
+  document.getElementById('weekly-pct').textContent = pct.toFixed(0) + '% הושלם';
+  saveState();
+}
+
+function resetWeekly() {
+  if (!confirm('לאפס את הצ\'קליסט השבועי?')) return;
+  state.weeklyChecks = [false,false,false,false,false,false,false,false,false,false];
+  document.querySelectorAll('#weekly-items input[type=checkbox]').forEach(c => { c.checked = false; c.closest('.checklist-item').classList.remove('checked'); });
+  updateWeeklyProgress();
+}
+
+function markAllWeekly() {
+  state.weeklyChecks = [true,true,true,true,true,true,true,true,true,true];
+  document.querySelectorAll('#weekly-items input[type=checkbox]').forEach(c => { c.checked = true; c.closest('.checklist-item').classList.add('checked'); });
+  updateWeeklyProgress();
+}
+
+function updateWeeklyDate() {
+  const now = new Date();
+  const day = now.getDay();
+  const sun = new Date(now); sun.setDate(now.getDate() - day);
+  const sat = new Date(sun); sat.setDate(sun.getDate() + 6);
+  const fmt = d => d.getDate() + '/' + (d.getMonth() + 1);
+  const el = document.getElementById('weekly-date-range');
+  if (el) el.textContent = fmt(sun) + ' - ' + fmt(sat);
+}
+
+function restoreWeekly() {
+  document.querySelectorAll('#weekly-items input[type=checkbox]').forEach((c, i) => {
+    c.checked = state.weeklyChecks[i] || false;
+    c.closest('.checklist-item').classList.toggle('checked', c.checked);
+  });
+  updateWeeklyProgress();
+}
+
+// ========== GLOSSARY ==========
+const GLOSSARY = [
+  { term: 'P/E - מכפיל רווח', def: 'Price to Earnings - היחס בין מחיר המניה לרווח למניה. מכפיל נמוך עשוי להצביע על מניה זולה יחסית. מכפיל ממוצע בשוק: 15-25.', tags: 'pe מכפיל רווח price earnings', cat: 'financial' },
+  { term: 'P/B - מכפיל הון', def: 'Price to Book - היחס בין מחיר המניה לערך החשבונאי (הון עצמי) למניה. P/B נמוך מ-1 עשוי להצביע על חברה מתומחרת מתחת לשווי הנכסים שלה.', tags: 'pb מכפיל הון book value', cat: 'financial' },
+  { term: 'ROE - תשואה על ההון', def: 'Return on Equity - כמה רווח נקי החברה מייצרת ביחס להון העצמי שלה. ROE גבוה (מעל 15%) מעיד על ניהול יעיל של ההון.', tags: 'roe תשואה הון return equity', cat: 'financial' },
+  { term: 'EPS - רווח למניה', def: 'Earnings Per Share - הרווח הנקי של החברה מחולק במספר המניות. עלייה עקבית ב-EPS היא סימן חיובי.', tags: 'eps רווח מניה earnings share', cat: 'financial' },
+  { term: 'חפיר תחרותי (Moat)', def: 'יתרון תחרותי בר-קיימא שמגן על החברה מפני מתחרים. סוגים: מותג חזק, פטנטים, אפקט רשת, עלויות מעבר גבוהות, יתרון בעלויות.', tags: 'moat חפיר תחרותי יתרון competitive advantage', cat: 'trading' },
+  { term: 'Risk/Reward Ratio', def: 'יחס סיכון/סיכוי - היחס בין ההפסד הפוטנציאלי (מרחק ל-Stop Loss) לבין הרווח הפוטנציאלי (מרחק ל-Target). לפי התוכנית, יש לדרוש לפחות 1:4.', tags: 'risk reward ratio סיכון סיכוי יחס', cat: 'trading' },
+  { term: 'Stop Loss', def: 'פקודת הפסקת הפסד - מחיר שבו סוגרים את העסקה כדי להגביל הפסדים. חיוני לניהול סיכונים נכון.', tags: 'stop loss סטופ לוס הפסד הגבלה', cat: 'trading' },
+  { term: 'כלל 1% (Position Sizing)', def: 'כלל ניהול סיכונים: לא לסכן יותר מ-1% מההון הכולל בעסקה בודדת. אם התיק 100,000$, הסיכון המקסימלי לעסקה הוא 1,000$.', tags: 'כלל אחוז position sizing גודל פוזיציה סיכון', cat: 'trading' },
+  { term: 'נרות יפניים', def: 'שיטת ייצוג גרפי של מחירי מניות. כל נר מציג: פתיחה, סגירה, שיא ושפל. נר ירוק = סגירה מעל פתיחה, נר אדום = סגירה מתחת לפתיחה.', tags: 'נרות יפניים candlestick candle גרף', cat: 'technical' },
+  { term: 'תמיכה (Support)', def: 'רמת מחיר שבה הביקוש חזק מספיק כדי לעצור ירידת מחיר. כשהמחיר מגיע לתמיכה, הוא נוטה לעצור או להתהפך כלפי מעלה.', tags: 'תמיכה support רמה ביקוש', cat: 'technical' },
+  { term: 'התנגדות (Resistance)', def: 'רמת מחיר שבה ההיצע חזק מספיק כדי לעצור עליית מחיר. כשהמחיר מגיע להתנגדות, הוא נוטה לעצור או להתהפך כלפי מטה.', tags: 'התנגדות resistance רמה היצע', cat: 'technical' },
+  { term: 'RSI', def: 'Relative Strength Index - אינדיקטור מומנטום שנע בין 0-100. מעל 70 = Overbought (קניית יתר), מתחת ל-30 = Oversold (מכירת יתר).', tags: 'rsi relative strength index אינדיקטור מומנטום', cat: 'technical' },
+  { term: 'MACD', def: 'Moving Average Convergence Divergence - אינדיקטור מגמה ומומנטום. חציית קו ה-MACD מעל קו האות = אות קנייה, מתחתיו = אות מכירה.', tags: 'macd moving average convergence divergence אינדיקטור', cat: 'technical' },
+  { term: 'Bollinger Bands', def: 'רצועות בולינגר - אינדיקטור תנודתיות. כשהמחיר נוגע ברצועה העליונה = אזור קניית יתר, ברצועה התחתונה = מכירת יתר. כשהרצועות מתכווצות = צפי לתנועה חדה.', tags: 'bollinger bands בולינגר רצועות תנודתיות', cat: 'technical' },
+  { term: 'ממוצע נע (Moving Average)', def: 'ממוצע מחירי הסגירה על פני תקופה מוגדרת. MA50 = 50 ימים, MA200 = 200 ימים. חציית MA50 מעל MA200 = Golden Cross (חיובי).', tags: 'moving average ממוצע נע ma50 ma200 golden cross', cat: 'technical' },
+  { term: 'מאזן (Balance Sheet)', def: 'דוח כספי המציג את מצבה הפיננסי של חברה ביום מסוים: נכסים = התחייבויות + הון עצמי. נכסים שוטפים וקבועים, התחייבויות קצרות וארוכות.', tags: 'מאזן balance sheet נכסים התחייבויות הון עצמי', cat: 'financial' },
+  { term: 'דוח רווח והפסד', def: 'דוח על הכנסות, הוצאות ורווח נקי של חברה. מתחילים מההכנסות, מפחיתים עלויות ומגיעים לרווח הנקי. "השורה התחתונה".', tags: 'דוח רווח הפסד income statement revenue profit', cat: 'financial' },
+  { term: 'תזרים מזומנים', def: 'Cash Flow Statement - דוח המראה את תנועת המזומנים בפועל: מפעילות שוטפת, מפעילות השקעה, ומפעילות מימון.', tags: 'תזרים מזומנים cash flow statement', cat: 'financial' },
+  { term: 'Current Ratio', def: 'יחס שוטף - נכסים שוטפים חלקי התחייבויות שוטפות. מעל 1.5 = טוב, מתחת ל-1 = בעייתי (החברה עלולה להתקשות לשלם חובות).', tags: 'current ratio יחס שוטף נזילות', cat: 'financial' },
+  { term: 'Debt/Equity', def: 'יחס חוב להון - מודד כמה החברה ממומנת בחוב לעומת הון עצמי. יחס נמוך (מתחת ל-50) = פחות ממונפת = פחות סיכון.', tags: 'debt equity חוב הון מינוף leverage', cat: 'financial' },
+  { term: 'Free Cash Flow', def: 'תזרים מזומנים חופשי - המזומנים שנשארים לחברה אחרי הוצאות תפעול והשקעות. FCF חיובי = החברה מייצרת מזומנים, שלילי = שורפת מזומנים.', tags: 'free cash flow fcf תזרים חופשי מזומנים', cat: 'financial' },
+  { term: 'Revenue Growth', def: 'צמיחת הכנסות - אחוז השינוי בהכנסות החברה ביחס לתקופה קודמת. צמיחה חיובית עקבית = סימן חיובי. צמיחה שלילית = החברה מצטמקת.', tags: 'revenue growth צמיחה הכנסות', cat: 'financial' },
+  { term: 'Net Margin', def: 'שולי רווח נקי - אחוז הרווח הנקי מתוך סך ההכנסות. מראה כמה מכל שקל הכנסה נשאר כרווח. מעל 20% = מצוין, 10-20% = טוב, מתחת ל-5% = חלש.', tags: 'net margin שולי רווח נקי רווחיות', cat: 'financial' },
+  { term: 'BUS - Business Understanding Score', def: 'ציון הבנה עסקית - מסגרת מהתוכנית עם 7 רכיבים (ביזנס, חפיר, תעשייה, מתחרות, השוואה ענפית, מיצוב, סיכונים). כל רכיב 1-5. מהווה 33% מהציון הכולל של ניתוח מניה.', tags: 'bus business understanding score ציון הבנה עסקית', cat: 'trading' },
+  { term: 'אג"ח (Bond)', def: 'אגרת חוב - מכשיר פיננסי לגיוס כסף. המנפיק מתחייב לשלם ריבית קבועה ולהחזיר את הקרן בתום התקופה. ממשלתי = בטוח יותר, קונצרני = תשואה גבוהה יותר.', tags: 'אגח bond אגרת חוב ריבית', cat: 'economy' },
+  { term: 'סחורות (Commodities)', def: 'מוצרים בסיסיים הניתנים לסחר: אנרגיה (נפט, גז), מתכות (זהב, כסף), חקלאות (חיטה, תירס). השקעה בסחורות מגנה מאינפלציה.', tags: 'סחורות commodities נפט זהב', cat: 'economy' },
+  { term: 'Finviz', def: 'אתר סריקת מניות (Stock Screener). מאפשר סינון לפי מכפילים, סקטורים, מדינות ועוד. כולל מפת חום (Heat Map) לראיית השוק בסקירה מהירה.', tags: 'finviz סורק screener מפת חום', cat: 'trading' },
+  { term: 'שנאת הפסד (Loss Aversion)', def: 'נטייה פסיכולוגית שבה כאב ההפסד חזק פי 2 מהנאת הרווח. מובילה משקיעים למכור מנצחות מוקדם ולהחזיק מפסידות זמן רב מדי.', tags: 'שנאת הפסד loss aversion פסיכולוגיה', cat: 'trading' },
+  { term: 'Earnings Whisper', def: 'אתר לעדכוני דוחות כספיים קרובים (Earnings). מציג תאריכי פרסום דוחות, תחזיות אנליסטים, ו"לחישות" על ביצועים צפויים.', tags: 'earnings whisper דוחות רבעוניים', cat: 'trading' },
+  { term: 'GICS', def: 'Global Industry Classification Standard - מערכת סיווג בינלאומית של תעשיות. מחלקת חברות ל-11 סקטורים, 25 קבוצות, 74 תעשיות, ו-164 תתי-תעשיות. חיונית להשוואה בין חברות דומות.', tags: 'gics סיווג סקטור תעשייה classification', cat: 'economy' },
+  { term: 'Quintiles (חמישונים)', def: 'חלוקת קבוצה ל-5 חלקים שווים (20% כל אחד). משמש להשוואת יחסים פיננסיים בתוך סקטור - למשל, P/E בחמישון העליון (יקר) לעומת התחתון (זול).', tags: 'quintiles חמישונים השוואה סטטיסטיקה', cat: 'financial' },
+  { term: 'VIX - מדד הפחד', def: 'Volatility Index - מדד התנודתיות הצפויה ב-S&P 500. מתחת ל-15 = שוק שקט, 15-25 = נורמלי, מעל 25 = פחד ותנודתיות גבוהה.', tags: 'vix volatility פחד תנודתיות מדד', cat: 'economy' },
+  { term: 'Market Cap (שווי שוק)', def: 'שווי שוק = מחיר מניה × מספר מניות. Mega Cap: מעל $200B, Large Cap: $10-200B, Mid Cap: $2-10B, Small Cap: $300M-2B, Micro Cap: מתחת ל-$300M.', tags: 'market cap שווי שוק גודל חברה mega large mid small', cat: 'financial' },
+  { term: 'Golden Cross / Death Cross', def: 'Golden Cross: ממוצע נע 50 חוצה מעלה את ממוצע 200 - אות חיובי. Death Cross: ממוצע 50 חוצה מטה את 200 - אות שלילי. אותות לטווח ארוך.', tags: 'golden cross death cross ממוצע נע אות', cat: 'technical' },
+  { term: 'Dividend Yield (תשואת דיבידנד)', def: 'דיבידנד שנתי חלקי מחיר המניה. תשואה של 2-4% נחשבת טובה. חברות עם דיבידנד קבוע ועולה נחשבות יציבות יותר.', tags: 'dividend yield דיבידנד תשואה', cat: 'financial' },
+  { term: 'Short Selling (מכירה בחסר)', def: 'שאילת מניות ומכירתן במחיר הנוכחי, בתקווה לקנות בחזרה בזול ולהרוויח מהפרש. סיכון בלתי מוגבל כי המחיר יכול לעלות ללא גבול.', tags: 'short selling מכירה בחסר שורט', cat: 'trading' }
+];
+
+function initGlossary() {
+  renderGlossary(GLOSSARY);
+}
+
+function renderGlossary(items) {
+  document.getElementById('glossary-list').innerHTML = items.map(g =>
+    `<div class="glossary-item"><div class="term">${g.term}</div><div class="def">${g.def}</div></div>`
+  ).join('');
+}
+
+function filterGlossary() {
+  const q = document.getElementById('glossary-search').value.toLowerCase();
+  let items = GLOSSARY;
+  if (currentGlossaryCat !== 'all') {
+    items = items.filter(g => g.cat === currentGlossaryCat);
+  }
+  if (q) {
+    items = items.filter(g => g.term.toLowerCase().includes(q) || g.def.toLowerCase().includes(q) || g.tags.includes(q));
+  }
+  renderGlossary(items);
+}
+
+// ========== CHAT ==========
+let chatMode = 'local';
+
+function setChatMode(mode) {
+  chatMode = mode;
+  document.getElementById('mode-local').classList.toggle('active', mode === 'local');
+  document.getElementById('mode-grok').classList.toggle('active', mode === 'grok');
+  document.getElementById('chat-mode-label').textContent = mode === 'local' ? 'חיפוש בבסיס הידע המקומי' : 'Grok AI - תשובות מבוססות מקורות';
+  if (mode === 'grok' && !state.settings.grokKey) {
+    alert('יש להגדיר מפתח Grok API בהגדרות');
+    setChatMode('local');
+  }
+}
+
+function askSuggested(btn) {
+  document.getElementById('chat-input').value = btn.textContent;
+  sendChat();
+}
+
+function parseMiniMarkdown(text) {
+  return text
+    .replace(/^### (.+)$/gm, '<strong style="font-size:15px;display:block;margin:8px 0 4px">$1</strong>')
+    .replace(/^## (.+)$/gm, '<strong style="font-size:16px;display:block;margin:10px 0 4px">$1</strong>')
+    .replace(/^# (.+)$/gm, '<strong style="font-size:17px;display:block;margin:12px 0 6px">$1</strong>')
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\*(.+?)\*/g, '<em>$1</em>')
+    .replace(/^- (.+)$/gm, '<span style="display:block;padding-right:12px">• $1</span>')
+    .replace(/^\d+\. (.+)$/gm, (m) => `<span style="display:block;padding-right:12px">${m}</span>`)
+    .replace(/\n/g, '<br>');
+}
+
+function addChatMessage(text, isUser, source) {
+  const c = document.getElementById('chat-messages');
+  const div = document.createElement('div');
+  div.className = 'chat-msg ' + (isUser ? 'user' : 'bot');
+  const formatted = isUser ? text.replace(/\n/g, '<br>') : parseMiniMarkdown(text);
+  div.innerHTML = formatted + (source ? `<br><span class="source-tag">${source}</span>` : '');
+  c.appendChild(div);
+  c.scrollTop = c.scrollHeight;
+}
+
+function searchKnowledgeBase(query) {
+  const q = query.toLowerCase();
+  const results = [];
+
+  // Search glossary
+  GLOSSARY.forEach(g => {
+    const score = (g.tags.includes(q) ? 3 : 0) + (g.term.toLowerCase().includes(q) ? 2 : 0) + (g.def.toLowerCase().includes(q) ? 1 : 0);
+    if (score > 0) results.push({ text: `**${g.term}**\n${g.def}`, source: 'מילון מושגים', score });
+  });
+
+  // Search extended knowledge
+  KNOWLEDGE_BASE.forEach(k => {
+    const words = q.split(/\s+/);
+    let score = 0;
+    words.forEach(w => {
+      if (w.length < 2) return;
+      if (k.tags.includes(w)) score += 3;
+      if (k.content.toLowerCase().includes(w)) score += 1;
+    });
+    if (score > 0) results.push({ text: k.content, source: k.source, score });
+  });
+
+  results.sort((a, b) => b.score - a.score);
+  return results.slice(0, 5);
+}
+
+async function sendChat() {
+  const input = document.getElementById('chat-input');
+  const query = input.value.trim();
+  if (!query) return;
+  input.value = '';
+
+  addChatMessage(query, true);
+
+  if (chatMode === 'local') {
+    const results = searchKnowledgeBase(query);
+    if (results.length) {
+      let response = '';
+      results.forEach((r, i) => {
+        response += r.text + '\n\n';
+      });
+      const sources = [...new Set(results.map(r => r.source))].join(', ');
+      addChatMessage(response.trim(), false, 'מקור: ' + sources);
+    } else {
+      addChatMessage('לא מצאתי מידע רלוונטי בבסיס הידע. נסה לנסח את השאלה אחרת, או עבור למצב Grok AI לתשובה מורחבת.', false, 'מערכת');
+    }
+  } else {
+    // Grok AI mode
+    const results = searchKnowledgeBase(query);
+    const context = results.map(r => `[${r.source}]: ${r.text}`).join('\n\n');
+
+    addChatMessage('חושב...', false);
+    const lastMsg = document.getElementById('chat-messages').lastChild;
+
+    try {
+      const res = await fetch('https://api.x.ai/v1/chat/completions', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + state.settings.grokKey },
+        body: JSON.stringify({
+          model: state.settings.grokModel || 'grok-3-mini',
+          messages: [
+            { role: 'system', content: 'אתה יועץ השקעות מבוסס על תוכנית "המקפצה הפיננסית". ענה אך ורק על בסיס המקורות שסופקו. אם אין מידע במקורות - אמור זאת בפירוש. ענה בעברית. היה מעשי וברור.' },
+            { role: 'user', content: `הקשר מהמקורות:\n${context}\n\nשאלה: ${query}` }
+          ],
+          temperature: 0.3
+        })
+      });
+      const data = await res.json();
+      const answer = data.choices?.[0]?.message?.content || 'שגיאה בקבלת תשובה מ-Grok';
+      lastMsg.innerHTML = parseMiniMarkdown(answer) + `<br><span class="source-tag">Grok AI | מקורות: ${[...new Set(results.map(r => r.source))].join(', ') || 'כללי'}</span>`;
+    } catch(e) {
+      lastMsg.innerHTML = 'שגיאה בחיבור ל-Grok API. בדוק את המפתח בהגדרות.<br><span class="source-tag">שגיאה: ' + e.message + '</span>';
+    }
+  }
+
+  state.chatHistory.push({ query, mode: chatMode, time: Date.now() });
+  saveState();
+}
+
+// ========== EXTENDED KNOWLEDGE BASE ==========
+const KNOWLEDGE_BASE = [
+  { content: 'Business Understanding Score (BUS) הוא מסגרת ניתוח עם 7 רכיבים: הביזנס, חפיר תחרותי, תעשייה, מתחרות, השוואה ענפית, מיצוב אסטרטגי, וסיכונים. כל רכיב מקבל ציון 0-10. הציון הסופי הוא ממוצע או ממוצע משוקלל, ומהווה 33% מהציון הכולל של ניתוח מניה. הסוכן פועל על בסיס אובייקטיביות מלאה, ללא סופרלטיבים או פרשנות רגשית.', source: 'Business Understanding Score Agent', tags: 'bus business understanding score ציון הבנה עסקית ניתוח 7 רכיבים' },
+  { content: 'סדר פעולות שבועי למשקיע: 1) סקירת מדדים (S&P, NASDAQ, בינלאומיים) 2) יומן אירועים כלכליים (ריבית, אינפלציה) 3) מעקב חדשות מאקרו 4) בדיקת תיק השקעות 5) בדיקת רשימות מעקב 6) חיפוש מניות אטרקטיביות בסורקים 7) ניתוח מניות פונדמנטלי+טכני 8) בניית תרחיש השקעה 9) יצירת פוזיציה 10) תיעוד ביומן מסחר', source: 'מדריך Genspark - סדר פעולות שבועי', tags: 'שבועי סדר פעולות workflow weekly מדדים חדשות סריקה' },
+  { content: 'ניהול סיכונים - כלל 1%: לעולם לא לסכן יותר מ-1% מההון הכולל בעסקה בודדת. Risk/Reward Ratio מינימלי של 1:4. חובה להגדיר Stop Loss לפני כניסה לעסקה. בניית צ\'קליסט לפני כל עסקה: מגמה, תמיכה/התנגדות, ווליום, אינדיקטורים, תבנית נרות, ניתוח פונדמנטלי, R/R.', source: 'מפגש 12 - ניהול סיכונים', tags: 'סיכון risk management stop loss position sizing 1% כלל צ\'קליסט' },
+  { content: 'P/B (Price to Book) - מכפיל הון עצמי. היחס בין שווי השוק של החברה לערך ההון העצמי שלה בספרים. P/B גבוה (כמו 68 לפלנטיר) מצביע על חברה "רעיונית" עם הרבה אוויר. P/B נמוך (סביב 1-2) מצביע על חברות יציבות. בעת משבר, חברות עם P/B גבוה ירדו יותר כי יש להן "יותר אוויר לצאת".', source: 'מפגש 12 - ניהול סיכונים', tags: 'pb price book מכפיל הון עצמי משבר אוויר' },
+  { content: 'דוחות כספיים: המאזן מציג תצלום של מצב פיננסי - נכסים = התחייבויות + הון עצמי. דוח רווח והפסד מראה הכנסות מול הוצאות. מתחילים תמיד מהשורה התחתונה (רווח נקי). דוח תזרים מזומנים מראה תנועת מזומנים בפועל. Free Cash Flow חיובי = החברה מייצרת מזומנים.', source: 'חוברת 3 - ניתוח פונדמנטלי', tags: 'דוחות כספיים מאזן רווח הפסד תזרים מזומנים fcf' },
+  { content: 'יחסים פיננסיים חשובים: P/E (מכפיל רווח) - מחיר/רווח למניה, ממוצע 15-25. ROE (תשואה על הון) - רווח נקי/הון עצמי, מעל 15% טוב. Current Ratio - נכסים שוטפים/התחייבויות שוטפות, מעל 1.5 טוב. Debt/Equity - חוב/הון עצמי, נמוך יותר = פחות סיכון.', source: 'חוברת 3 - ניתוח פונדמנטלי', tags: 'pe pb roe current ratio debt equity יחסים פיננסיים מכפילים' },
+  { content: 'נרות יפניים - תבניות חשובות: Hammer (פטיש) - גוף קטן עם זנב תחתון ארוך, סימן להתהפכות כלפי מעלה. Engulfing - נר שבולע את הנר הקודם, סימן להתהפכות. Doji - גוף כמעט אפסי, סימן לחוסר החלטיות. Morning Star - תבנית של 3 נרות המסמנת התהפכות כלפי מעלה.', source: 'חוברת 2 - ניתוח טכני / מפגש 11', tags: 'נרות יפניים candlestick hammer engulfing doji morning star תבנית' },
+  { content: 'תמיכה והתנגדות: תמיכה = רמת מחיר שבה הביקוש חזק ועוצר ירידות. התנגדות = רמת מחיר שבה ההיצע חזק ועוצר עליות. כשתמיכה נשברת היא הופכת להתנגדות ולהיפך. ככל שרמה נבדקה יותר פעמים - היא חזקה יותר. ווליום גבוה בפריצה מחזק את האותנטיות שלה.', source: 'מפגש 11 - תמיכה והתנגדות', tags: 'תמיכה התנגדות support resistance רמות פריצה breakout' },
+  { content: 'פסיכולוגיית השקעות: שנאת הפסד - כאב ההפסד חזק פי 2 מהנאת הרווח (טברסקי וכהנמן). הטיית העשייה - משקיעים פועלים רק לשם פעולה, גם אם זה מוריד תשואות. העדפת ההווה - קושי לחסוך לטווח ארוך. פתרון: ניהול יומן מסחר, התנסות בחשבון דמו 3 חודשים לפני מעבר לחשבון אמיתי.', source: 'חוברת 4 - המשקיע השלם', tags: 'פסיכולוגיה שנאת הפסד loss aversion הטיה דמו יומן מסחר' },
+  { content: 'אפשרויות השקעה כלליות: אג"ח ממשלתי (SSA) - סיכון נמוך, תשואה נמוכה. אג"ח קונצרני - סיכון בינוני, תשואה גבוהה יותר. סחורות - אנרגיה, מתכות, חקלאות - הגנה מאינפלציה. מט"ח - שוק הכי גדול ונזיל, סיכון גבוה עם מינוף. מדדים (S&P 500) - תשואה ממוצעת 7-8% בשנה.', source: 'מדריך לימודי - אפשרויות השקעה', tags: 'אגח bond סחורות commodities מטח forex מדדים index השקעה' },
+  { content: 'Forensic Financial Analysis - ניתוח פורנזי של דוחות כספיים: חיפוש דגלים אדומים כמו שינויים חשבונאיים, הכנסות חד-פעמיות חוזרות, ירידה באיכות הרווחים, שינויים ברואי חשבון, עסקאות עם צדדים קשורים. המטרה: לזהות מניפולציות חשבונאיות לפני שהן נחשפות.', source: 'Forensic Financial Analysis', tags: 'forensic פורנזי דגלים אדומים מניפולציה חשבונאות' },
+  { content: 'אופציות - מכשיר פיננסי נגזר. אופציית Call = זכות לקנות במחיר קבוע. אופציית Put = זכות למכור במחיר קבוע. פרמיה = המחיר שמשלמים על האופציה. Strike Price = מחיר המימוש. תאריך פקיעה = המועד האחרון למימוש. השימוש דורש ידע מתקדם וניהול סיכונים קפדני.', source: 'אופציות / אליאב בן שושן', tags: 'אופציות options call put פרמיה strike מימוש' },
+  { content: 'אינדיקטורים טכניים: RSI (0-100) - מעל 70 קניית יתר, מתחת 30 מכירת יתר. MACD - חציית קו אות = שינוי מגמה. Bollinger Bands - רוחב הרצועות מודד תנודתיות, התכווצות = צפי לתנועה חדה. Moving Averages - MA50 מעל MA200 = Golden Cross (חיובי), מתחת = Death Cross (שלילי).', source: 'חוברת 2 - ניתוח טכני / מפגש אינדיקטורים', tags: 'rsi macd bollinger bands moving average אינדיקטורים golden cross death cross' },
+  { content: 'חוב עולמי: נכון ל-2025 כ-324 טריליון דולר. סוגים: חוב ממשלתי, חוב משקי בית, חוב חברות. עליית ריבית מגדילה את עלות החוב ומאטה צמיחה. יחס חוב-תוצר (Debt/GDP) הוא מדד חשוב לבריאות כלכלית. חוב גבוה = סיכון למשבר.', source: 'מדריך לימודי - החוב העולמי', tags: 'חוב עולמי debt gdp ריבית משבר מאקרו' },
+  { content: 'השקעה פסיבית מול אקטיבית: פסיבית = קנייה של מדד (כמו S&P 500) והחזקה לטווח ארוך. אקטיבית = בחירת מניות ספציפיות. סטטיסטית, רוב המשקיעים האקטיביים לא מנצחים את המדד בטווח ארוך. ריבית דריבית: 3,000 ש"ח בחודש ב-7% = 7.7 מיליון ש"ח אחרי 40 שנה.', source: 'חוברת 4 - המשקיע השלם', tags: 'פסיבית אקטיבית מדד ריבית דריבית compound interest' },
+  { content: 'Finviz Heat Map - מפת חום לסריקת שוק: מאפשרת לראות בסקירה מהירה אילו סקטורים/מניות עולים או יורדים. ניתן לסנן לפי מכפילים (P/B, P/E), סקטורים, גודל חברה. שימושי במיוחד להערכת מצב השוק הכללי ולאיתור הזדמנויות.', source: 'מפגש 12 + מפגש 13', tags: 'finviz heat map מפת חום סריקה סקטור סורק screener' }
+];
+
+// ========== RED FLAGS ==========
+function generateRedFlags(ratios) {
+  const flags = [];
+  if (ratios.pe > 50) flags.push({ title: 'P/E גבוה מאוד (' + ratios.pe.toFixed(1) + ')', desc: 'מכפיל רווח גבוה - החברה עשויה להיות מתומחרת ביתר. השווה לסקטור.' });
+  if (ratios.pe < 0 || (ratios.eps != null && ratios.eps < 0)) flags.push({ title: 'רווח שלילי', desc: 'החברה מפסידה כסף. בדוק אם זו תקופה זמנית או מגמה.' });
+  if (ratios.de > 100) flags.push({ title: 'מינוף גבוה (D/E: ' + ratios.de.toFixed(0) + ')', desc: 'יחס חוב/הון גבוה - סיכון במשבר או בעליית ריבית.' });
+  if (ratios.cr != null && ratios.cr < 1) flags.push({ title: 'Current Ratio נמוך (' + ratios.cr.toFixed(2) + ')', desc: 'בעיית נזילות - החברה עלולה להתקשות לשלם חובות לטווח קצר.' });
+  if (ratios.rg != null && ratios.rg < 0) flags.push({ title: 'צמיחת הכנסות שלילית', desc: 'ההכנסות יורדות - בדוק אם מדובר בשינוי מגמה או אירוע חד-פעמי.' });
+  if (ratios.fcf != null && ratios.fcf < 0) flags.push({ title: 'FCF שלילי', desc: 'החברה שורפת מזומנים. בדוק האם זה בגלל השקעות בצמיחה או בעיה מהותית.' });
+  if (ratios.nm != null && ratios.nm < 0.03) flags.push({ title: 'שולי רווח נמוכים (' + (ratios.nm*100).toFixed(1) + '%)', desc: 'רווחיות נמוכה - החברה רגישה לשינויים בעלויות.' });
+  if (ratios.pb > 15) flags.push({ title: 'P/B גבוה מאוד (' + ratios.pb.toFixed(1) + ')', desc: 'הרבה "אוויר" - בירידות, המניה עלולה ליפול חזק.' });
+
+  const card = document.getElementById('red-flags-card');
+  const list = document.getElementById('red-flags-list');
+  if (flags.length > 0) {
+    card.style.display = 'block';
+    list.innerHTML = flags.map(f => `<div class="red-flag"><span class="rf-icon">&#9888;</span><div><div class="rf-title">${f.title}</div><div class="rf-desc">${f.desc}</div></div></div>`).join('');
+  } else {
+    card.style.display = 'block';
+    list.innerHTML = '<div class="no-flags">&#9989; לא זוהו דגלים אדומים - הנתונים הפיננסיים נראים תקינים</div>';
+  }
+}
+
+// ========== SCENARIO PLANNING ==========
+function calcScenario() {
+  const entry = parseFloat(document.getElementById('sc-entry').value);
+  const sl = parseFloat(document.getElementById('sc-sl').value);
+  const target = parseFloat(document.getElementById('sc-target').value);
+  if (!entry || !sl || !target) return;
+
+  const capital = parseFloat(document.getElementById('calc-capital')?.value) || state.settings.portfolioSize || 10000;
+  const riskPct = parseFloat(document.getElementById('calc-risk-pct')?.value) || state.settings.riskPct || 1;
+  const maxRisk = capital * (riskPct / 100);
+  const slDist = Math.abs(entry - sl);
+  const shares = slDist > 0 ? Math.floor(maxRisk / slDist) : 0;
+
+  document.getElementById('scenario-result').style.display = 'block';
+  document.getElementById('sc-shares').textContent = shares;
+  document.getElementById('sc-posval').textContent = '$' + (shares * entry).toFixed(2);
+  document.getElementById('sc-risk').textContent = '$' + (shares * slDist).toFixed(2);
+  document.getElementById('sc-profit').textContent = '$' + (shares * Math.abs(target - entry)).toFixed(2);
+  const rr = slDist > 0 ? (Math.abs(target - entry) / slDist) : 0;
+  const rrEl = document.getElementById('sc-rr');
+  rrEl.textContent = '1:' + rr.toFixed(1);
+  rrEl.style.color = rr >= 4 ? 'var(--green)' : rr >= 2 ? 'var(--orange)' : 'var(--red)';
+}
+
+function sendToCalculator() {
+  const entry = document.getElementById('sc-entry').value;
+  const sl = document.getElementById('sc-sl').value;
+  const target = document.getElementById('sc-target').value;
+  if (entry) document.getElementById('calc-entry').value = entry;
+  if (sl) document.getElementById('calc-sl').value = sl;
+  if (target) document.getElementById('calc-target').value = target;
+  switchTab('calculator');
+  calcPosition();
+}
+
+// ========== ANALYST COMPARISON ==========
+function checkAnalystConflict() {
+  const tv = document.getElementById('analyst-tv').value;
+  const ib = document.getElementById('analyst-ib').value;
+  const total = parseFloat(document.getElementById('total-score-num').textContent) || 0;
+  const warning = document.getElementById('analyst-warning');
+
+  const hasSell = tv === 'sell' || ib === 'sell';
+  const highScore = total >= 3.5;
+
+  if (hasSell && highScore) {
+    warning.style.display = 'block';
+    warning.innerHTML = '&#9888; <strong>סתירה!</strong> הציון שלך גבוה (' + total.toFixed(1) + '/5), אבל אנליסטים חיצוניים מצביעים על Sell. שקול לבדוק שוב את הניתוח.';
+  } else {
+    warning.style.display = 'none';
+  }
+}
+
+// ========== MARKET SENTIMENT ==========
+function updateMarketSentiment(vixPrice, sp500Chg) {
+  // VIX interpretation
+  const vixEl = document.getElementById('vix-interp');
+  if (vixPrice < 15) { vixEl.textContent = 'שקט - ' + vixPrice.toFixed(1); vixEl.style.background = 'rgba(22,163,74,.12)'; vixEl.style.color = 'var(--green)'; }
+  else if (vixPrice < 25) { vixEl.textContent = 'נורמלי - ' + vixPrice.toFixed(1); vixEl.style.background = 'rgba(217,119,6,.12)'; vixEl.style.color = 'var(--orange)'; }
+  else { vixEl.textContent = 'פחד - ' + vixPrice.toFixed(1); vixEl.style.background = 'rgba(220,38,38,.12)'; vixEl.style.color = 'var(--red)'; }
+
+  // Market badge
+  const badge = document.getElementById('market-badge');
+  if (sp500Chg > 0.5) { badge.textContent = 'Bullish'; badge.className = 'market-badge bullish'; }
+  else if (sp500Chg < -0.5) { badge.textContent = 'Bearish'; badge.className = 'market-badge bearish'; }
+  else { badge.textContent = 'Neutral'; badge.className = 'market-badge neutral'; }
+
+  // Action recommendation
+  const action = document.getElementById('market-action');
+  if (vixPrice > 30) { action.textContent = 'זהירות - תנודתיות גבוהה, צמצמו חשיפה'; action.style.color = 'var(--red)'; }
+  else if (vixPrice < 15 && sp500Chg > 0) { action.textContent = 'שוק רגוע - חפשו הזדמנויות כניסה'; action.style.color = 'var(--green)'; }
+  else { action.textContent = 'שוק סטנדרטי - המשיכו לפי התוכנית'; action.style.color = 'var(--text2)'; }
+}
+
+function saveTfState() {
+  state.tfWeekly = document.getElementById('tf-weekly').value;
+  state.tfMonthly = document.getElementById('tf-monthly').value;
+  applyTfColors();
+  saveState();
+}
+
+function applyTfColors() {
+  ['tf-weekly', 'tf-monthly'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el.value === 'up') el.style.color = 'var(--green)';
+    else if (el.value === 'down') el.style.color = 'var(--red)';
+    else if (el.value === 'side') el.style.color = 'var(--orange)';
+    else el.style.color = 'var(--text)';
+  });
+}
+
+// ========== GLOSSARY CATEGORIES ==========
+let currentGlossaryCat = 'all';
+
+function filterGlossaryCat(cat) {
+  currentGlossaryCat = cat;
+  document.querySelectorAll('.glossary-cat-btn').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+  filterGlossary();
+}
+
+// ========== TERM POPUP ==========
+function showTermPopup(term, e) {
+  const item = GLOSSARY.find(g => g.term.toLowerCase().includes(term.toLowerCase()));
+  if (!item) return;
+  const popup = document.getElementById('term-popup');
+  document.getElementById('tp-term').textContent = item.term;
+  document.getElementById('tp-def').textContent = item.def;
+  popup.style.top = (e.clientY + 10) + 'px';
+  popup.style.right = (window.innerWidth - e.clientX + 10) + 'px';
+  popup.classList.add('show');
+}
+
+function closeTermPopup() {
+  document.getElementById('term-popup').classList.remove('show');
+}
+
+// Close popup on click outside
+document.addEventListener('click', e => {
+  if (!e.target.closest('.term-popup') && !e.target.closest('.term-link')) closeTermPopup();
+});
+
+// ========== TRADE INSTRUCTIONS ==========
+function updateTradeInstructions() {
+  const entry = parseFloat(document.getElementById('calc-entry').value);
+  const sl = parseFloat(document.getElementById('calc-sl').value);
+  const target = parseFloat(document.getElementById('calc-target').value);
+  const shares = document.getElementById('cr-shares').textContent;
+  const el = document.getElementById('trade-instructions');
+  if (!entry || !sl || !shares || shares === '--') {
+    el.textContent = 'הזן מחיר כניסה, Stop Loss ו-Target לקבלת הוראות.';
+    return;
+  }
+  const direction = entry > sl ? 'Long' : 'Short';
+  el.innerHTML = `<strong>${direction} | ${shares} מניות</strong><br>` +
+    `Limit Buy @ $${entry.toFixed(2)} | Stop Loss @ $${sl.toFixed(2)}` +
+    (target ? ` | Take Profit @ $${target.toFixed(2)}` : '');
+}
+
+// ========== SETTINGS ==========
+function openSettings() { document.getElementById('settings-modal').classList.add('show');
+  document.getElementById('grok-api-key').value = state.settings.grokKey || '';
+  document.getElementById('grok-model').value = state.settings.grokModel || 'grok-3-mini';
+  document.getElementById('default-currency').value = state.settings.currency || 'USD';
+  document.getElementById('setting-portfolio').value = state.settings.portfolioSize || '';
+  document.getElementById('setting-risk').value = state.settings.riskPct || '';
+}
+function closeSettings() { document.getElementById('settings-modal').classList.remove('show'); }
+function saveSettings() {
+  state.settings.grokKey = document.getElementById('grok-api-key').value;
+  state.settings.grokModel = document.getElementById('grok-model').value;
+  state.settings.currency = document.getElementById('default-currency').value;
+  state.settings.portfolioSize = parseFloat(document.getElementById('setting-portfolio').value) || 10000;
+  state.settings.riskPct = parseFloat(document.getElementById('setting-risk').value) || 1;
+  // Auto-fill calculator
+  document.getElementById('calc-capital').value = state.settings.portfolioSize;
+  document.getElementById('calc-risk-pct').value = state.settings.riskPct;
+  saveState();
+  closeSettings();
+}
+function clearAllData() {
+  if (!confirm('האם אתה בטוח? כל הנתונים יימחקו!')) return;
+  localStorage.removeItem('makpetza-state');
+  location.reload();
+}
+
+// ========== CANDLESTICK CHART ENGINE ==========
+let chartData = {};
+let currentChartRange = '3mo';
+
+async function fetchChartData(ticker, range) {
+  const interval = ['5d','1mo'].includes(range) ? '1d' : '1d';
+  const url = `https://query1.finance.yahoo.com/v8/finance/chart/${ticker}?range=${range}&interval=${interval}`;
+  const data = await yahooFetch(url);
+  if (!data || !data.chart || !data.chart.result) return null;
+  const r = data.chart.result[0];
+  const ts = r.timestamp || [];
+  const q = r.indicators.quote[0];
+  const candles = [];
+  for (let i = 0; i < ts.length; i++) {
+    if (q.open[i] == null) continue;
+    candles.push({
+      date: new Date(ts[i] * 1000),
+      open: q.open[i], high: q.high[i], low: q.low[i], close: q.close[i],
+      volume: q.volume[i] || 0
+    });
+  }
+  return candles;
+}
+
+function calcMA(candles, period) {
+  const ma = [];
+  for (let i = 0; i < candles.length; i++) {
+    if (i < period - 1) { ma.push(null); continue; }
+    let sum = 0;
+    for (let j = i - period + 1; j <= i; j++) sum += candles[j].close;
+    ma.push(sum / period);
+  }
+  return ma;
+}
+
+function drawCandlestickChart(canvasId, candles, options = {}) {
+  const canvas = document.getElementById(canvasId);
+  if (!canvas || !candles || !candles.length) return;
+  const ctx = canvas.getContext('2d');
+  const dpr = window.devicePixelRatio || 1;
+  const rect = canvas.parentElement.getBoundingClientRect();
+  canvas.width = rect.width * dpr;
+  canvas.height = (options.height || 400) * dpr;
+  canvas.style.height = (options.height || 400) + 'px';
+  ctx.scale(dpr, dpr);
+  const W = rect.width;
+  const H = options.height || 400;
+  ctx.clearRect(0, 0, W, H);
+
+  const pad = { top: 10, right: 60, bottom: 30, left: 10 };
+  const chartH = H * 0.7 - pad.top;
+  const volH = H * 0.2;
+  const volTop = H * 0.75;
+
+  // Price range
+  let minP = Infinity, maxP = -Infinity, maxVol = 0;
+  candles.forEach(c => {
+    if (c.low < minP) minP = c.low;
+    if (c.high > maxP) maxP = c.high;
+    if (c.volume > maxVol) maxVol = c.volume;
+  });
+  const pRange = maxP - minP || 1;
+  const pPad = pRange * 0.05;
+  minP -= pPad; maxP += pPad;
+
+  const priceToY = p => pad.top + chartH - ((p - minP) / (maxP - minP)) * chartH;
+  const candleW = Math.max(2, (W - pad.left - pad.right) / candles.length * 0.7);
+  const gap = (W - pad.left - pad.right) / candles.length;
+
+  // Grid
+  ctx.strokeStyle = getComputedStyle(document.documentElement).getPropertyValue('--border').trim() || '#d8dde6';
+  ctx.lineWidth = 0.5;
+  const gridLines = 5;
+  for (let i = 0; i <= gridLines; i++) {
+    const y = pad.top + (chartH / gridLines) * i;
+    ctx.beginPath(); ctx.moveTo(pad.left, y); ctx.lineTo(W - pad.right, y); ctx.stroke();
+    const price = maxP - ((maxP - minP) / gridLines) * i;
+    ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--text3').trim() || '#8896a6';
+    ctx.font = '11px JetBrains Mono, monospace';
+    ctx.textAlign = 'left';
+    ctx.fillText(price.toFixed(2), W - pad.right + 4, y + 4);
+  }
+
+  // Volume bars
+  candles.forEach((c, i) => {
+    const x = pad.left + i * gap + gap / 2;
+    const vH = maxVol > 0 ? (c.volume / maxVol) * volH : 0;
+    ctx.fillStyle = c.close >= c.open ? 'rgba(22,163,74,0.25)' : 'rgba(220,38,38,0.25)';
+    ctx.fillRect(x - candleW / 2, volTop + volH - vH, candleW, vH);
+  });
+
+  // Candles
+  candles.forEach((c, i) => {
+    const x = pad.left + i * gap + gap / 2;
+    const isGreen = c.close >= c.open;
+    const color = isGreen ? '#16a34a' : '#dc2626';
+
+    // Wick
+    ctx.strokeStyle = color;
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(x, priceToY(c.high));
+    ctx.lineTo(x, priceToY(c.low));
+    ctx.stroke();
+
+    // Body
+    const bodyTop = priceToY(Math.max(c.open, c.close));
+    const bodyBot = priceToY(Math.min(c.open, c.close));
+    const bodyH = Math.max(1, bodyBot - bodyTop);
+    ctx.fillStyle = color;
+    ctx.fillRect(x - candleW / 2, bodyTop, candleW, bodyH);
+  });
+
+  // Moving Averages
+  const ma20 = calcMA(candles, 20);
+  const ma50 = calcMA(candles, 50);
+
+  function drawMA(ma, color) {
+    ctx.strokeStyle = color;
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    let started = false;
+    ma.forEach((v, i) => {
+      if (v == null) return;
+      const x = pad.left + i * gap + gap / 2;
+      const y = priceToY(v);
+      if (!started) { ctx.moveTo(x, y); started = true; }
+      else ctx.lineTo(x, y);
+    });
+    ctx.stroke();
+  }
+  drawMA(ma20, '#d97706');
+  drawMA(ma50, '#2563eb');
+
+  // Date labels
+  ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--text3').trim() || '#8896a6';
+  ctx.font = '10px JetBrains Mono, monospace';
+  ctx.textAlign = 'center';
+  const labelEvery = Math.max(1, Math.floor(candles.length / 6));
+  candles.forEach((c, i) => {
+    if (i % labelEvery !== 0) return;
+    const x = pad.left + i * gap + gap / 2;
+    const d = c.date;
+    ctx.fillText(`${d.getDate()}/${d.getMonth() + 1}`, x, H - 5);
+  });
+
+  // Store for hover
+  canvas._chartData = { candles, pad, gap, priceToY, W, H, candleW };
+}
+
+function setupChartHover(canvasId, tooltipId) {
+  const canvas = document.getElementById(canvasId);
+  const tooltip = document.getElementById(tooltipId);
+  if (!canvas || !tooltip) return;
+  canvas.addEventListener('mousemove', e => {
+    const data = canvas._chartData;
+    if (!data) return;
+    const rect = canvas.getBoundingClientRect();
+    const mx = e.clientX - rect.left;
+    const idx = Math.floor((mx - data.pad.left) / data.gap);
+    if (idx < 0 || idx >= data.candles.length) { tooltip.classList.remove('show'); return; }
+    const c = data.candles[idx];
+    tooltip.classList.add('show');
+    const ids = tooltipId.replace('tooltip', '');
+    const prefix = ids === 'main-tooltip' ? '' : ids;
+    document.getElementById('tt-date').textContent = c.date.toLocaleDateString('he-IL');
+    document.getElementById('tt-open').textContent = c.open.toFixed(2);
+    document.getElementById('tt-high').textContent = c.high.toFixed(2);
+    document.getElementById('tt-low').textContent = c.low.toFixed(2);
+    document.getElementById('tt-close').textContent = c.close.toFixed(2);
+    document.getElementById('tt-vol').textContent = (c.volume / 1e6).toFixed(1) + 'M';
+  });
+  canvas.addEventListener('mouseleave', () => tooltip.classList.remove('show'));
+}
+
+async function loadMainChart(ticker, range) {
+  const candles = await fetchChartData(ticker, range || currentChartRange);
+  if (!candles || !candles.length) return;
+  chartData[ticker] = candles;
+  document.getElementById('chart-card').style.display = 'block';
+  drawCandlestickChart('main-chart', candles);
+  setupChartHover('main-chart', 'main-tooltip');
+}
+
+function changeChartRange(range) {
+  currentChartRange = range;
+  document.querySelectorAll('#chart-card .chart-controls button').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+  if (state.currentTicker) loadMainChart(state.currentTicker, range);
+}
+
+// ========== EXERCISE FUNCTIONS ==========
+function toggleExercise(num) {
+  const card = document.getElementById('ex-' + num);
+  card.classList.toggle('open');
+  // Mark as active
+  const numEl = document.getElementById('ex-num-' + num);
+  if (card.classList.contains('open') && numEl.classList.contains('pending')) {
+    numEl.classList.remove('pending');
+    numEl.classList.add('active');
+  }
+}
+
+function copyPrompt(btn) {
+  const text = btn.parentElement.textContent.replace('העתק', '').trim();
+  navigator.clipboard.writeText(text).then(() => {
+    btn.textContent = 'הועתק!';
+    setTimeout(() => { btn.innerHTML = '&#128203; העתק'; }, 1500);
+  });
+}
+
+let exChartRanges = {};
+async function loadExChart(num) {
+  const ticker = document.getElementById('ex' + num + '-ticker').value.toUpperCase().trim();
+  if (!ticker) { alert('הזן Ticker'); return; }
+  const range = exChartRanges[num] || '3mo';
+  const candles = await fetchChartData(ticker, range);
+  if (!candles || !candles.length) { alert('לא נמצאו נתונים עבור ' + ticker); return; }
+  document.getElementById('ex' + num + '-chart-wrap').style.display = 'block';
+  drawCandlestickChart('ex' + num + '-chart', candles, { height: 350 });
+}
+
+function changeExChartRange(num, range) {
+  exChartRanges[num] = range;
+  const wrap = document.getElementById('ex' + num + '-chart-wrap');
+  wrap.querySelectorAll('.chart-controls button').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+  loadExChart(num);
+}
+
+// Exercise 3: P/E data
+async function loadEx3Data() {
+  const ticker = document.getElementById('ex3-ticker').value.toUpperCase().trim();
+  if (!ticker) return;
+  try {
+    const modules = 'price,summaryDetail,defaultKeyStatistics,financialData,incomeStatementHistory';
+    const url = `https://query1.finance.yahoo.com/v10/finance/quoteSummary/${ticker}?modules=${modules}`;
+    const data = await yahooFetch(url);
+    if (!data || !data.quoteSummary || !data.quoteSummary.result) { alert('לא נמצאו נתונים'); return; }
+    const r = data.quoteSummary.result[0];
+    const detail = r.summaryDetail || {};
+    const stats = r.defaultKeyStatistics || {};
+    const fin = r.financialData || {};
+
+    document.getElementById('ex3-data').style.display = 'block';
+    document.getElementById('ex3-pe').textContent = (detail.trailingPE?.raw || stats.trailingPE?.raw || '--').toString();
+    document.getElementById('ex3-fpe').textContent = (detail.forwardPE?.raw || stats.forwardPE?.raw || '--').toString();
+    document.getElementById('ex3-eps').textContent = (stats.trailingEps?.raw?.toFixed(2) || '--');
+    document.getElementById('ex3-rev').textContent = fin.totalRevenue?.raw ? '$' + (fin.totalRevenue.raw / 1e9).toFixed(1) + 'B' : '--';
+    document.getElementById('ex3-gp').textContent = fin.grossProfits?.raw ? '$' + (fin.grossProfits.raw / 1e9).toFixed(1) + 'B' : '--';
+    document.getElementById('ex3-oi').textContent = fin.operatingMargins?.raw ? (fin.operatingMargins.raw * 100).toFixed(1) + '%' : '--';
+    document.getElementById('ex3-ni').textContent = fin.profitMargins?.raw ? (fin.profitMargins.raw * 100).toFixed(1) + '% margin' : '--';
+    document.getElementById('ex3-margin').textContent = fin.profitMargins?.raw ? (fin.profitMargins.raw * 100).toFixed(1) + '%' : '--';
+  } catch(e) { alert('שגיאה בשליפת נתונים: ' + e.message); }
+}
+
+// Exercise 4: R/R calc
+['ex4-entry','ex4-sl','ex4-target'].forEach(id => {
+  document.addEventListener('DOMContentLoaded', () => {
+    const el = document.getElementById(id);
+    if (el) el.addEventListener('input', calcEx4RR);
+  });
+});
+
+function calcEx4RR() {
+  const entry = parseFloat(document.getElementById('ex4-entry').value);
+  const sl = parseFloat(document.getElementById('ex4-sl').value);
+  const target = parseFloat(document.getElementById('ex4-target').value);
+  if (!entry || !sl || !target) { document.getElementById('ex4-rr').value = '--'; return; }
+  const risk = Math.abs(entry - sl);
+  const reward = Math.abs(target - entry);
+  const rr = risk > 0 ? (reward / risk) : 0;
+  const el = document.getElementById('ex4-rr');
+  el.value = '1:' + rr.toFixed(1);
+  el.style.color = rr >= 4 ? 'var(--green)' : rr >= 2 ? 'var(--orange)' : 'var(--red)';
+}
+
+// Exercise 5: P/B data
+async function loadEx5Data() {
+  const ticker = document.getElementById('ex5-ticker').value.toUpperCase().trim();
+  if (!ticker) return;
+  try {
+    const modules = 'summaryDetail,defaultKeyStatistics,financialData,balanceSheetHistory';
+    const url = `https://query1.finance.yahoo.com/v10/finance/quoteSummary/${ticker}?modules=${modules}`;
+    const data = await yahooFetch(url);
+    if (!data || !data.quoteSummary || !data.quoteSummary.result) { alert('לא נמצאו נתונים'); return; }
+    const r = data.quoteSummary.result[0];
+    const detail = r.summaryDetail || {};
+    const stats = r.defaultKeyStatistics || {};
+    const fin = r.financialData || {};
+
+    document.getElementById('ex5-data').style.display = 'block';
+    document.getElementById('ex5-pb').textContent = (detail.priceToBook?.raw?.toFixed(2) || stats.priceToBook?.raw?.toFixed(2) || '--');
+    document.getElementById('ex5-bvps').textContent = stats.bookValue?.raw ? '$' + stats.bookValue.raw.toFixed(2) : '--';
+    document.getElementById('ex5-cr').textContent = fin.currentRatio?.raw?.toFixed(2) || '--';
+    document.getElementById('ex5-de').textContent = fin.debtToEquity?.raw?.toFixed(1) || '--';
+    document.getElementById('ex5-assets').textContent = fin.totalAssets?.raw ? '$' + (fin.totalAssets.raw / 1e9).toFixed(1) + 'B' : '--';
+    document.getElementById('ex5-liab').textContent = fin.totalDebt?.raw ? '$' + (fin.totalDebt.raw / 1e9).toFixed(1) + 'B' : '--';
+    document.getElementById('ex5-equity').textContent = stats.bookValue?.raw && stats.sharesOutstanding?.raw ? '$' + ((stats.bookValue.raw * stats.sharesOutstanding.raw) / 1e9).toFixed(1) + 'B' : '--';
+  } catch(e) { alert('שגיאה בשליפת נתונים: ' + e.message); }
+}
+
+// Exercise save/load
+function saveExercise(num) {
+  const fields = document.querySelectorAll(`#ex-${num} input, #ex-${num} textarea, #ex-${num} select`);
+  const data = {};
+  fields.forEach(f => { if (f.id) data[f.id] = f.value; });
+  if (!state.exercises) state.exercises = {};
+  state.exercises['ex' + num] = data;
+  saveState();
+  // Mark as done
+  const numEl = document.getElementById('ex-num-' + num);
+  numEl.classList.remove('pending', 'active');
+  numEl.classList.add('done');
+  alert('תרגיל ' + num + ' נשמר!');
+}
+
+function loadExercise(num) {
+  if (!state.exercises || !state.exercises['ex' + num]) { alert('אין תרגיל שמור'); return; }
+  const data = state.exercises['ex' + num];
+  Object.entries(data).forEach(([id, val]) => {
+    const el = document.getElementById(id);
+    if (el) el.value = val;
+  });
+  // Mark as done
+  const numEl = document.getElementById('ex-num-' + num);
+  numEl.classList.remove('pending', 'active');
+  numEl.classList.add('done');
+}
+
+function restoreExerciseStatus() {
+  if (!state.exercises) return;
+  for (let i = 1; i <= 10; i++) {
+    if (state.exercises['ex' + i]) {
+      const numEl = document.getElementById('ex-num-' + i);
+      if (numEl) { numEl.classList.remove('pending'); numEl.classList.add('done'); }
+    }
+  }
+}
+
+// ========== INIT ==========
+document.addEventListener('DOMContentLoaded', () => {
+  loadState();
+  initBusItems();
+  initGlossary();
+  renderWatchlist();
+  renderJournal();
+  restoreWeekly();
+  updateWeeklyDate();
+  document.getElementById('j-date').value = new Date().toISOString().split('T')[0];
+
+  // Restore exercise status
+  restoreExerciseStatus();
+
+  // Auto-fill calculator from settings
+  if (state.settings.portfolioSize) document.getElementById('calc-capital').value = state.settings.portfolioSize;
+  if (state.settings.riskPct) document.getElementById('calc-risk-pct').value = state.settings.riskPct;
+
+  // Load indices (non-blocking)
+  loadIndices();
+  // Refresh watchlist
+  if (state.watchlist.length) refreshWatchlist();
+
+  // Responsive chart redraw
+  window.addEventListener('resize', () => {
+    const mc = document.getElementById('main-chart');
+    if (mc && mc._chartData) drawCandlestickChart('main-chart', mc._chartData.candles);
+  });
+});
+</script>
+</body>
+</html>

@@ -187,16 +187,16 @@ export function calculateFinancialScore(ratios) {
 }
 
 function saveData() {
-  const ratios = {};
-  RATIO_CONFIG.forEach(r => {
-    const el = document.getElementById('r-' + r.id);
-    ratios[r.id] = el ? parseFloat(el.textContent) || null : null;
-  });
-  setState('pipeline.steps.financial', {
-    ticker: getState('currentTicker'),
-    ratios,
-    score: calculateFinancialScore(ratios)
-  });
+  // Read raw numeric data from state (saved during loadFinancialData),
+  // NOT from formatted DOM text which contains suffixes like "B", "%"
+  const existing = getState('pipeline.steps.financial');
+  if (existing && existing.ratios) {
+    // Data already saved by loadFinancialData — just ensure score is current
+    setState('pipeline.steps.financial', {
+      ...existing,
+      score: calculateFinancialScore(existing.ratios)
+    });
+  }
 }
 
 export function validate() {
