@@ -1,0 +1,78 @@
+/* ========== CANDLESTICK CHART ========== */
+.chart-wrap { position: relative; background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin-top: 12px; }
+.chart-wrap canvas { display: block; width: 100%; cursor: crosshair; }
+.chart-controls { display: flex; gap: 6px; padding: 8px 12px; background: var(--bg3); border-bottom: 1px solid var(--border); }
+.chart-controls button { padding: 4px 12px; border: 1px solid var(--border); border-radius: 6px; background: var(--bg2); color: var(--text2); cursor: pointer; font-size: 12px; font-family: var(--mono); transition: .2s; }
+.chart-controls button.active, .chart-controls button:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+.chart-tooltip { position: absolute; top: 8px; left: 8px; background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 8px 12px; font-size: 12px; font-family: var(--mono); pointer-events: none; opacity: 0; transition: opacity .15s; box-shadow: var(--shadow); z-index: 10; }
+.chart-tooltip.show { opacity: 1; }
+.chart-tooltip .tt-row { display: flex; justify-content: space-between; gap: 16px; }
+.chart-tooltip .tt-label { color: var(--text2); }
+.chart-legend { display: flex; gap: 16px; padding: 6px 12px; font-size: 11px; color: var(--text2); }
+.chart-legend span::before { content: ''; display: inline-block; width: 12px; height: 3px; border-radius: 2px; margin-left: 4px; vertical-align: middle; }
+.chart-legend .ma20::before { background: var(--orange); }
+.chart-legend .ma50::before { background: var(--blue); }
+
+/* ========== CHAT ========== */
+.chat-container { display: flex; flex-direction: column; height: calc(100vh - 100px); }
+.chat-messages { flex: 1; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 12px; }
+.chat-msg { max-width: 80%; padding: 12px 16px; border-radius: 12px; font-size: 14px; line-height: 1.6; position: relative; }
+.chat-msg.user { background: var(--accent); color: #fff; align-self: flex-end; }
+.chat-msg.bot { background: var(--bg3); align-self: flex-start; }
+.chat-msg .source-tag { display: inline-block; background: var(--bg4); padding: 2px 8px; border-radius: 4px; font-size: 11px; color: var(--text2); margin-top: 8px; }
+.chat-input-area { display: flex; gap: 8px; padding: 12px; background: var(--bg2); border-top: 1px solid var(--border); border-radius: 0 0 12px 12px; }
+.chat-input-area input { flex: 1; padding: 12px; background: var(--bg3); border: 1px solid var(--border); border-radius: 8px; color: var(--text); font-size: 14px; outline: none; }
+.chat-input-area input:focus { border-color: var(--accent); }
+.chat-mode-toggle { display: flex; gap: 8px; padding: 8px 12px; background: var(--bg2); border-bottom: 1px solid var(--border); }
+.chat-mode-toggle button { padding: 6px 14px; border-radius: 6px; border: 1px solid var(--border); background: none; color: var(--text2); cursor: pointer; font-size: 12px; }
+.chat-mode-toggle button.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+.suggested-q { display: flex; flex-wrap: wrap; gap: 6px; padding: 8px 12px; }
+.suggested-q button { padding: 6px 12px; background: var(--bg3); border: 1px solid var(--border); border-radius: 20px; color: var(--text2); cursor: pointer; font-size: 12px; transition: .2s; }
+.suggested-q button:hover { border-color: var(--accent); color: var(--accent); }
+
+/* ========== EXERCISES ========== */
+.exercise-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 12px; overflow: hidden; box-shadow: var(--shadow); }
+.exercise-header { display: flex; align-items: center; gap: 12px; padding: 16px 20px; cursor: pointer; transition: .2s; user-select: none; }
+.exercise-header:hover { background: var(--bg3); }
+.exercise-header .ex-num { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--mono); font-weight: 700; font-size: 16px; flex-shrink: 0; }
+.exercise-header .ex-num.pending { background: var(--bg4); color: var(--text2); }
+.exercise-header .ex-num.active { background: rgba(37,99,235,.1); color: var(--accent); }
+.exercise-header .ex-num.done { background: rgba(22,163,74,.1); color: var(--green); }
+.exercise-header .ex-title { flex: 1; font-weight: 500; font-size: 15px; }
+.exercise-header .ex-arrow { font-size: 18px; color: var(--text3); transition: transform .2s; }
+.exercise-card.open .ex-arrow { transform: rotate(180deg); }
+.exercise-body { display: none; padding: 0 20px 20px; border-top: 1px solid var(--border); }
+.exercise-card.open .exercise-body { display: block; }
+.exercise-links { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
+.exercise-links a { display: inline-flex; align-items: center; gap: 4px; padding: 6px 14px; background: var(--bg3); border: 1px solid var(--border); border-radius: 20px; font-size: 12px; color: var(--accent); transition: .2s; }
+.exercise-links a:hover { background: var(--accent); color: #fff; }
+.prompt-box { background: var(--bg3); border: 1px solid var(--border); border-radius: 8px; padding: 12px; margin: 12px 0; position: relative; font-size: 13px; color: var(--text2); line-height: 1.6; white-space: pre-wrap; }
+.prompt-box .copy-btn { position: absolute; top: 8px; left: 8px; padding: 4px 10px; background: var(--bg2); border: 1px solid var(--border); border-radius: 6px; font-size: 11px; cursor: pointer; color: var(--text2); }
+.prompt-box .copy-btn:hover { background: var(--accent); color: #fff; }
+.ex-field-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+@media (max-width: 768px) { .ex-field-grid { grid-template-columns: 1fr; } }
+.ex-save-row { display: flex; gap: 8px; margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--border); }
+
+/* ========== SCENARIO ========== */
+.scenario-card { background: var(--bg2); border: 1px solid var(--accent); border-radius: 12px; padding: 20px; margin-bottom: 16px; }
+.scenario-card h3 { color: var(--accent); }
+.scenario-result { background: var(--bg3); border-radius: 10px; padding: 16px; margin-top: 12px; }
+.scenario-result .sr-row { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid var(--border); font-size: 14px; }
+.scenario-result .sr-row:last-child { border: none; font-weight: 700; }
+
+/* ========== ANALYST ========== */
+.analyst-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin-bottom: 16px; }
+.analyst-row { display: flex; align-items: center; gap: 12px; padding: 10px; background: var(--bg3); border-radius: 8px; margin-bottom: 8px; }
+.analyst-row .ar-source { font-weight: 500; min-width: 140px; font-size: 14px; }
+.analyst-row select { padding: 6px 12px; border: 1px solid var(--border); border-radius: 6px; background: var(--bg); color: var(--text); font-size: 13px; }
+.analyst-warning { padding: 12px; background: rgba(220,38,38,.06); border: 1px solid rgba(220,38,38,.2); border-radius: 8px; margin-top: 10px; font-size: 13px; color: var(--red); display: none; }
+
+/* ========== LEARNING ========== */
+.learning-sub-tabs { display: flex; gap: 8px; margin-bottom: 16px; }
+.learning-sub-btn { padding: 8px 18px; border: 1px solid var(--border); border-radius: 8px; background: none; color: var(--text2); cursor: pointer; font-size: 13px; transition: .2s; }
+.learning-sub-btn:hover { background: var(--bg3); }
+.learning-sub-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+.video-placeholder { background: var(--bg3); border: 2px dashed var(--border); border-radius: 12px; padding: 40px; text-align: center; margin-bottom: 12px; }
+.video-placeholder .vp-icon { font-size: 48px; margin-bottom: 8px; }
+.video-placeholder .vp-title { font-weight: 600; font-size: 15px; margin-bottom: 4px; }
+.video-placeholder .vp-desc { font-size: 12px; color: var(--text2); }
