@@ -8,7 +8,13 @@ const SOURCING_METHODS = [
   { id: 'community', label: '\u{1F465} קהילות', desc: 'Reddit (r/stocks), Discord, קבוצות טלגרם — רעיונות מהקהילה' },
   { id: 'insider', label: '\u{1F4CA} מסחר פנימיים', desc: 'OpenInsider, SEC Filings — מעקב אחר קניות/מכירות של בכירים' },
   { id: 'etf', label: '\u{1F4BC} ETF Holdings', desc: 'בדיקת אחזקות של קרנות מובילות (ARK, Berkshire)' },
-  { id: 'sector', label: '\u{1F3ED} ניתוח סקטוריאלי', desc: 'זיהוי סקטורים חמים ובחירת המניות המובילות בהם' }
+  { id: 'sector', label: '\u{1F3ED} ניתוח סקטוריאלי', desc: 'זיהוי סקטורים חמים ובחירת המניות המובילות בהם' },
+  { id: 'ai', label: '\u{1F916} מודלי AI', desc: 'Claude, GPT, Gemini, DeepSeek — ניתוח וסינון באמצעות בינה מלאכותית' },
+  { id: 'heatmap', label: '\u{1F5FA}\u{FE0F} Heat Maps', desc: 'Finviz Heat Map — סריקה ויזואלית של סקטורים ומניות בולטות' },
+  { id: 'earnings', label: '\u{1F4C5} Earnings Whispers', desc: 'לוח דוחות רבעוניים — מציאת חברות לפני/אחרי פרסום תוצאות' },
+  { id: 'berkshire', label: '\u{1F3DB}\u{FE0F} Berkshire / 13-F', desc: 'מעקב אחרי קניות של באפט, Bridgewater ומוסדיים גדולים' },
+  { id: 'rotation', label: '\u{1F504} רוטציית סקטורים', desc: 'זיהוי תנועת כספים בין סקטורים לפי מחזור כלכלי' },
+  { id: 'social', label: '\u{1F4F1} סנטימנט חברתי', desc: 'Twitter/X, Reddit, StockTwits — מדידת הלך רוח ומגמות חברתיות' }
 ];
 
 export function render(container) {

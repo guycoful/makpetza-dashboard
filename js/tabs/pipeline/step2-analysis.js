@@ -565,7 +565,9 @@ async function loadFinancialData() {
     };
 
     displayRatios(ratios);
-    setState('pipeline.steps.analysis.financial', { ticker, ratios, score: calculateFinancialScore(ratios) });
+    const targetPrice = fin.targetMeanPrice?.raw ?? null;
+    const analystCount = fin.numberOfAnalystOpinions?.raw ?? null;
+    setState('pipeline.steps.analysis.financial', { ticker, ratios, score: calculateFinancialScore(ratios), targetPrice, analystCount });
     if (tickerEl) tickerEl.textContent = ticker;
   } catch (e) {
     console.error('Financial data error:', e);

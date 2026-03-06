@@ -27,9 +27,9 @@ export async function yahooFetch(url) {
   return null;
 }
 
-export async function fetchQuote(ticker) {
+export async function fetchQuote(ticker, range = '5d') {
   if (!isValidTicker(ticker)) return null;
-  const url = `https://query1.finance.yahoo.com/v8/finance/chart/${ticker}?interval=1d&range=5d`;
+  const url = `https://query1.finance.yahoo.com/v8/finance/chart/${ticker}?interval=1d&range=${encodeURIComponent(range)}`;
   return await yahooFetch(url);
 }
 

@@ -34,7 +34,8 @@ export function render(container) {
     { id: 'financial', label: 'פיננסי' },
     { id: 'technical', label: 'טכני' },
     { id: 'trading', label: 'מסחר' },
-    { id: 'economy', label: 'כלכלה' }
+    { id: 'economy', label: 'כלכלה' },
+    { id: 'psychology', label: 'פסיכולוגיה' }
   ];
 
   const catRow = document.createElement('div');

@@ -150,6 +150,131 @@ export function render(container) {
 
   wrap.appendChild(stagesCard);
 
+  // Risk Free Calculator card
+  const rfCard = document.createElement('div');
+  rfCard.className = 'rf-card';
+  rfCard.style.marginTop = '12px';
+
+  const rfTitle = document.createElement('h3');
+  rfTitle.textContent = '\u{1F4B0} מחשבון Risk Free';
+  rfCard.appendChild(rfTitle);
+
+  const rfDesc = document.createElement('p');
+  rfDesc.style.cssText = 'color:var(--text2);font-size:13px;margin-bottom:12px';
+  rfDesc.textContent = 'חשב כמה מניות למכור ביעד כדי להחזיר את ההשקעה. 2/3 מהפוזיציה = החזר הון, 1/3 = רווח חינמי.';
+  rfCard.appendChild(rfDesc);
+
+  const rfFieldsRow = document.createElement('div');
+  rfFieldsRow.style.cssText = 'display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px';
+
+  const rfTarget = document.createElement('div');
+  const rfTargetLbl = document.createElement('label');
+  rfTargetLbl.textContent = 'מחיר יעד ($)';
+  rfTargetLbl.style.cssText = 'display:block;font-size:11px;color:var(--text3);margin-bottom:2px';
+  rfTarget.appendChild(rfTargetLbl);
+  const rfTargetInput = document.createElement('input');
+  rfTargetInput.type = 'number';
+  rfTargetInput.id = 'rf-target-price';
+  rfTargetInput.className = 'input';
+  rfTargetInput.style.width = '100%';
+  rfTargetInput.placeholder = 'מחיר יעד';
+  rfTarget.appendChild(rfTargetInput);
+  rfFieldsRow.appendChild(rfTarget);
+
+  const rfCurrent = document.createElement('div');
+  const rfCurrentLbl = document.createElement('label');
+  rfCurrentLbl.textContent = 'מחיר נוכחי ($)';
+  rfCurrentLbl.style.cssText = 'display:block;font-size:11px;color:var(--text3);margin-bottom:2px';
+  rfCurrent.appendChild(rfCurrentLbl);
+  const rfCurrentInput = document.createElement('input');
+  rfCurrentInput.type = 'number';
+  rfCurrentInput.id = 'rf-current-price';
+  rfCurrentInput.className = 'input';
+  rfCurrentInput.style.width = '100%';
+  rfCurrentInput.placeholder = 'אופציונלי';
+  rfCurrent.appendChild(rfCurrentInput);
+  rfFieldsRow.appendChild(rfCurrent);
+
+  rfCard.appendChild(rfFieldsRow);
+
+  const rfCalcBtn = document.createElement('button');
+  rfCalcBtn.className = 'btn btn-primary btn-sm';
+  rfCalcBtn.textContent = '\u{1F9EE} חשב Risk Free';
+  rfCalcBtn.addEventListener('click', () => {
+    const entry = parseFloat(document.getElementById('pos-entry-price')?.value) || 0;
+    const shares = parseFloat(document.getElementById('pos-shares')?.value) || 0;
+    const target = parseFloat(rfTargetInput.value) || parseFloat(scenario['sc-target']) || 0;
+
+    if (!entry || !shares || !target) {
+      alert('מלא מחיר כניסה, כמות מניות ומחיר יעד');
+      return;
+    }
+
+    const rf = calculateRiskFree(entry, shares, target);
+    const resultsDiv = document.getElementById('rf-results');
+    if (!resultsDiv) return;
+    resultsDiv.textContent = '';
+    resultsDiv.style.display = 'block';
+
+    const rows = [
+      { label: 'השקעה כוללת', val: '$' + rf.totalInvestment.toLocaleString() },
+      { label: 'מניות למכירה (2/3)', val: rf.sharesToSell.toLocaleString() },
+      { label: 'תמורה מהמכירה', val: '$' + rf.proceeds.toLocaleString() },
+      { label: 'מניות חופשיות (1/3)', val: rf.remainingShares.toLocaleString() },
+      { label: 'שווי מניות חופשיות', val: '$' + rf.freeValue.toLocaleString() },
+      { label: 'מחיר Breakeven למכירה', val: '$' + rf.breakEvenPrice },
+      { label: 'רווח/הפסד מהמכירה', val: (rf.profit >= 0 ? '+' : '') + '$' + rf.profit.toLocaleString() }
+    ];
+
+    rows.forEach(r => {
+      const row = document.createElement('div');
+      row.className = 'rf-row';
+      const lbl = document.createElement('span');
+      lbl.className = 'rf-label';
+      lbl.textContent = r.label;
+      row.appendChild(lbl);
+      const val = document.createElement('span');
+      val.className = 'rf-val';
+      val.textContent = r.val;
+      row.appendChild(val);
+      resultsDiv.appendChild(row);
+    });
+
+    // Badge
+    const badge = document.createElement('div');
+    badge.className = 'rf-badge ' + (rf.isRiskFree ? 'achieved' : 'pending');
+    badge.textContent = rf.isRiskFree
+      ? '\u{2705} Risk Free! ' + rf.remainingShares + ' \u05DE\u05E0\u05D9\u05D5\u05EA \u05D7\u05D9\u05E0\u05DE\u05D9\u05D5\u05EA'
+      : '\u{26A0}\u{FE0F} \u05E2\u05D5\u05D3 $' + Math.abs(rf.profit) + ' \u05DC\u05DE\u05E6\u05D1 Risk Free';
+    badge.style.display = 'block';
+    badge.style.textAlign = 'center';
+    resultsDiv.appendChild(badge);
+
+    // Progress bar
+    const progressWrap = document.createElement('div');
+    progressWrap.className = 'rf-progress';
+    const progressFill = document.createElement('div');
+    progressFill.className = 'rf-fill';
+    progressFill.style.width = rf.progressPct + '%';
+    progressFill.style.background = rf.isRiskFree ? 'var(--green)' : 'var(--orange)';
+    progressWrap.appendChild(progressFill);
+    resultsDiv.appendChild(progressWrap);
+
+    const progressLabel = document.createElement('div');
+    progressLabel.style.cssText = 'text-align:center;font-size:11px;color:var(--text3);margin-top:4px';
+    progressLabel.textContent = rf.progressPct + '% \u05DE\u05D4\u05D3\u05E8\u05DA \u05DC-Risk Free';
+    resultsDiv.appendChild(progressLabel);
+  });
+  rfCard.appendChild(rfCalcBtn);
+
+  const rfResults = document.createElement('div');
+  rfResults.id = 'rf-results';
+  rfResults.className = 'rf-result';
+  rfResults.style.display = 'none';
+  rfCard.appendChild(rfResults);
+
+  wrap.appendChild(rfCard);
+
   // Load saved data
   const saved = getState('pipeline.steps.position') || {};
   posFields.forEach(f => {
@@ -209,3 +334,23 @@ export function validate() {
 }
 
 export function getData() { return getState('pipeline.steps.position') || {}; }
+
+// Pure Risk Free calculation (exported for testing)
+export function calculateRiskFree(entryPrice, shares, targetPrice) {
+  const totalInvestment = entryPrice * shares;
+  const sharesToSell = Math.ceil(shares * (2 / 3));
+  const proceeds = sharesToSell * targetPrice;
+  const remainingShares = shares - sharesToSell;
+  const breakEvenPrice = totalInvestment / sharesToSell;
+  return {
+    totalInvestment,
+    sharesToSell,
+    remainingShares,
+    proceeds,
+    isRiskFree: proceeds >= totalInvestment,
+    breakEvenPrice: Math.round(breakEvenPrice * 100) / 100,
+    freeValue: Math.round(remainingShares * targetPrice * 100) / 100,
+    profit: Math.round((proceeds - totalInvestment) * 100) / 100,
+    progressPct: Math.min(100, Math.round((proceeds / totalInvestment) * 100))
+  };
+}

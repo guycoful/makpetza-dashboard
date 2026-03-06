@@ -84,6 +84,29 @@ export function render(container) {
     calcCard.appendChild(group);
   });
 
+  // Analyst target price (from step2 financial data)
+  const finData = getState('pipeline.steps.analysis.financial') || {};
+  if (finData.targetPrice) {
+    const tpCard = document.createElement('div');
+    tpCard.style.cssText = 'margin-top:12px;padding:12px;background:rgba(37,99,235,.06);border-radius:8px;border:1px solid rgba(37,99,235,.15)';
+    const tpText = document.createElement('div');
+    tpText.style.cssText = 'font-size:13px;display:flex;justify-content:space-between;align-items:center';
+    const tpLabel = document.createElement('span');
+    tpLabel.textContent = '\u{1F4CA} Target Price \u05D0\u05E0\u05DC\u05D9\u05E1\u05D8\u05D9\u05DD';
+    tpText.appendChild(tpLabel);
+    const tpVal = document.createElement('span');
+    tpVal.style.cssText = 'font-weight:700;font-family:var(--font-mono);font-size:16px;color:var(--accent)';
+    tpVal.textContent = '$' + finData.targetPrice.toFixed(2);
+    if (finData.analystCount) tpVal.textContent += ' (' + finData.analystCount + ' \u05D0\u05E0\u05DC\u05D9\u05E1\u05D8\u05D9\u05DD)';
+    tpText.appendChild(tpVal);
+    tpCard.appendChild(tpText);
+    const tpHint = document.createElement('div');
+    tpHint.style.cssText = 'font-size:11px;color:var(--text3);margin-top:4px';
+    tpHint.textContent = '\u05D4\u05E9\u05EA\u05DE\u05E9 \u05DB\u05E0\u05E7\u05D5\u05D3\u05EA \u05D4\u05EA\u05D9\u05D9\u05D7\u05E1\u05D5\u05EA \u05DC-Target \u05E9\u05DC\u05DA. \u05DC\u05D7\u05E5 \u05DC\u05DE\u05D9\u05DC\u05D5\u05D9 Target \u05DC\u05DE\u05E2\u05DC\u05D4.';
+    tpCard.appendChild(tpHint);
+    calcCard.appendChild(tpCard);
+  }
+
   // Results display
   const resultsDiv = document.createElement('div');
   resultsDiv.id = 'scenario-results';
