@@ -1,7 +1,7 @@
 // Step 2: The Analysis — 5 sub-tabs (Market Agent, Business Agent, Technical Agent, Financial Agent, Meta-Agent)
 import { getState, setState } from '../../core/state.js';
 import { fetchSummary } from '../../core/api.js';
-import { completeStep } from './pipeline-manager.js';
+import { completeStep, goToStep } from './pipeline-manager.js';
 import { BUS_ITEMS } from '../../data/bus-criteria.js';
 import { createTooltipLabel, getRatioGlossaryKey, getTechGlossaryKey } from '../../components/glossary-tooltip.js';
 
@@ -92,6 +92,7 @@ export function render(container) {
   btn.addEventListener('click', () => {
     saveAllData();
     completeStep(3);
+    goToStep(4);
   });
   wrap.appendChild(btn);
 

@@ -1,6 +1,6 @@
 // Step 5: Position Management — Stop Loss + staged realization for Risk Free
 import { getState, setState } from '../../core/state.js';
-import { completeStep } from './pipeline-manager.js';
+import { completeStep, goToStep } from './pipeline-manager.js';
 
 export function render(container) {
   container.textContent = '';
@@ -301,6 +301,7 @@ export function render(container) {
     if (validate()) {
       saveData();
       completeStep(6);
+      goToStep(7);
     }
   });
   wrap.appendChild(btn);

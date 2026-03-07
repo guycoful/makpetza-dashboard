@@ -1,6 +1,6 @@
 // Step 3: List Management — Route stocks to cold/warm/hot lists by score
 import { getState, setState } from '../../core/state.js';
-import { completeStep } from './pipeline-manager.js';
+import { completeStep, goToStep } from './pipeline-manager.js';
 
 const LIST_TYPES = [
   { id: 'hot',  label: '\u{1F525} רשימה חמה', desc: 'ציון 4+ — מוכנה לביצוע תרחיש', color: 'var(--green)', min: 4.0 },
@@ -134,6 +134,7 @@ export function render(container) {
   btn.style.marginTop = '16px';
   btn.addEventListener('click', () => {
     completeStep(4);
+    goToStep(5);
   });
   wrap.appendChild(btn);
 

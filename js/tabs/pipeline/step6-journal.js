@@ -1,6 +1,6 @@
 // Step 6: Trading Journal — documentation with emotional state tracking
 import { getState, setState } from '../../core/state.js';
-import { completeStep } from './pipeline-manager.js';
+import { completeStep, goToStep } from './pipeline-manager.js';
 
 const EMOTIONS = [
   { val: 'confident', label: '\u{1F60E} בטוח', color: 'var(--green)' },
@@ -179,6 +179,7 @@ export function render(container) {
   btn.style.marginTop = '16px';
   btn.addEventListener('click', () => {
     completeStep(7);
+    goToStep(8);
   });
   wrap.appendChild(btn);
 

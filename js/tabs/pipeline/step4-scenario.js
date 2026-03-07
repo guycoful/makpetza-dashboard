@@ -1,7 +1,7 @@
 // Step 4: Scenario Execution — Risk/Reward calculator (1:5 minimum)
 // Opens only for stocks in the "hot list"
 import { getState, setState } from '../../core/state.js';
-import { completeStep } from './pipeline-manager.js';
+import { completeStep, goToStep } from './pipeline-manager.js';
 import { createTooltipLabel } from '../../components/glossary-tooltip.js';
 
 export function render(container) {
@@ -149,6 +149,7 @@ export function render(container) {
     if (validate()) {
       saveData();
       completeStep(5);
+      goToStep(6);
     }
   });
   wrap.appendChild(btn);

@@ -1,6 +1,6 @@
 // Step 1: Sourcing — Investment idea discovery
 import { getState, setState } from '../../core/state.js';
-import { completeStep } from './pipeline-manager.js';
+import { completeStep, goToStep } from './pipeline-manager.js';
 
 const SOURCING_METHODS = [
   { id: 'screener', label: '\u{1F50D} סורקים (Screeners)', desc: 'Finviz, TradingView, Yahoo Finance screener — סינון לפי קריטריונים פיננסיים' },
@@ -140,6 +140,7 @@ export function render(container) {
     if (validate()) {
       saveData();
       completeStep(2);
+      goToStep(3);
     }
   });
   wrap.appendChild(btn);
