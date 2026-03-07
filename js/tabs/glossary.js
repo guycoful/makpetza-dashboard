@@ -35,6 +35,9 @@ export function render(container) {
     { id: 'technical', label: 'טכני' },
     { id: 'trading', label: 'מסחר' },
     { id: 'economy', label: 'כלכלה' },
+    { id: 'macro', label: 'מאקרו' },
+    { id: 'options', label: 'אופציות' },
+    { id: 'risk', label: 'ניהול סיכונים' },
     { id: 'psychology', label: 'פסיכולוגיה' }
   ];
 

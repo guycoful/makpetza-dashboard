@@ -1,7 +1,7 @@
 // Step 0: Market Survey — SPY, QQQ, VIX macro data
 import { getState, setState } from '../../core/state.js';
 import { fetchQuote } from '../../core/api.js';
-import { completeStep } from './pipeline-manager.js';
+import { completeStep, goToStep } from './pipeline-manager.js';
 
 const INDICES = [
   { ticker: 'SPY', label: 'S&P 500 (SPY)', desc: 'מדד 500 החברות הגדולות בארה״ב' },
@@ -219,6 +219,7 @@ export function render(container) {
     if (validate()) {
       saveData();
       completeStep(1);
+      goToStep(2);
     }
   });
   wrap.appendChild(btn);
